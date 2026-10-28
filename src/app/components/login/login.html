@@ -1,0 +1,19 @@
+<form [formGroup]="form" (ngSubmit)="loginUser()">
+    <div class="div-username">  
+        <label for="username">Nombre de usuario</label>
+        <input type="text" name="username" id="username" 
+               formControlName='username' placeholder="Nombre de usuario">
+        @if(form.controls.username.touched && form.controls.username.hasError('required')){
+            <span>El campo de nombre de usuario es requerido</span>
+        }
+    </div>
+    <div class="div-password">
+        <label for="password">Contraseña</label>
+        <input type="password" name="password" id="password" 
+               formControlName='password' placeholder="Contraseña">
+    </div>
+    @if(form.controls.password.touched && form.controls.password.hasError('required')){
+        <span>La contraseña es requerida</span>
+    }
+    <button>Logearse</button>
+</form>

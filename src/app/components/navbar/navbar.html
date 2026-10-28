@@ -1,1 +1,10 @@
-<p>navbar works!</p>
+<nav>
+    <h3>Guard</h3>
+    <ul>
+        <li><a routerLink="home">Home</a></li>
+        <li><a routerLink="admin">Admin</a></li>
+    </ul>
+    <button (click)="logInLogOut()">
+        {{authService.estoyLogeado() ? 'LogOut' : 'LogIn' }}
+    </button>
+</nav>
