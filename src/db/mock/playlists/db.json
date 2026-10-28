@@ -1,0 +1,20 @@
+{
+  "playlists": [
+    {
+      "id": 1,
+      "idUser": 1,
+      "name": "musica clasica",
+      "isDefault": true,
+      "createdAt": "27/10/2026 19:49",
+      "songVersions": []
+    },
+    {
+      "id": 2,
+      "idUser": 1,
+      "name": "rock en español",
+      "isDefault": false,
+      "createdAt": "27/10/2026 19:50",
+      "songVersions": []
+    }
+  ]
+}
