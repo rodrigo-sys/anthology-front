@@ -1,0 +1,5 @@
+{
+  "/api/playlists": "/playlists",
+  "/api/playlists/:id": "/playlists/:id",
+  "/api/playlists/:id/user": "/playlists?idUser=:id"
+}

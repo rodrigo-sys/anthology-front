@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "mock-playlists": "json-server --watch src/db/mock/playlists/db.json --routes src/db/mock/playlists/routes.json --port 3001"
   },
   "private": true,
   "packageManager": "npm@11.19.0",
