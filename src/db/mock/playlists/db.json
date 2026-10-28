@@ -6,7 +6,32 @@
       "name": "musica clasica",
       "isDefault": true,
       "createdAt": "27/10/2026 19:49",
-      "songVersions": []
+      "songVersions": [
+        {
+          "id": 1,
+          "songId": 10,
+          "songTitle": "Claro de luna",
+          "instrument": "PIANO",
+          "status": "APPROVED",
+          "pdfUrl": "/pdfs/claro-de-luna.pdf"
+        },
+        {
+          "id": 2,
+          "songId": 11,
+          "songTitle": "Nocturno Op. 9 N° 2",
+          "instrument": "PIANO",
+          "status": "APPROVED",
+          "pdfUrl": "/pdfs/nocturno-op9-n2.pdf"
+        },
+        {
+          "id": 3,
+          "songId": 12,
+          "songTitle": "Canon en Re mayor",
+          "instrument": "GUITAR",
+          "status": "PENDING",
+          "pdfUrl": "/pdfs/canon-en-re.pdf"
+        }
+      ]
     },
     {
       "id": 2,
@@ -14,7 +39,24 @@
       "name": "rock en español",
       "isDefault": false,
       "createdAt": "27/10/2026 19:50",
-      "songVersions": []
+      "songVersions": [
+        {
+          "id": 4,
+          "songId": 20,
+          "songTitle": "De música ligera",
+          "instrument": "GUITAR",
+          "status": "APPROVED",
+          "pdfUrl": "/pdfs/de-musica-ligera.pdf"
+        },
+        {
+          "id": 5,
+          "songId": 21,
+          "songTitle": "Persiana americana",
+          "instrument": "BASS",
+          "status": "APPROVED",
+          "pdfUrl": "/pdfs/persiana-americana.pdf"
+        }
+      ]
     }
   ]
 }

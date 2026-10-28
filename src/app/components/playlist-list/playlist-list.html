@@ -5,7 +5,9 @@
   }
   <ul>
     @for (playlist of playlists(); track playlist.id) {
-      <li>{{ playlist.name }}</li>
+      <li>
+        <a [routerLink]="['/playlists', playlist.id]">{{ playlist.name }}</a>
+      </li>
     }
   </ul>
 </div>

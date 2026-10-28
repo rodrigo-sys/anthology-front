@@ -6,13 +6,24 @@ export interface PlaylistRequest {
   name: string;
   idUser: number;
 }
+
+//todo: importar en vez de crearla aca cuando se implemente songversion
+export interface SongVersionResponse {
+  id: number;
+  songId: number;
+  songTitle: string;
+  instrument: 'GUITAR' | 'BASS' | 'PIANO';
+  status: 'PENDING' | 'APPROVED' | 'REJECTED';
+  pdfUrl: string;
+}
+
 export interface PlaylistResponse {
   id: number;
   idUser: number;
   name: string;
   isDefault: boolean;
   createdAt: string;
-  songVersions: any[];
+  songVersions: SongVersionResponse[];
 }
 export interface PlaylistUpdateRequest {
   name?: string;
