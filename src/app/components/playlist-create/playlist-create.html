@@ -1,0 +1,4 @@
+<form [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
+  <input type="text" formControlName="name" placeholder="Nombre de la playlist" />
+  <button type="submit" [disabled]="playlistForm.invalid">Crear playlist</button>
+</form>
