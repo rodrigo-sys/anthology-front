@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PlaylistService } from '../../service/playlist-service';
@@ -11,7 +11,7 @@ import { PlaylistService } from '../../service/playlist-service';
   styleUrl: './playlist-create.css'
 })
 export class PlaylistCreate {
-  @Output() playlistCreated = new EventEmitter<void>();
+  playlistCreated = output<void>();
   private fb = inject(FormBuilder);
   private playlistService = inject(PlaylistService);
   playlistForm: FormGroup;

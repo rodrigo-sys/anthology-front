@@ -1,0 +1,5 @@
+<div class="playlists-page">
+  <h2>Playlists</h2>
+  <app-playlist-create (playlistCreated)="loadPlaylists()" />
+  <app-playlist-list [playlists]="playlists()" />
+</div>

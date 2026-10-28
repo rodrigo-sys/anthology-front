@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { PlaylistResponse } from '../../service/playlist-service';
 
 @Component({
@@ -7,5 +7,5 @@ import { PlaylistResponse } from '../../service/playlist-service';
   styleUrl: './playlist-list.css'
 })
 export class PlaylistList {
-  @Input() playlists: PlaylistResponse[] = [];
+  playlists = input<PlaylistResponse[]>([]);
 }

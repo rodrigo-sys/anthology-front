@@ -1,10 +1,10 @@
 <div class="playlist-list">
   <h3>Mis Playlists</h3>
-  @if (playlists.length === 0) {
+  @if (playlists().length === 0) {
     <div>No hay playlists</div>
   }
   <ul>
-    @for (playlist of playlists; track playlist.id) {
+    @for (playlist of playlists(); track playlist.id) {
       <li>{{ playlist.name }}</li>
     }
   </ul>
