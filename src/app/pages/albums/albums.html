@@ -1,1 +1,11 @@
-<p>albums works!</p>
+<section class="albums">
+
+  @if (albumService.albumSeleccionado()) {
+    <app-album-edit></app-album-edit>
+  } @else {
+    <app-album-create></app-album-create>
+  }
+
+  <app-album-list></app-album-list>
+
+</section>

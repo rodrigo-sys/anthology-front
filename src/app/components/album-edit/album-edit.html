@@ -1,0 +1,56 @@
+<form class="tarjeta album-edit" [formGroup]="formulario" (ngSubmit)="guardar()">
+
+  <h2>Editar álbum</h2>
+
+  <div class="campos">
+    <div class="campo">
+      <label for="edit-album-title">Título</label>
+      <input id="edit-album-title" type="text" formControlName="title">
+      @if (formulario.controls['title'].hasError('required') && formulario.controls['title'].touched) {
+        <small class="error">Campo requerido</small>
+      }
+      @if (formulario.controls['title'].hasError('maxlength') && formulario.controls['title'].touched) {
+        <small class="error">Máximo 255 caracteres</small>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="edit-album-artist">Artista</label>
+      <input id="edit-album-artist" type="text" formControlName="artistName">
+      @if (formulario.controls['artistName'].hasError('required') && formulario.controls['artistName'].touched) {
+        <small class="error">Campo requerido</small>
+      }
+      @if (formulario.controls['artistName'].hasError('maxlength') && formulario.controls['artistName'].touched) {
+        <small class="error">Máximo 255 caracteres</small>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="edit-album-year">Año de lanzamiento</label>
+      <input id="edit-album-year" type="number" formControlName="releaseYear">
+      @if (formulario.controls['releaseYear'].hasError('required') && formulario.controls['releaseYear'].touched) {
+        <small class="error">Campo requerido</small>
+      }
+      @if (formulario.controls['releaseYear'].hasError('min') && formulario.controls['releaseYear'].touched) {
+        <small class="error">Año inválido</small>
+      }
+      @if (formulario.controls['releaseYear'].hasError('max') && formulario.controls['releaseYear'].touched) {
+        <small class="error">El año no puede ser futuro</small>
+      }
+    </div>
+  </div>
+
+  <div class="boton">
+    <button type="submit" [disabled]="formulario.invalid">
+      Guardar cambios
+    </button>
+    <button type="button" class="secundario" (click)="cancelar()">
+      Cancelar
+    </button>
+  </div>
+
+  @if (albumService.error()) {
+    <small class="error">{{ albumService.error() }}</small>
+  }
+
+</form>

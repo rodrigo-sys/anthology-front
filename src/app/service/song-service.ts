@@ -1,137 +1,131 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { computed, inject, Service, signal } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Instrument, Status } from '../interfaces/Enums';
 import { Song, SongFilters, SongRequest, SongUpdateRequest } from '../interfaces/Song';
 
-
 @Service()
 export class SongService {
-  private http = inject(HttpClient);
-  private readonly url = '/api/songs';
+  http = inject(HttpClient)
+  url = '/api/songs'
 
-  songs = signal<Song[]>([]);
-  song = signal<Song | null>(null);
-  songEditando = signal<Song | null>(null);
-  instrumento = signal<Instrument | ''>('');
-  error = signal('');
-  cargando = signal(false);
-
+  songs = signal<Song[]>([])
+  songById = signal<Song | null>(null)
+  songSeleccionada = signal<Song | null>(null)
+  instrumento = signal<Instrument | ''>('')
+  error = signal<string>('')
 
   songsFiltradas = computed(() => {
-    const instrumento = this.instrumento();
-    if (!instrumento) return this.songs();
-    return this.songs().filter((song) => song.availableInstruments.includes(instrumento));
-  });
+    const instrumento = this.instrumento()
+    if (!instrumento) return this.songs()
+    return this.songs().filter((song) => song.availableInstruments.includes(instrumento))
+  })
 
-  private ultimaLista: {
-    tipo: 'todas' | 'estado';
-    filtros?: SongFilters;
-    status?: Status;
-  } = { tipo: 'todas', filtros: {} };
-
+  private filtros: SongFilters = {}
+  private estado: Status | null = null
+  private todas = false
 
   listSongs(filtros: SongFilters = {}) {
-    this.ultimaLista = { tipo: 'todas', filtros };
-    this.cargar(this.http.get<Song[]>(this.url, { params: this.aParams(filtros) }));
+    this.filtros = filtros
+    this.estado = null
+    this.todas = false
+
+    this.http.get<Song[]>(this.url, { params: this.params(filtros) }).subscribe({
+      next: (data) => {
+        this.songs.set(data)
+        this.error.set('')
+      },
+      error: () => this.error.set('No se pudieron cargar las canciones')
+    })
+  }
+
+  listTodas() {
+    this.todas = true
+    this.estado = null
+
+    this.http.get<Song[]>(`${this.url}/all`).subscribe({
+      next: (data) => {
+        this.songs.set(data)
+        this.error.set('')
+      },
+      error: () => this.error.set('No se pudieron cargar las canciones')
+    })
   }
 
   listByStatus(status: Status) {
-    this.ultimaLista = { tipo: 'estado', status };
-    this.cargar(this.http.get<Song[]>(`${this.url}/status`, { params: { status } }));
-  }
+    this.estado = status
+    this.todas = false
 
-  
-  getSong(id: number) {
-    if (this.song()?.id !== id) this.song.set(null);
-    this.error.set('');
-    this.http.get<Song>(`${this.url}/${id}`).subscribe({
-      next: (data) => this.song.set(data),
-      error: () => this.error.set('No se encontró la canción'),
-    });
-  }
-
-
-
-  add(song: SongRequest, despues?: () => void) {
-    this.http.post<Song>(this.url, song).subscribe({
-      next: () => {
-        this.refrescar();
-        despues?.();
+    this.http.get<Song[]>(`${this.url}/status`, { params: { status } }).subscribe({
+      next: (data) => {
+        this.songs.set(data)
+        this.error.set('')
       },
-      error: (err) => this.error.set(this.mensajeError(err, 'No se pudo agregar la canción')),
-    });
+      error: () => this.error.set('No se pudieron cargar las canciones')
+    })
   }
 
+  getById(id: number) {
+    this.http.get<Song>(`${this.url}/${id}`).subscribe({
+      next: (data) => {
+        this.songById.set(data)
+        this.error.set('')
+      },
+      error: () => {
+        this.songById.set(null)
+        this.error.set('No se encontró esta canción')
+      }
+    })
+  }
+
+  add(song: SongRequest) {
+    this.http.post<Song>(this.url, song).subscribe({
+      next: () => this.recargar(),
+      error: () => this.error.set('No se pudo agregar la canción')
+    })
+  }
 
   update(id: number, cambios: SongUpdateRequest) {
     this.http.patch<Song>(`${this.url}/${id}`, cambios).subscribe({
       next: () => {
-        this.songEditando.set(null);
-        this.refrescar();
-        if (this.song()?.id === id) this.getSong(id);
+        this.songSeleccionada.set(null)
+        this.recargar()
       },
-      error: (err) => this.error.set(this.mensajeError(err, 'No se pudo actualizar la canción')),
-    });
+      error: () => this.error.set('No se pudo actualizar la canción')
+    })
   }
-
 
   updateStatus(id: number, status: Status) {
     this.http.patch<Song>(`${this.url}/${id}/status`, null, { params: { status } }).subscribe({
-      next: () => {
-        this.refrescar();
-        if (this.song()?.id === id) this.getSong(id);
-      },
-      error: (err) => this.error.set(this.mensajeError(err, 'No se pudo cambiar el estado')),
-    });
+      next: () => this.recargar(),
+      error: () => this.error.set('No se pudo cambiar el estado')
+    })
   }
 
-
-  remove(id: number, despues?: () => void) {
+  remove(id: number) {
     this.http.delete<void>(`${this.url}/${id}`).subscribe({
-      next: () => {
-        if (this.song()?.id === id) this.song.set(null);
-        this.refrescar();
-        despues?.();
-      },
-      error: (err) => this.error.set(this.mensajeError(err, 'No se pudo eliminar la canción')),
-    });
+      next: () => this.recargar(),
+      error: () => this.error.set('No se pudo eliminar la canción')
+    })
   }
 
-
-  refrescar() {
-    if (this.ultimaLista.tipo === 'estado') {
-      return this.listByStatus(this.ultimaLista.status!);
-    }
-    return this.listSongs(this.ultimaLista.filtros);
+  private recargar() {
+    if (this.todas) this.listTodas()
+    else if (this.estado) this.listByStatus(this.estado)
+    else this.listSongs(this.filtros)
   }
 
+  private params(filtros: SongFilters) {
+    const params: Record<string, string | number> = {}
 
-  mensajeError(err: unknown, porDefecto: string): string {
-    const httpError = err as HttpErrorResponse;
-    return httpError?.error?.message ?? porDefecto;
-  }
+    const title = filtros.title?.trim()
+    const genre = filtros.genre?.trim()
+    const artistName = filtros.artistName?.trim()
 
+    if (title) params['title'] = title
+    if (genre) params['genre'] = genre
+    if (artistName) params['artistName'] = artistName
+    if (filtros.albumId) params['albumId'] = filtros.albumId
 
-  private aParams(filtros: SongFilters): Record<string, string | number> {
-    return Object.fromEntries(
-      Object.entries(filtros).filter(([, v]) => v !== '' && v != null),
-    ) as Record<string, string | number>;
-  }
-
-
-  private cargar(peticion: Observable<Song[]>) {
-    this.error.set('');
-    this.cargando.set(true);
-    peticion.subscribe({
-      next: (data) => {
-        this.songs.set(data);
-        this.cargando.set(false);
-      },
-      error: () => {
-        this.error.set('No se pudieron cargar las canciones');
-        this.cargando.set(false);
-      },
-    });
+    return params
   }
 }

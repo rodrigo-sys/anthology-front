@@ -1,1 +1,58 @@
-<p>song-create works!</p>
+<form class="tarjeta song-create" [formGroup]="formulario" (ngSubmit)="add()">
+
+  <h2>Nueva canción</h2>
+
+  <div class="campos">
+    <div class="campo">
+      <label for="song-title">Título</label>
+      <input id="song-title" type="text" formControlName="title">
+      @if (formulario.controls['title'].hasError('required') && formulario.controls['title'].touched) {
+        <small class="error">Campo requerido</small>
+      }
+      @if (formulario.controls['title'].hasError('maxlength') && formulario.controls['title'].touched) {
+        <small class="error">Máximo 255 caracteres</small>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="song-artist">Artista</label>
+      <input id="song-artist" type="text" formControlName="artistName">
+      @if (formulario.controls['artistName'].hasError('required') && formulario.controls['artistName'].touched) {
+        <small class="error">Campo requerido</small>
+      }
+      @if (formulario.controls['artistName'].hasError('maxlength') && formulario.controls['artistName'].touched) {
+        <small class="error">Máximo 255 caracteres</small>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="song-genre">Género</label>
+      <input id="song-genre" type="text" formControlName="genre">
+      @if (formulario.controls['genre'].hasError('required') && formulario.controls['genre'].touched) {
+        <small class="error">Campo requerido</small>
+      }
+      @if (formulario.controls['genre'].hasError('maxlength') && formulario.controls['genre'].touched) {
+        <small class="error">Máximo 100 caracteres</small>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="song-album">Álbum (opcional)</label>
+      <input id="song-album" type="number" formControlName="albumId">
+      @if (formulario.controls['albumId'].hasError('min') && formulario.controls['albumId'].touched) {
+        <small class="error">ID de álbum inválido</small>
+      }
+    </div>
+  </div>
+
+  <div class="boton">
+    <button type="submit" [disabled]="formulario.invalid">
+      Agregar canción
+    </button>
+  </div>
+
+  @if (songService.error()) {
+    <small class="error">{{ songService.error() }}</small>
+  }
+
+</form>

@@ -1,1 +1,40 @@
-<p>album-list works!</p>
+<section class="album-list">
+
+  <h2>Álbumes</h2>
+
+  <div class="buscador">
+    <label for="buscar-album">Buscar por ID</label>
+    <input id="buscar-album" type="number" [(ngModel)]="searchId">
+    <button type="button" (click)="buscar()">Buscar</button>
+  </div>
+
+  @if (albumService.error()) {
+    <p class="error">{{ albumService.error() }}</p>
+  }
+
+  @if (albumService.albumById(); as album) {
+    <p class="resultado">
+      Encontrado: #{{ album.id }} - {{ album.title }} - {{ album.artistName }}
+      ({{ album.releaseYear }}) - {{ album.status }}
+    </p>
+  }
+
+  <div class="lista">
+    @for (album of albumService.albums(); track album.id) {
+      <article class="tarjeta">
+        <strong>{{ album.title }}</strong>
+        <span>Artista: {{ album.artistName }}</span>
+        <span>Año: {{ album.releaseYear }}</span>
+        <span>Estado: {{ album.status }}</span>
+
+        <div class="acciones">
+          <button type="button" class="secundario" (click)="editar(album)">Editar</button>
+          <button type="button" class="eliminar" (click)="eliminar(album.id)">Eliminar</button>
+        </div>
+      </article>
+    } @empty {
+      <p>No hay álbumes.</p>
+    }
+  </div>
+
+</section>

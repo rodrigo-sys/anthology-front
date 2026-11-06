@@ -1,1 +1,82 @@
-<p>song-list works!</p>
+<section class="song-list">
+
+  <h2>Canciones</h2>
+
+  <div class="buscador">
+    <div class="campo">
+      <label for="filtro-title">Título</label>
+      <input id="filtro-title" type="text" [(ngModel)]="filtros.title">
+    </div>
+
+    <div class="campo">
+      <label for="filtro-artist">Artista</label>
+      <input id="filtro-artist" type="text" [(ngModel)]="filtros.artistName">
+    </div>
+
+    <div class="campo">
+      <label for="filtro-genre">Género</label>
+      <input id="filtro-genre" type="text" [(ngModel)]="filtros.genre">
+    </div>
+
+    <div class="campo">
+      <label for="filtro-album">Álbum</label>
+      <input id="filtro-album" type="number" [(ngModel)]="filtros.albumId">
+    </div>
+
+    <div class="campo">
+      <label for="filtro-estado">Estado</label>
+      <select id="filtro-estado" [(ngModel)]="estado">
+        <option value="">Todas</option>
+        @for (estado of estados; track estado) {
+          <option [value]="estado">{{ estado }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="campo">
+      <label for="filtro-instrumento">Instrumento</label>
+      <select
+        id="filtro-instrumento"
+        [ngModel]="songService.instrumento()"
+        (ngModelChange)="songService.instrumento.set($event)"
+      >
+        <option value="">Todos</option>
+        @for (instrumento of instrumentos; track instrumento) {
+          <option [value]="instrumento">{{ etiquetas[instrumento] }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="boton">
+      <button type="button" (click)="buscar()">Buscar</button>
+      <button type="button" class="secundario" (click)="limpiar()">Limpiar</button>
+    </div>
+  </div>
+
+  @if (songService.error()) {
+    <p class="error">{{ songService.error() }}</p>
+  }
+
+  <div class="lista">
+    @for (song of songService.songsFiltradas(); track song.id) {
+      <article class="tarjeta">
+        <strong>{{ song.title }}</strong>
+        <span>Artista: {{ song.artistName }}</span>
+        <span>Género: {{ song.genre }}</span>
+        @if (song.AlbumTitle) {
+          <span>Álbum: {{ song.AlbumTitle }} ({{ song.ReleaseYear }})</span>
+        }
+        <span>Instrumentos: {{ song.availableInstruments.join(', ') }}</span>
+        <span>Estado: {{ song.status }}</span>
+
+        <div class="acciones">
+          <button type="button" class="secundario" (click)="editar(song)">Editar</button>
+          <button type="button" class="eliminar" (click)="eliminar(song.id)">Eliminar</button>
+        </div>
+      </article>
+    } @empty {
+      <p>No hay canciones.</p>
+    }
+  </div>
+
+</section>

@@ -1,1 +1,11 @@
-<p>songs works!</p>
+<section class="songs">
+
+  @if (songService.songSeleccionada()) {
+    <app-song-edit></app-song-edit>
+  } @else {
+    <app-song-create></app-song-create>
+  }
+
+  <app-song-list></app-song-list>
+
+</section>

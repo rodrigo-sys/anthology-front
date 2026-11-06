@@ -1,1 +1,36 @@
-<p>version-list works!</p>
+<section class="version-list">
+
+  <h2>Versiones</h2>
+
+  <div class="acciones">
+    <button type="button" (click)="cambiarVista(false)">Aprobadas</button>
+    <button type="button" class="secundario" (click)="cambiarVista(true)">Todas</button>
+  </div>
+
+  @if (versionService.error()) {
+    <p class="error">{{ versionService.error() }}</p>
+  }
+
+  <div class="lista">
+    @for (version of versionService.versions(); track version.id) {
+      <article class="tarjeta">
+        <strong>{{ version.songTitle }}</strong>
+        <span>Instrumento: {{ etiquetas[version.instrument] }}</span>
+        <span>Estado: {{ version.status }}</span>
+
+        <a [href]="version.pdfUrl" target="_blank" rel="noopener">Ver PDF</a>
+
+        <div class="acciones">
+          @if (version.status === 'PENDING') {
+            <button type="button" (click)="aprobar(version)">Aprobar</button>
+            <button type="button" class="secundario" (click)="rechazar(version)">Rechazar</button>
+          }
+          <button type="button" class="eliminar" (click)="eliminar(version.id)">Eliminar</button>
+        </div>
+      </article>
+    } @empty {
+      <p>No hay versiones.</p>
+    }
+  </div>
+
+</section>

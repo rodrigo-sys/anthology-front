@@ -8,8 +8,3 @@ export interface SongVersion {
   status: Status
   pdfUrl: string
 }
-
-export interface SongVersionRequest {
-  instrument: Instrument
-  file: File
-}

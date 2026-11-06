@@ -1,9 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AlbumCreate } from '../../components/album-create/album-create';
+import { AlbumEdit } from '../../components/album-edit/album-edit';
+import { AlbumList } from '../../components/album-list/album-list';
+import { AlbumService } from '../../service/album-service';
 
 @Component({
-  imports: [],
+  imports: [AlbumCreate, AlbumEdit, AlbumList],
   selector: 'app-albums',
   styleUrl: './albums.css',
   templateUrl: './albums.html',
 })
-export class Albums {}
+export class Albums {
+  albumService = inject(AlbumService)
+}

@@ -22,7 +22,7 @@ export interface SongUpdateRequest {
   title: string;
   artistName: string;
   genre: string;
-  albumId: number | null;
+  albumId?: number | null;
 }
 
 export interface SongFilters {
