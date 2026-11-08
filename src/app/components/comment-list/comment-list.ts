@@ -11,4 +11,8 @@ import { CommentService } from '../../service/comment-service';
 })
 export class CommentList {
   commentService = inject(CommentService);
+
+  deleteComment(id: number) {
+    this.commentService.remove(id, 1);
+  }
 }

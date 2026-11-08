@@ -9,6 +9,7 @@
         <strong>{{ comment.username }}</strong> ({{ comment.instrument }}):
         <p>{{ comment.content }}</p>
         <small>{{ comment.createdAt }}</small>
+        <button (click)="deleteComment(comment.id)">Eliminar</button>
       </li>
     }
   </ul>
