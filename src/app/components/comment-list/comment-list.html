@@ -5,14 +5,7 @@
   }
   <ul>
     @for (comment of commentService.comments(); track comment.id) {
-      <li>
-        <strong>{{ comment.username }}</strong> ({{ comment.instrument }}):
-        <p>{{ comment.content }}</p>
-        <small>{{ comment.createdAt }}</small>
-        @if (devAuth.isAdmin()) {
-          <button (click)="deleteComment(comment.id)">Eliminar</button>
-        }
-      </li>
+      <app-comment-item [comment]="comment" [songVersionId]="songVersionId()"></app-comment-item>
     }
   </ul>
 </div>
