@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CommentService, CommentRequest } from '../../service/comment-service';
+import { CommentService } from '../../service/comment-service';
+import { CommentRequest } from '../../interfaces/Comment';
 
 @Component({
   selector: 'app-comment-create',
@@ -12,18 +13,19 @@ import { CommentService, CommentRequest } from '../../service/comment-service';
 })
 export class CommentCreate {
   commentService = inject(CommentService);
+  songVersionId = input.required<number>();
   content = '';
-  songVersionId: number = 1;
-  idUser: number = Number(typeof localStorage !== 'undefined' ? localStorage.getItem('userId') || '1' : '1');
+  idUser: number = Number(typeof localStorage !== 'undefined' ? localStorage.getItem('userId') : 0);
 
   createComment() {
-    if (!this.content) return;
+    if (!this.content || !this.idUser) return;
+    const sId = this.songVersionId();
     const request: CommentRequest = {
       idUser: this.idUser,
-      SongVersion: this.songVersionId,
+      SongVersion: sId,
       content: this.content
     };
-    this.commentService.add(request, this.songVersionId);
+    this.commentService.add(request, sId);
     this.content = '';
   }
 }
