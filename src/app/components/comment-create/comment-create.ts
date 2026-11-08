@@ -1,13 +1,11 @@
 import { Component, inject, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CommentService } from '../../service/comment-service';
 import { CommentRequest } from '../../interfaces/Comment';
 
 @Component({
   selector: 'app-comment-create',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './comment-create.html',
   styleUrl: './comment-create.css'
 })

@@ -1,12 +1,10 @@
 import { Component, inject, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { CommentService } from '../../service/comment-service';
 import { DevAuthService } from '../../service/dev-auth.service';
 
 @Component({
   selector: 'app-comment-list',
-  standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './comment-list.html',
   styleUrl: './comment-list.css'
 })

@@ -1,5 +1,4 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { CommentService } from '../../service/comment-service';
 import { CommentList } from '../../components/comment-list/comment-list';
@@ -7,8 +6,7 @@ import { CommentCreate } from '../../components/comment-create/comment-create';
 
 @Component({
   selector: 'app-comments-page',
-  standalone: true,
-  imports: [CommonModule, CommentList, CommentCreate],
+  imports: [CommentList, CommentCreate],
   templateUrl: './comments.html',
   styleUrl: './comments.css'
 })
