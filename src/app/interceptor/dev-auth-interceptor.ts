@@ -5,7 +5,7 @@ export const devAuthInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req);
   }
 
-  const token = typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null;
+  const token = localStorage.getItem('token');
   if (token) {
     const cloned = req.clone({
       setHeaders: {

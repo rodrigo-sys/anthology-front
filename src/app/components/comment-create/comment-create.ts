@@ -20,7 +20,7 @@ export class CommentCreate {
 
   createComment() {
     if (this.commentForm.invalid) return;
-    const idUser = Number(typeof localStorage !== 'undefined' ? localStorage.getItem('userId') : 0);
+    const idUser = Number(localStorage.getItem('userId') || 0);
     if (!idUser) return;
 
     const sId = this.songVersionId();

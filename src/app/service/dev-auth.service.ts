@@ -50,7 +50,7 @@ export class DevAuthService {
   }
 
   isAdmin(): boolean {
-    const token = typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null;
+    const token = localStorage.getItem('token');
     if (!token) return false;
     try {
       const payloadBase64 = token.split('.')[1];
