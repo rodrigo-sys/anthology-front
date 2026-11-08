@@ -1,6 +1,6 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PlaylistResponse, PlaylistService } from '../../service/playlist-service';
+import { PlaylistService } from '../../service/playlist-service';
 
 @Component({
   selector: 'app-playlist-detail',
@@ -9,16 +9,12 @@ import { PlaylistResponse, PlaylistService } from '../../service/playlist-servic
 })
 export class PlaylistDetail implements OnInit {
   private route = inject(ActivatedRoute);
-  private playlistService = inject(PlaylistService);
-
-  playlist = signal<PlaylistResponse | null>(null);
+  playlistService = inject(PlaylistService);
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
-      this.playlistService.getPlaylistById(id).subscribe(playlist => {
-        this.playlist.set(playlist);
-      });
+      this.playlistService.getPlaylistById(id);
     }
   }
 }

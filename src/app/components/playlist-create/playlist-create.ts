@@ -1,4 +1,4 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PlaylistService } from '../../service/playlist-service';
@@ -11,7 +11,6 @@ import { PlaylistService } from '../../service/playlist-service';
   styleUrl: './playlist-create.css'
 })
 export class PlaylistCreate {
-  playlistCreated = output<void>();
   private fb = inject(FormBuilder);
   private playlistService = inject(PlaylistService);
   playlistForm: FormGroup;
@@ -33,10 +32,7 @@ export class PlaylistCreate {
       idUser: userId
     };
 
-    this.playlistService.createPlaylist(request).subscribe(() => {
-      this.playlistForm.reset();
-      this.playlistCreated.emit();
-    });
-
+    this.playlistService.createPlaylist(request);
+    this.playlistForm.reset();
   }
 }

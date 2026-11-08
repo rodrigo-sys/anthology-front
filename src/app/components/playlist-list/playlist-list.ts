@@ -1,6 +1,6 @@
-import { Component, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { PlaylistResponse } from '../../service/playlist-service';
+import { PlaylistService } from '../../service/playlist-service';
 
 @Component({
   selector: 'app-playlist-list',
@@ -9,5 +9,5 @@ import { PlaylistResponse } from '../../service/playlist-service';
   styleUrl: './playlist-list.css'
 })
 export class PlaylistList {
-  playlists = input<PlaylistResponse[]>([]);
+  playlistService = inject(PlaylistService);
 }

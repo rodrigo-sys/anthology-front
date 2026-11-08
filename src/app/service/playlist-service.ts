@@ -1,13 +1,11 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 export interface PlaylistRequest {
   name: string;
   idUser: number;
 }
 
-//todo: importar en vez de crearla aca cuando se implemente songversion
 export interface SongVersionResponse {
   id: number;
   songId: number;
@@ -29,7 +27,6 @@ export interface PlaylistUpdateRequest {
   name?: string;
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -39,31 +36,69 @@ export class PlaylistService {
   private baseUrl = 'http://localhost:3001';
   private url = `${this.baseUrl}/api/playlists`;
 
-  createPlaylist(request: PlaylistRequest): Observable<PlaylistResponse> {
-    return this.http.post<PlaylistResponse>(this.url, request);
+  playlists = signal<PlaylistResponse[]>([]);
+  playlistById = signal<PlaylistResponse | null>(null);
+  error = signal<string>('');
+
+  getPlaylistsByUser(userId: number) {
+    this.http.get<PlaylistResponse[]>(`${this.url}/${userId}/user`).subscribe({
+      next: (data) => {
+        this.playlists.set(data);
+        this.error.set('');
+      },
+      error: () => this.error.set('No se pudieron cargar las playlists')
+    });
   }
 
-  getPlaylistsByUser(userId: number): Observable<PlaylistResponse[]> {
-    return this.http.get<PlaylistResponse[]>(`${this.url}/${userId}/user`);
+  getPlaylistById(id: number) {
+    this.http.get<PlaylistResponse>(`${this.url}/${id}`).subscribe({
+      next: (data) => {
+        this.playlistById.set(data);
+        this.error.set('');
+      },
+      error: () => {
+        this.playlistById.set(null);
+        this.error.set('No se encontró la playlist');
+      }
+    });
   }
 
-  getPlaylistById(id: number): Observable<PlaylistResponse> {
-    return this.http.get<PlaylistResponse>(`${this.url}/${id}`);
+  createPlaylist(request: PlaylistRequest) {
+    this.http.post<PlaylistResponse>(this.url, request).subscribe({
+      next: () => this.getPlaylistsByUser(request.idUser),
+      error: () => this.error.set('No se pudo crear la playlist')
+    });
   }
 
-  deletePlaylist(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${id}`);
+  deletePlaylist(id: number, userId: number = 1) {
+    this.http.delete<void>(`${this.url}/${id}`).subscribe({
+      next: () => this.getPlaylistsByUser(userId),
+      error: () => this.error.set('No se pudo eliminar la playlist')
+    });
   }
 
-  updatePlaylist(id: number, request: PlaylistUpdateRequest): Observable<PlaylistResponse> {
-    return this.http.patch<PlaylistResponse>(`${this.url}/${id}`, request);
+  updatePlaylist(id: number, request: PlaylistUpdateRequest, userId: number = 1) {
+    this.http.patch<PlaylistResponse>(`${this.url}/${id}`, request).subscribe({
+      next: () => this.getPlaylistsByUser(userId),
+      error: () => this.error.set('No se pudo actualizar la playlist')
+    });
   }
 
-  addSongVersion(playlistId: number, songVersionId: number): Observable<PlaylistResponse> {
-    return this.http.patch<PlaylistResponse>(`${this.url}/${playlistId}/canciones/${songVersionId}`, {});
+  addSongVersion(playlistId: number, songVersionId: number) {
+    this.http.patch<PlaylistResponse>(`${this.url}/${playlistId}/canciones/${songVersionId}`, {}).subscribe({
+      next: (updated) => {
+        this.playlistById.set(updated);
+      },
+      error: () => this.error.set('No se pudo agregar la canción')
+    });
   }
 
-  removeSongVersion(playlistId: number, songVersionId: number): Observable<PlaylistResponse> {
-    return this.http.delete<PlaylistResponse>(`${this.url}/${playlistId}/canciones/${songVersionId}`);
+  removeSongVersion(playlistId: number, songVersionId: number) {
+    this.http.delete<PlaylistResponse>(`${this.url}/${playlistId}/canciones/${songVersionId}`).subscribe({
+      next: (updated) => {
+        this.playlistById.set(updated);
+      },
+      error: () => this.error.set('No se pudo quitar la canción')
+    });
   }
 }

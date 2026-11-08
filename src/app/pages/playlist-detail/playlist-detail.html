@@ -1,5 +1,5 @@
 <div class="playlist-detail">
-  @if (playlist(); as playlist) {
+  @if (playlistService.playlistById(); as playlist) {
     <h2>{{ playlist.name }}</h2>
     <h3>Canciones</h3>
     @if (playlist.songVersions?.length) {
@@ -11,5 +11,7 @@
     } @else {
       <div>No hay canciones</div>
     }
+  } @else {
+    <div>Cargando playlist...</div>
   }
 </div>
