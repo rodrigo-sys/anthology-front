@@ -1,29 +1,35 @@
 import { Component, inject, input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommentService } from '../../service/comment-service';
 import { CommentRequest } from '../../interfaces/Comment';
 
 @Component({
   selector: 'app-comment-create',
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './comment-create.html',
   styleUrl: './comment-create.css'
 })
 export class CommentCreate {
+  private fb = inject(FormBuilder);
   commentService = inject(CommentService);
   songVersionId = input.required<number>();
-  content = '';
-  idUser: number = Number(typeof localStorage !== 'undefined' ? localStorage.getItem('userId') : 0);
+
+  commentForm: FormGroup = this.fb.group({
+    content: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(500)]]
+  });
 
   createComment() {
-    if (!this.content || !this.idUser) return;
+    if (this.commentForm.invalid) return;
+    const idUser = Number(typeof localStorage !== 'undefined' ? localStorage.getItem('userId') : 0);
+    if (!idUser) return;
+
     const sId = this.songVersionId();
     const request: CommentRequest = {
-      idUser: this.idUser,
+      idUser: idUser,
       SongVersion: sId,
-      content: this.content
+      content: this.commentForm.value.content
     };
     this.commentService.add(request, sId);
-    this.content = '';
+    this.commentForm.reset();
   }
 }

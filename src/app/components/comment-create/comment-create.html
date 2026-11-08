@@ -1,7 +1,7 @@
 <div class="comment-create">
   <h4>Agregar Comentario</h4>
-  <form (submit)="createComment()">
-    <input type="text" [(ngModel)]="content" name="content" placeholder="Escribe un comentario..." required />
-    <button type="submit">Enviar</button>
+  <form [formGroup]="commentForm" (ngSubmit)="createComment()">
+    <input type="text" formControlName="content" placeholder="Escribe un comentario..." required />
+    <button type="submit" [disabled]="commentForm.invalid">Enviar</button>
   </form>
 </div>
