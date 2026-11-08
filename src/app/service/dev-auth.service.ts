@@ -48,4 +48,18 @@ export class DevAuthService {
       }
     });
   }
+
+  isAdmin(): boolean {
+    const token = typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null;
+    if (!token) return false;
+    try {
+      const payloadBase64 = token.split('.')[1];
+      const payloadJson = atob(payloadBase64);
+      const payload = JSON.parse(payloadJson);
+      const authorities = payload.authorities || [];
+      return authorities.includes('ROLE_ADMIN');
+    } catch {
+      return false;
+    }
+  }
 }
