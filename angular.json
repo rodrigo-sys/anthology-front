@@ -55,14 +55,15 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {
-            "proxyConfig": "proxy.conf.json"
+            "proxyConfig": "./proxy.conf.json"
           },
           "configurations": {
             "production": {
               "buildTarget": "anthology-front:build:production"
             },
             "development": {
-              "buildTarget": "anthology-front:build:development"
+              "buildTarget": "anthology-front:build:development",
+              "proxyConfig": "./proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
