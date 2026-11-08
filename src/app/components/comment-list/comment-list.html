@@ -1,0 +1,15 @@
+<div class="comment-list">
+  <h3>Comentarios</h3>
+  @if (commentService.comments().length === 0) {
+    <div>No hay comentarios</div>
+  }
+  <ul>
+    @for (comment of commentService.comments(); track comment.id) {
+      <li>
+        <strong>{{ comment.username }}</strong> ({{ comment.instrument }}):
+        <p>{{ comment.content }}</p>
+        <small>{{ comment.createdAt }}</small>
+      </li>
+    }
+  </ul>
+</div>
