@@ -2,6 +2,8 @@
   <h2>Comentarios de la Versión</h2>
   @if (songVersionId() > 0) {
     <app-comment-create [songVersionId]="songVersionId()"></app-comment-create>
+    <app-comment-list [songVersionId]="songVersionId()"></app-comment-list>
+  } @else {
+    <div>Cargando comentarios...</div>
   }
-  <app-comment-list></app-comment-list>
 </div>
