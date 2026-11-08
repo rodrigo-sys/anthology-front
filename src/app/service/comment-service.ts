@@ -7,8 +7,7 @@ import { CommentRequest, CommentResponse } from '../interfaces/Comment';
 })
 export class CommentService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:8081';
-  private url = `${this.baseUrl}/api/comments`;
+  private url = '/api/comments';
 
   comments = signal<CommentResponse[]>([]);
   commentById = signal<CommentResponse | null>(null);

@@ -14,12 +14,11 @@ el interceptor agrega el token a las requests
 })
 export class DevAuthService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:8081';
 
   login() {
     const payload = { username: 'foo', password: '123', email: 'foo@test.com' };
 
-    this.http.post<any>(`${this.baseUrl}/api/users`, payload).subscribe({
+    this.http.post<any>('/api/users', payload).subscribe({
       next: (userRes) => {
         if (userRes && userRes.id) {
           localStorage.setItem('userId', String(userRes.id));
@@ -33,7 +32,7 @@ export class DevAuthService {
   }
 
   private authenticate() {
-    this.http.post<any>(`${this.baseUrl}/auth`, { username: 'foo', password: '123' }).subscribe({
+    this.http.post<any>('/auth', { username: 'foo', password: '123' }).subscribe({
       next: (res) => {
         const token = res.AccessToken;
         if (token) {
@@ -42,7 +41,7 @@ export class DevAuthService {
         }
       },
       error: (err) => {
-        console.log('Error en autenticación (dev):', err.error?.message || err.statusText);
+        console.log('Error en autenticación dev:', err.error?.message || err.statusText);
       }
     });
   }
