@@ -1,0 +1,9 @@
+<li>
+  <strong>{{ suggestion().title }}</strong> - {{ suggestion().artistName }} ({{ suggestion().genre }})
+  <span>Estado: {{ suggestion().status }}</span>
+  @if (devAuth.isAdmin()) {
+    <button (click)="approve(suggestion().id)">Aprobar</button>
+    <button (click)="reject(suggestion().id)">Rechazar</button>
+    <button (click)="delete(suggestion().id)">Eliminar</button>
+  }
+</li>

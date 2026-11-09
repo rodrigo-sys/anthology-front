@@ -1,0 +1,18 @@
+<div class="suggestion-create">
+  <h3>Sugerir Canción</h3>
+  <form [formGroup]="suggestionForm" (ngSubmit)="createSuggestion()">
+    <div>
+      <label>Título:</label>
+      <input type="text" formControlName="title" placeholder="Título de la canción" required />
+    </div>
+    <div>
+      <label>Artista:</label>
+      <input type="text" formControlName="artistName" placeholder="Nombre del artista" required />
+    </div>
+    <div>
+      <label>Género:</label>
+      <input type="text" formControlName="genre" placeholder="Género musical" required />
+    </div>
+    <button type="submit" [disabled]="suggestionForm.invalid">Enviar Sugerencia</button>
+  </form>
+</div>

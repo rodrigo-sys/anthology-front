@@ -1,0 +1,13 @@
+<div class="suggestion-list">
+  <h3>Lista de Sugerencias</h3>
+  @if (suggestionService.error()) {
+    <div class="error-message" style="color: red;">{{ suggestionService.error() }}</div>
+  } @else if (suggestionService.suggestions().length === 0) {
+    <div>No hay sugerencias</div>
+  }
+  <ul>
+    @for (suggestion of suggestionService.suggestions(); track suggestion.id) {
+      <app-suggestion-item [suggestion]="suggestion"></app-suggestion-item>
+    }
+  </ul>
+</div>
