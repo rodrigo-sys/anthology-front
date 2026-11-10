@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
   private http = inject(HttpClient);
 
-  isLoggedIn = signal<boolean>(!!localStorage.getItem('token'));
+  isLoggedIn = signal<boolean>(!!this.getToken());
 
   login(credentials: { username: string; password: string }) {
     return this.http.post<any>('/auth', credentials);
@@ -31,8 +31,16 @@ export class AuthService {
     this.isLoggedIn.set(true);
   }
 
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  getUserId(): string | null {
+    return localStorage.getItem('userId');
+  }
+
   isAdmin(): boolean {
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     if (!token) return false;
     try {
       const payloadBase64 = token.split('.')[1];
