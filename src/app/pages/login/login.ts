@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth-service';
@@ -14,7 +14,7 @@ export class LoginPage {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  error = '';
+  error = signal<string>('');
 
   loginForm: FormGroup = this.fb.group({
     username: ['', [Validators.required]],
@@ -34,7 +34,7 @@ export class LoginPage {
         }
       },
       error: (err) => {
-        this.error = err.error?.message || 'Credenciales inválidas';
+        this.error.set(err.error?.message || 'Credenciales inválidas');
       }
     });
   }
