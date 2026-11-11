@@ -1,7 +1,7 @@
 import { Component, inject, input } from '@angular/core';
 import { CommentResponse } from '../../interfaces/Comment';
 import { CommentService } from '../../service/comment-service';
-import { DevAuthService } from '../../service/dev-auth.service';
+import { AuthService } from '../../service/auth-service';
 
 @Component({
   selector: 'app-comment-item',
@@ -13,7 +13,7 @@ export class CommentItem {
   comment = input.required<CommentResponse>();
   songVersionId = input<number>(0);
   commentService = inject(CommentService);
-  devAuth = inject(DevAuthService);
+  authService = inject(AuthService);
 
   deleteComment(id: number) {
     this.commentService.remove(id, this.songVersionId());
