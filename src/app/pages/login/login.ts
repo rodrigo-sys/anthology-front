@@ -26,12 +26,8 @@ export class LoginPage {
     const { username, password } = this.loginForm.getRawValue();
 
     this.authService.login({ username, password }).subscribe({
-      next: (res) => {
-        const token = res.AccessToken;
-        if (token) {
-          this.authService.saveSession(token);
-          this.router.navigate(['/']);
-        }
+      next: () => {
+        this.router.navigate(['/']);
       },
       error: (err) => {
         this.error.set(err.error?.message || 'Credenciales inválidas');

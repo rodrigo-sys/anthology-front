@@ -1,5 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,14 @@ export class AuthService {
   isLoggedIn = signal<boolean>(!!this.getToken());
 
   login(credentials: { username: string; password: string }) {
-    return this.http.post<any>('/auth', credentials);
+    return this.http.post<any>('/auth', credentials).pipe(
+      tap((res) => {
+        const token = res.AccessToken;
+        if (token) {
+          this.saveSession(token);
+        }
+      })
+    );
   }
 
   register(user: { username: string; email: string; password: string }) {
