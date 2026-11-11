@@ -62,7 +62,8 @@
               "buildTarget": "anthology-front:build:production"
             },
             "development": {
-              "buildTarget": "anthology-front:build:development"
+              "buildTarget": "anthology-front:build:development",
+              "proxyConfig": "./proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

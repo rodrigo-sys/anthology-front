@@ -2,6 +2,8 @@ export type Status = 'PENDING' | 'APPROVED' | 'REJECTED'
 
 export type Instrument = 'GUITAR' | 'BASS' | 'PIANO'
 
+export type Role = 'ADMIN' | 'USER' | 'ARTIST'
+
 export const INSTRUMENTS: Instrument[] = ['GUITAR', 'BASS', 'PIANO']
 
 export const INSTRUMENT_LABEL: Record<Instrument, string> = {
