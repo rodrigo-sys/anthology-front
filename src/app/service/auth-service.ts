@@ -78,7 +78,9 @@ export class AuthService {
     const username = this.getUsername();
     if (!username) return of(null);
 
-    return this.http.get<{ id: number; username: string }[]>('/api/users/user').pipe(
+    const endpoint = this.isAdmin() ? '/api/users' : '/api/users/user';
+
+    return this.http.get<{ id: number; username: string }[]>(endpoint).pipe(
       map((users) => users.find((u) => u.username === username)?.id ?? null),
       tap((id) => {
         if (id !== null) localStorage.setItem('userId', String(id));
