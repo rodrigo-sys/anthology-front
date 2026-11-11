@@ -2,6 +2,7 @@ import { Component, inject, input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { INSTRUMENT_LABEL, STATUS_LABEL, Status } from '../../interfaces/Enums';
 import { SongVersion } from '../../interfaces/SongVersion';
+import { AuthService } from '../../service/auth-service';
 import { SongVersionService } from '../../service/song-version-service';
 
 @Component({
@@ -13,12 +14,16 @@ export class VersionList implements OnInit {
   songId = input.required<number>()
 
   versionService = inject(SongVersionService)
+  authService = inject(AuthService)
+
+  esAdmin = this.authService.isAdmin()
 
   etiquetas = INSTRUMENT_LABEL
   estadoEtiquetas = STATUS_LABEL
   estados: Status[] = ['PENDING', 'APPROVED', 'REJECTED']
 
   filtroEstado: Status | '' = ''
+  mostrandoMias = false
 
   ngOnInit(): void {
     this.versionService.listVersions(this.songId())
@@ -32,8 +37,15 @@ export class VersionList implements OnInit {
   }
 
   cambiarVista(todas: boolean) {
+    this.mostrandoMias = false
     if (todas) this.versionService.listTodas(this.songId())
     else this.versionService.listVersions(this.songId())
+  }
+
+  verMias() {
+    this.filtroEstado = ''
+    this.mostrandoMias = true
+    this.versionService.myVersions(this.songId())
   }
 
   aprobar(version: SongVersion) {

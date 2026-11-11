@@ -2,6 +2,15 @@
 
   <h2>Canciones</h2>
 
+  <div class="acciones">
+    @if (esAdmin) {
+      <button type="button" (click)="verTodas()">Todas</button>
+    } @else {
+      <button type="button" (click)="verAprobadas()">Aprobadas</button>
+      <button type="button" class="secundario" (click)="verMias()">Mis canciones</button>
+    }
+  </div>
+
   <div class="buscador">
     <div class="campo">
       <label for="filtro-title">Título</label>
@@ -28,15 +37,17 @@
       </select>
     </div>
 
-    <div class="campo">
-      <label for="filtro-estado">Estado</label>
-      <select id="filtro-estado" [(ngModel)]="estado">
-        <option value="">Todas</option>
-        @for (estado of estados; track estado) {
-          <option [value]="estado">{{ estadoEtiquetas[estado] }}</option>
-        }
-      </select>
-    </div>
+    @if (esAdmin) {
+      <div class="campo">
+        <label for="filtro-estado">Estado</label>
+        <select id="filtro-estado" [(ngModel)]="estado">
+          <option value="">Todas</option>
+          @for (estado of estados; track estado) {
+            <option [value]="estado">{{ estadoEtiquetas[estado] }}</option>
+          }
+        </select>
+      </div>
+    }
 
     <div class="campo">
       <label for="filtro-instrumento">Instrumento</label>
@@ -80,8 +91,10 @@
 
         <div class="acciones">
           <a [routerLink]="['/songs', song.id]">Ver</a>
-          <button type="button" class="secundario" (click)="editar(song)">Editar</button>
-          <button type="button" class="eliminar" (click)="eliminar(song)">Eliminar</button>
+          @if (esAdmin || (mostrandoMias && song.status !== 'APPROVED')) {
+            <button type="button" class="secundario" (click)="editar(song)">Editar</button>
+            <button type="button" class="eliminar" (click)="eliminar(song)">Eliminar</button>
+          }
         </div>
       </article>
     } @empty {

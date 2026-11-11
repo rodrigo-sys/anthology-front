@@ -2,6 +2,13 @@
 
   <h2>Álbumes</h2>
 
+  <div class="acciones">
+    <button type="button" (click)="verTodos()">Todos</button>
+    @if (!esAdmin) {
+      <button type="button" class="secundario" (click)="verMios()">Mis álbumes</button>
+    }
+  </div>
+
   <div class="buscador">
     <div class="campo">
       <label for="filtro-album-title">Título</label>
@@ -58,8 +65,10 @@
         <span>Estado: {{ estadoEtiquetas[album.status] }}</span>
 
         <div class="acciones">
-          <button type="button" class="secundario" (click)="editar(album)">Editar</button>
-          <button type="button" class="eliminar" (click)="eliminar(album)">Eliminar</button>
+          @if (esAdmin || (mostrandoMias && album.status !== 'APPROVED')) {
+            <button type="button" class="secundario" (click)="editar(album)">Editar</button>
+            <button type="button" class="eliminar" (click)="eliminar(album)">Eliminar</button>
+          }
         </div>
       </article>
     } @empty {

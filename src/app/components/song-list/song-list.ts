@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { INSTRUMENTS, INSTRUMENT_LABEL, STATUS_LABEL, Status } from '../../interfaces/Enums';
 import { Song, SongFilters } from '../../interfaces/Song';
 import { AlbumService } from '../../service/album-service';
+import { AuthService } from '../../service/auth-service';
 import { SongService } from '../../service/song-service';
 
 @Component({
@@ -14,6 +15,9 @@ import { SongService } from '../../service/song-service';
 export class SongList implements OnInit {
   songService = inject(SongService)
   albumService = inject(AlbumService)
+  authService = inject(AuthService)
+
+  esAdmin = this.authService.isAdmin()
 
   instrumentos = INSTRUMENTS
   etiquetas = INSTRUMENT_LABEL
@@ -22,6 +26,7 @@ export class SongList implements OnInit {
 
   filtros: SongFilters = {}
   estado: Status | '' = ''
+  mostrandoMias = false
 
   ngOnInit(): void {
     this.songService.listSongs()
@@ -29,13 +34,33 @@ export class SongList implements OnInit {
   }
 
   buscar(): void {
+    this.mostrandoMias = false
     if (this.estado) this.songService.listByStatus(this.estado)
     else this.songService.listSongs(this.filtros)
+  }
+
+  verTodas(): void {
+    this.estado = ''
+    this.mostrandoMias = false
+    this.songService.listTodas()
+  }
+
+  verAprobadas(): void {
+    this.estado = ''
+    this.mostrandoMias = false
+    this.songService.listSongs()
+  }
+
+  verMias(): void {
+    this.estado = ''
+    this.mostrandoMias = true
+    this.songService.mySongs()
   }
 
   limpiar(): void {
     this.filtros = {}
     this.estado = ''
+    this.mostrandoMias = false
     this.songService.instrumento.set('')
     this.songService.listSongs()
   }

@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Album } from '../../interfaces/Album';
 import { STATUS_LABEL, Status } from '../../interfaces/Enums';
 import { AlbumService } from '../../service/album-service';
+import { AuthService } from '../../service/auth-service';
 
 @Component({
   selector: 'app-album-list',
@@ -11,6 +12,9 @@ import { AlbumService } from '../../service/album-service';
 })
 export class AlbumList implements OnInit {
   albumService = inject(AlbumService)
+  authService = inject(AuthService)
+
+  esAdmin = this.authService.isAdmin()
 
   estados: Status[] = ['PENDING', 'APPROVED', 'REJECTED']
   estadoEtiquetas = STATUS_LABEL
@@ -22,6 +26,7 @@ export class AlbumList implements OnInit {
   }
 
   searchId: number | null = null
+  mostrandoMias = false
 
   ngOnInit(): void {
     this.albumService.listAlbums()
@@ -49,7 +54,18 @@ export class AlbumList implements OnInit {
   limpiar(): void {
     this.filtros = { title: '', artistName: '', status: '' }
     this.searchId = null
+    this.mostrandoMias = false
     this.albumService.listAlbums()
+  }
+
+  verTodos(): void {
+    this.mostrandoMias = false
+    this.albumService.listAlbums()
+  }
+
+  verMios(): void {
+    this.mostrandoMias = true
+    this.albumService.myAlbums()
   }
 
   editar(album: Album): void {

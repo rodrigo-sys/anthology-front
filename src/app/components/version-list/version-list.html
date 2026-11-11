@@ -4,7 +4,11 @@
 
   <div class="acciones">
     <button type="button" (click)="cambiarVista(false)">Aprobadas</button>
-    <button type="button" class="secundario" (click)="cambiarVista(true)">Todas</button>
+    @if (esAdmin) {
+      <button type="button" class="secundario" (click)="cambiarVista(true)">Todas</button>
+    } @else {
+      <button type="button" class="secundario" (click)="verMias()">Mis versiones</button>
+    }
   </div>
 
   <div class="campo">
@@ -31,11 +35,13 @@
         <a [href]="version.pdfUrl" target="_blank" rel="noopener">Ver PDF</a>
 
         <div class="acciones">
-          @if (version.status === 'PENDING') {
+          @if (esAdmin && version.status === 'PENDING') {
             <button type="button" (click)="aprobar(version)">Aprobar</button>
             <button type="button" class="secundario" (click)="rechazar(version)">Rechazar</button>
           }
-          <button type="button" class="eliminar" (click)="eliminar(version)">Eliminar</button>
+          @if (esAdmin || (mostrandoMias && version.status !== 'APPROVED')) {
+            <button type="button" class="eliminar" (click)="eliminar(version)">Eliminar</button>
+          }
         </div>
       </article>
     } @empty {
