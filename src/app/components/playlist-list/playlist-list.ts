@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PlaylistService } from '../../service/playlist-service';
+import { AuthService } from '../../service/auth-service';
 
 @Component({
   selector: 'app-playlist-list',
@@ -10,4 +11,5 @@ import { PlaylistService } from '../../service/playlist-service';
 })
 export class PlaylistList {
   playlistService = inject(PlaylistService);
+  authService = inject(AuthService)
 }

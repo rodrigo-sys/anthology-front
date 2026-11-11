@@ -15,6 +15,9 @@ export class Playlists implements OnInit {
   private authService = inject(AuthService);
 
   ngOnInit() {
+    if (this.authService.isAdmin()) {
+      this.playlistService.getAllPlaylists();
+    }
     const userId = this.authService.getUserId();
     if (userId) {
       this.playlistService.getPlaylistsByUser(userId);

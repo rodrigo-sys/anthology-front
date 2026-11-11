@@ -10,4 +10,21 @@
       </li>
     }
   </ul>
+
+  @if (authService.isAdmin()) {
+    <details>
+      <summary>Todas las playlists</summary>
+
+      <ul>
+
+        @for (playlist of playlistService.allPlaylists(); track playlist.id) {
+          <li>
+            <a [routerLink]="['/playlists', playlist.id]">{{ playlist.name }}</a>
+          </li>
+        }
+
+      </ul>
+    </details>
+  }
+
 </div>
