@@ -1,1 +1,17 @@
-<p>login works!</p>
+<div class="login-page">
+  <h2>Iniciar Sesión</h2>
+  @if (error()) {
+    <div class="error" style="color: red;">{{ error() }}</div>
+  }
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Usuario:</label>
+      <input type="text" formControlName="username" required />
+    </div>
+    <div>
+      <label>Contraseña:</label>
+      <input type="password" formControlName="password" required />
+    </div>
+    <button type="submit" [disabled]="loginForm.invalid">Ingresar</button>
+  </form>
+</div>
