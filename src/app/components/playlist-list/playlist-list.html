@@ -31,17 +31,7 @@
 
         @for (playlist of playlistService.allPlaylists(); track playlist.id) {
           <li>
-            @if (editingId === playlist.id) {
-              <input [(ngModel)]="newName" type="text" />
-              <button type="button" (click)="saveEdit(playlist)">Guardar</button>
-              <button type="button" (click)="editingId = null">Cancelar</button>
-            } @else {
               <a [routerLink]="['/playlists', playlist.id]">{{ playlist.name }}</a>
-              <div class="acciones">
-                <button type="button" (click)="startEdit(playlist)">Renombrar</button>
-                <button type="button" class="eliminar" (click)="deletePlaylist(playlist)">Eliminar</button>
-              </div>
-            }
           </li>
         }
 

@@ -1,20 +1,37 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PlaylistService } from '../../service/playlist-service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-playlist-detail',
+  imports: [RouterLink, FormsModule],
   templateUrl: './playlist-detail.html',
   styleUrl: './playlist-detail.css'
 })
 export class PlaylistDetail implements OnInit {
   private route = inject(ActivatedRoute);
   playlistService = inject(PlaylistService);
+  songVersionIdInput: number | null = null;
+  playlistId = 0;
 
   ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (id) {
-      this.playlistService.getPlaylistById(id);
+    this.playlistId = Number(this.route.snapshot.paramMap.get('id'));
+    if (this.playlistId) {
+      this.playlistService.getPlaylistById(this.playlistId);
+    }
+  }
+
+  removeSong(songVersionId: number) {
+    if (this.playlistId) {
+      this.playlistService.removeSongVersion(this.playlistId, songVersionId);
+    }
+  }
+
+  addSong() {
+    if (this.playlistId && this.songVersionIdInput) {
+      this.playlistService.addSongVersion(this.playlistId, this.songVersionIdInput);
+      this.songVersionIdInput = null;
     }
   }
 }
