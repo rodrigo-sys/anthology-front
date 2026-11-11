@@ -21,6 +21,8 @@ export class CommentsPage implements OnInit {
       const parsedId = Number(id);
       this.songVersionId.set(parsedId);
       this.commentService.getBySongVersionId(parsedId);
+    } else {
+      this.commentService.listComments();
     }
   }
 }

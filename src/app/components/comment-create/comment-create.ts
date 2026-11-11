@@ -2,6 +2,7 @@ import { Component, inject, input } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommentService } from '../../service/comment-service';
 import { CommentRequest } from '../../interfaces/Comment';
+import { AuthService } from '../../service/auth-service';
 
 @Component({
   selector: 'app-comment-create',
@@ -11,6 +12,7 @@ import { CommentRequest } from '../../interfaces/Comment';
 })
 export class CommentCreate {
   private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
   commentService = inject(CommentService);
   songVersionId = input.required<number>();
 
@@ -20,7 +22,7 @@ export class CommentCreate {
 
   createComment() {
     if (this.commentForm.invalid) return;
-    const idUser = Number(localStorage.getItem('userId') || 0);
+    const idUser = this.authService.getUserId();
     if (!idUser) return;
 
     const sId = this.songVersionId();

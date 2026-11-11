@@ -1,8 +1,8 @@
 <li>
-  <strong>{{ comment().username }}</strong> ({{ comment().instrument }}):
+  <strong>{{ comment().username }}</strong> ({{ comment().instrument }}){{ songVersionId() === 0 ? ' — ' + comment().songTitle : '' }}:
   <p>{{ comment().content }}</p>
   <small>{{ comment().createdAt }}</small>
-  @if (devAuth.isAdmin()) {
+  @if (authService.isAdmin()) {
     <button (click)="deleteComment(comment().id)">Eliminar</button>
   }
 </li>
