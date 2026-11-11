@@ -92,4 +92,9 @@ export class AuthService {
     const authorities = this.getPayload()?.authorities || [];
     return authorities.includes('ROLE_ADMIN');
   }
+
+  isArtist(): boolean {
+    const authorities = this.getPayload()?.authorities || [];
+    return authorities.includes('ROLE_ARTIST');
+  }
 }
