@@ -3,7 +3,10 @@ import { inject } from '@angular/core';
 import { AuthService } from '../service/auth-service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  if (req.url.includes('/auth') || req.url.includes('/api/users')) {
+  const isLogin = req.url.includes('/auth');
+  const isRegister = req.url === '/api/users' && req.method === 'POST';
+
+  if (isLogin || isRegister) {
     return next(req);
   }
 

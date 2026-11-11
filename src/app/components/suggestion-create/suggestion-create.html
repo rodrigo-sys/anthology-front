@@ -10,8 +10,8 @@
       <input type="text" formControlName="artistName" placeholder="Nombre del artista" required />
     </div>
     <div>
-      <label>Género:</label>
-      <input type="text" formControlName="genre" placeholder="Género musical" required />
+      <label>Nota:</label>
+      <textarea formControlName="notes" placeholder="¿Por qué quieres sugerir esta canción?" required></textarea>
     </div>
     <button type="submit" [disabled]="suggestionForm.invalid">Enviar Sugerencia</button>
   </form>

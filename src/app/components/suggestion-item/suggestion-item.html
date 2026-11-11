@@ -1,5 +1,7 @@
 <li>
-  <strong>{{ suggestion().title }}</strong> - {{ suggestion().artistName }} ({{ suggestion().genre }})
+  <strong>{{ suggestion().title }}</strong> - {{ suggestion().artistName }}
+  <p>Nota: {{ suggestion().notes }}</p>
+  <span>Usuario: {{ suggestion().idUser }}</span>
   <span>Estado: {{ suggestion().status }}</span>
   @if (devAuth.isAdmin()) {
     <button (click)="approve(suggestion().id)">Aprobar</button>
