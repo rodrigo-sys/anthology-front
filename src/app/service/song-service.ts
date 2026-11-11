@@ -89,6 +89,8 @@ export class SongService {
   }
 
   mySongs() {
+    if (!this.soloArtista('ver tus canciones')) return
+
     this.mis = true
     this.todas = false
     this.estado = null
@@ -118,6 +120,8 @@ export class SongService {
   }
 
   add(song: SongRequest, alCrear?: () => void) {
+    if (!this.puedeEscribir('agregar canciones')) return
+
     this.http.post<Song>(this.authService.isAdmin() ? this.url : `${this.url}/artist`, song).subscribe({
       next: () => {
         this.recargar()
@@ -128,6 +132,8 @@ export class SongService {
   }
 
   update(id: number, cambios: SongUpdateRequest) {
+    if (!this.puedeEscribir('editar canciones')) return
+
     this.http.patch<Song>(
       this.authService.isAdmin() ? `${this.url}/${id}` : `${this.url}/artist/${id}`,
       cambios
@@ -150,6 +156,8 @@ export class SongService {
   }
 
   remove(id: number) {
+    if (!this.puedeEscribir('eliminar canciones')) return
+
     this.http.delete<void>(
       this.authService.isAdmin() ? `${this.url}/${id}` : `${this.url}/artist/${id}`
     ).subscribe({
@@ -169,6 +177,20 @@ export class SongService {
     if (this.authService.isAdmin()) return true
 
     this.error.set(`Solo un administrador puede ${accion}`)
+    return false
+  }
+
+  private soloArtista(accion: string) {
+    if (this.authService.isArtist()) return true
+
+    this.error.set(`Solo un artista puede ${accion}`)
+    return false
+  }
+
+  private puedeEscribir(accion: string) {
+    if (this.authService.isAdmin() || this.authService.isArtist()) return true
+
+    this.error.set(`Solo un administrador o artista puede ${accion}`)
     return false
   }
 

@@ -6,7 +6,7 @@
     <button type="button" (click)="cambiarVista(false)">Aprobadas</button>
     @if (esAdmin) {
       <button type="button" class="secundario" (click)="cambiarVista(true)">Todas</button>
-    } @else {
+    } @else if (esArtist) {
       <button type="button" class="secundario" (click)="verMias()">Mis versiones</button>
     }
   </div>

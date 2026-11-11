@@ -17,6 +17,7 @@ export class VersionList implements OnInit {
   authService = inject(AuthService)
 
   esAdmin = this.authService.isAdmin()
+  esArtist = this.authService.isArtist()
 
   etiquetas = INSTRUMENT_LABEL
   estadoEtiquetas = STATUS_LABEL

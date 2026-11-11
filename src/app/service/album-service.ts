@@ -49,6 +49,8 @@ export class AlbumService {
   }
 
   myAlbums() {
+    if (!this.soloArtista('ver tus álbumes')) return
+
     this.mis = true
     this.estado = null
 
@@ -78,6 +80,8 @@ export class AlbumService {
   }
 
   add(album: AlbumRequest, alCrear?: (album: Album) => void) {
+    if (!this.puedeEscribir('agregar álbumes')) return
+
     this.http.post<Album>(this.authService.isAdmin() ? this.url : `${this.url}/artist`, album).subscribe({
       next: (data) => {
         this.error.set('')
@@ -89,6 +93,8 @@ export class AlbumService {
   }
 
   update(id: number, cambios: AlbumUpdateRequest) {
+    if (!this.puedeEscribir('editar álbumes')) return
+
     this.http.patch<Album>(
       this.authService.isAdmin() ? `${this.url}/${id}` : `${this.url}/artist/${id}`,
       cambios
@@ -111,6 +117,8 @@ export class AlbumService {
   }
 
   remove(id: number) {
+    if (!this.puedeEscribir('eliminar álbumes')) return
+
     this.http.delete<void>(
       this.authService.isAdmin() ? `${this.url}/${id}` : `${this.url}/artist/${id}`
     ).subscribe({
@@ -129,6 +137,20 @@ export class AlbumService {
     if (this.authService.isAdmin()) return true
 
     this.error.set(`Solo un administrador puede ${accion}`)
+    return false
+  }
+
+  private soloArtista(accion: string) {
+    if (this.authService.isArtist()) return true
+
+    this.error.set(`Solo un artista puede ${accion}`)
+    return false
+  }
+
+  private puedeEscribir(accion: string) {
+    if (this.authService.isAdmin() || this.authService.isArtist()) return true
+
+    this.error.set(`Solo un administrador o artista puede ${accion}`)
     return false
   }
 }

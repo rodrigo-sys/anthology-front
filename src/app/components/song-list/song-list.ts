@@ -18,6 +18,7 @@ export class SongList implements OnInit {
   authService = inject(AuthService)
 
   esAdmin = this.authService.isAdmin()
+  esArtist = this.authService.isArtist()
 
   instrumentos = INSTRUMENTS
   etiquetas = INSTRUMENT_LABEL

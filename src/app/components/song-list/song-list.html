@@ -7,7 +7,9 @@
       <button type="button" (click)="verTodas()">Todas</button>
     } @else {
       <button type="button" (click)="verAprobadas()">Aprobadas</button>
-      <button type="button" class="secundario" (click)="verMias()">Mis canciones</button>
+      @if (esArtist) {
+        <button type="button" class="secundario" (click)="verMias()">Mis canciones</button>
+      }
     }
   </div>
 

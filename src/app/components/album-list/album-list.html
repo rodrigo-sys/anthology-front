@@ -4,7 +4,7 @@
 
   <div class="acciones">
     <button type="button" (click)="verTodos()">Todos</button>
-    @if (!esAdmin) {
+    @if (!esAdmin && esArtist) {
       <button type="button" class="secundario" (click)="verMios()">Mis álbumes</button>
     }
   </div>

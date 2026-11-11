@@ -15,6 +15,7 @@ export class AlbumList implements OnInit {
   authService = inject(AuthService)
 
   esAdmin = this.authService.isAdmin()
+  esArtist = this.authService.isArtist()
 
   estados: Status[] = ['PENDING', 'APPROVED', 'REJECTED']
   estadoEtiquetas = STATUS_LABEL

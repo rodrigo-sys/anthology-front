@@ -67,6 +67,8 @@ export class SongVersionService {
 
   // el backend expone esta ruta anidada dentro de /api/songs/{songId}/versions
   myVersions(songId: number) {
+    if (!this.soloArtista('ver tus versiones')) return
+
     this.mis = true
     this.todas = false
     this.estado = null
@@ -110,6 +112,8 @@ export class SongVersionService {
   }
 
   add(songId: number, instrument: Instrument, file: File, alSubir?: () => void) {
+    if (!this.puedeEscribir('subir versiones')) return
+
     const cuerpo = new FormData()
     cuerpo.append('file', file)
 
@@ -136,6 +140,8 @@ export class SongVersionService {
   }
 
   remove(songId: number, versionId: number) {
+    if (!this.puedeEscribir('eliminar versiones')) return
+
     this.http.delete<void>(
       this.authService.isAdmin()
         ? `${this.url(songId)}/${versionId}`
@@ -157,6 +163,20 @@ export class SongVersionService {
     if (this.authService.isAdmin()) return true
 
     this.error.set(`Solo un administrador puede ${accion}`)
+    return false
+  }
+
+  private soloArtista(accion: string) {
+    if (this.authService.isArtist()) return true
+
+    this.error.set(`Solo un artista puede ${accion}`)
+    return false
+  }
+
+  private puedeEscribir(accion: string) {
+    if (this.authService.isAdmin() || this.authService.isArtist()) return true
+
+    this.error.set(`Solo un administrador o artista puede ${accion}`)
     return false
   }
 }
