@@ -3,7 +3,7 @@
   <p>Nota: {{ suggestion().notes }}</p>
   <span>Usuario: {{ suggestion().idUser }}</span>
   <span>Estado: {{ suggestion().status }}</span>
-  @if (devAuth.isAdmin()) {
+  @if (authService.isAdmin()) {
     <button (click)="approve(suggestion().id)">Aprobar</button>
     <button (click)="reject(suggestion().id)">Rechazar</button>
     <button (click)="delete(suggestion().id)">Eliminar</button>

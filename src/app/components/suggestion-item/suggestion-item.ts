@@ -1,7 +1,7 @@
 import { Component, inject, input } from '@angular/core';
 import { SongSuggestionResponse } from '../../interfaces/Suggestion';
 import { SuggestionService } from '../../service/suggestion-service';
-import { DevAuthService } from '../../service/dev-auth.service';
+import { AuthService } from '../../service/auth-service';
 
 @Component({
   selector: 'app-suggestion-item',
@@ -12,7 +12,7 @@ import { DevAuthService } from '../../service/dev-auth.service';
 export class SuggestionItem {
   suggestion = input.required<SongSuggestionResponse>();
   suggestionService = inject(SuggestionService);
-  devAuth = inject(DevAuthService);
+  authService = inject(AuthService);
 
   reject(id: number) {
     this.suggestionService.reject(id);
