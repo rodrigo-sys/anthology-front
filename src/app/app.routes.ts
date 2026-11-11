@@ -17,8 +17,6 @@ import { ArtistCreate } from './components/artist-create/artist-create';
 import { UserCreate } from './components/user-create/user-create';
 import { UserEdit } from './components/user-edit/user-edit';
 import { UserList } from './components/user-list/user-list';
-import { ArtistEdit } from './components/artist-edit/artist-edit';
-import { ArtistList } from './components/artist-list/artist-list';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'songs', pathMatch: 'full' },
@@ -31,16 +29,12 @@ export const routes: Routes = [
   { path: 'suggestions/new', component: SuggestionCreatePage, canActivate: [authGuard] },
   { path: 'playlists', component: Playlists, canActivate: [authGuard] },
   { path: 'playlists/:id', component: PlaylistDetail, canActivate: [authGuard] },
-  { path: 'users', component: UsersPage },
-  { path: 'artists', component: ArtistsPage },
   { path: 'login', component: LoginPage },
   { path: 'logout', component: LogoutPage },
-   { path: 'artist-create', component: ArtistCreate ,canActivate:[adminGuard]},
-   {path:'user-create',component:UserCreate,canActivate:[authGuard]},
-   {path:'user-edit',component:UserEdit,canActivate:[authGuard]},
-   {path:'user-list',component:UserList, canActivate:[adminGuard]},
-  {path:'artist-edit',component:ArtistEdit, },
-  {path:'artist-list',component:ArtistList, canActivate:[adminGuard]},
+   { path: 'artist-create', component: ArtistCreate },
+   {path:'user-create',component:UserCreate},
+   {path:'user-edit',component:UserEdit},
+   {path:'user-list',component:UserList},
   { path: '**', redirectTo: 'songs' }
-  
+
 ];
