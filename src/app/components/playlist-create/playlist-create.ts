@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PlaylistService } from '../../service/playlist-service';
+import { AuthService } from '../../service/auth-service';
 
 @Component({
   selector: 'app-playlist-create',
@@ -13,6 +14,7 @@ import { PlaylistService } from '../../service/playlist-service';
 export class PlaylistCreate {
   private fb = inject(FormBuilder);
   private playlistService = inject(PlaylistService);
+  private authService = inject(AuthService);
   playlistForm: FormGroup;
 
   constructor() {
@@ -24,8 +26,8 @@ export class PlaylistCreate {
   onSubmit(): void {
     if (this.playlistForm.invalid) { return }
 
-    // todo: usar id de usuario logueado
-    const userId = 1;
+    const userId = this.authService.getUserId();
+    if (!userId) { return }
 
     const request = {
       name: this.playlistForm.value.name,

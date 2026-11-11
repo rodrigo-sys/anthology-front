@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { PlaylistService } from '../../service/playlist-service';
+import { AuthService } from '../../service/auth-service';
 import { PlaylistList } from '../../components/playlist-list/playlist-list';
 import { PlaylistCreate } from '../../components/playlist-create/playlist-create';
 
@@ -11,11 +12,12 @@ import { PlaylistCreate } from '../../components/playlist-create/playlist-create
 })
 export class Playlists implements OnInit {
   playlistService = inject(PlaylistService);
-
-  // todo: usar id de usuario logueado
-  userId = 1;
+  private authService = inject(AuthService);
 
   ngOnInit() {
-    this.playlistService.getPlaylistsByUser(this.userId);
+    const userId = this.authService.getUserId();
+    if (userId) {
+      this.playlistService.getPlaylistsByUser(userId);
+    }
   }
 }

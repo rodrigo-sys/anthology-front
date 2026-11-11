@@ -24,7 +24,8 @@ export interface PlaylistResponse {
   songVersions: SongVersionResponse[];
 }
 export interface PlaylistUpdateRequest {
-  name?: string;
+  name: string;
+  idUser: number;
 }
 
 @Injectable({
@@ -33,8 +34,7 @@ export interface PlaylistUpdateRequest {
 export class PlaylistService {
   private http = inject(HttpClient);
 
-  private baseUrl = 'http://localhost:3001';
-  private url = `${this.baseUrl}/api/playlists`;
+  private url = '/api/playlists';
 
   playlists = signal<PlaylistResponse[]>([]);
   playlistById = signal<PlaylistResponse | null>(null);
@@ -70,14 +70,14 @@ export class PlaylistService {
     });
   }
 
-  deletePlaylist(id: number, userId: number = 1) {
+  deletePlaylist(id: number, userId: number) {
     this.http.delete<void>(`${this.url}/${id}`).subscribe({
       next: () => this.getPlaylistsByUser(userId),
       error: () => this.error.set('No se pudo eliminar la playlist')
     });
   }
 
-  updatePlaylist(id: number, request: PlaylistUpdateRequest, userId: number = 1) {
+  updatePlaylist(id: number, request: PlaylistUpdateRequest, userId: number) {
     this.http.patch<PlaylistResponse>(`${this.url}/${id}`, request).subscribe({
       next: () => this.getPlaylistsByUser(userId),
       error: () => this.error.set('No se pudo actualizar la playlist')
