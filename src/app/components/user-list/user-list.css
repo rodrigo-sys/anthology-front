@@ -95,6 +95,10 @@ input:focus {
   color: #2d2a55;
 }
 
+.edit-panel {
+  margin-top: 20px;
+}
+
 .list {
   display: grid;
   grid-template-columns: 1fr;

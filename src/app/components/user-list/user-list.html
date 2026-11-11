@@ -19,14 +19,14 @@
         <p class="error-box">{{ userService.error() }}</p>
       }
 
-      @if (userService.userById()) {
+      @if (userService.userById(); as searchedUser) {
         <div class="result">
-          <h3>Resultado</h3>
+          <h3>Resultado de búsqueda</h3>
           <div class="user-card highlight">
             <div class="user-info">
-              <span><strong>ID:</strong> {{ userService.userById()!.id }}</span>
-              <span><strong>Usuario:</strong> {{ userService.userById()!.username }}</span>
-              <span><strong>Email:</strong> {{ userService.userById()!.email }}</span>
+              <span><strong>ID:</strong> {{ searchedUser.id }}</span>
+              <span><strong>Usuario:</strong> {{ searchedUser.username }}</span>
+              <span><strong>Email:</strong> {{ searchedUser.email }}</span>
             </div>
           </div>
         </div>
@@ -49,6 +49,12 @@
           <p class="empty">No hay usuarios.</p>
         }
       </div>
+
+      @if (userService.userToEdit()) {
+        <div class="edit-panel">
+          <app-user-edit></app-user-edit>
+        </div>
+      }
     </div>
   </section>
 </div>
