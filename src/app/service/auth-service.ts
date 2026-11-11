@@ -70,7 +70,7 @@ export class AuthService {
     return this.getPayload()?.sub ?? null;
   }
 
-  // todo: solución temporal. Descarga toda la lista de usuarios para encontrar el id.
+  // todo: solución temporal. descarga toda la lista de usuarios para encontrar el id.
   // lo ideal seria que el backend obtenga el id con: authentication.getName() + userRepository.findByUsername(),
   // y quitar los id de los dto requests
   // o agregar el id al token (claim "userId")
@@ -78,7 +78,9 @@ export class AuthService {
     const username = this.getUsername();
     if (!username) return of(null);
 
-    return this.http.get<{ id: number; username: string }[]>('/api/users/user').pipe(
+    const endpoint = this.isAdmin() ? '/api/users' : '/api/users/user';
+
+    return this.http.get<{ id: number; username: string }[]>(endpoint).pipe(
       map((users) => users.find((u) => u.username === username)?.id ?? null),
       tap((id) => {
         if (id !== null) localStorage.setItem('userId', String(id));
