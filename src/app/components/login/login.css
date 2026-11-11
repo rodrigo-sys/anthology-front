@@ -1,3 +1,50 @@
-input.ng-touched.ng-invalid{
-    outline: 2px solid red;
+.login-form {
+  display: flex;              /* apila los campos y el botón */
+  flex-direction: column;
+  gap: 14px;
+}
+
+.campo {
+  display: flex;              /* (o display: grid;) */
+  flex-direction: column;
+  gap: 5px;
+}
+
+.campo label {
+  font-weight: bold;
+  color: #222;
+}
+
+.campo input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.campo input:focus {
+  outline: none;
+  border-color: #2f5d8a;
+}
+
+.error {
+  color: #c62828;
+  font-size: 13px;
+}
+
+.btn-login {
+  margin-top: 5px;
+  padding: 10px;
+  background: #2f5d8a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.btn-login:hover {
+  background: #24486b;
 }

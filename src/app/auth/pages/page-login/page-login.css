@@ -1,0 +1,41 @@
+.login-page {
+  min-height: 80vh;
+  display: flex;              /* centra la tarjeta */
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: #f6f3ed;
+}
+
+.login-card {
+  position: relative;         /* por si querés un detalle decorativo */
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-header .logo {
+  font-size: 36px;
+  color: #2f5d8a;
+}
+
+.login-header h1 {
+  margin: 5px 0;
+  font-size: 28px;
+  color: #222;
+}
+
+.login-header p {
+  margin: 0;
+  color: #555;
+  font-size: 14px;
+}

@@ -1,0 +1,72 @@
+.admin-page {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 20px;
+  background: #f6f3ed;
+}
+
+.admin-card {
+  width: 100%;
+  max-width: 800px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.admin-card h1 {
+  margin: 0;
+  color: #222;
+}
+
+.subtitulo {
+  margin: 6px 0 20px 0;
+  color: #555;
+}
+
+.admin-menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.admin-opcion {
+  position: relative; /* para ubicar el badge */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #222;
+  background: #fafafa;
+}
+
+.admin-opcion:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.opcion-titulo {
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.opcion-desc {
+  color: #555;
+  font-size: 14px;
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #c77700;
+  color: #fff;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 10px;
+}

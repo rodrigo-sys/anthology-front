@@ -1,0 +1,73 @@
+.navbar {
+  position: sticky;           /* queda fijo arriba */
+  top: 0;
+  z-index: 10;                /* por encima del contenido */
+  background: #ffffff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+
+  display: flex;              /* fila: marca | links | acción */
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-icon {
+  font-size: 24px;
+  color: #2f5d8a;
+}
+
+.brand-name {
+  font-size: 22px;
+  font-weight: bold;
+  color: #222;
+  text-decoration: none;
+}
+
+.navbar-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: flex;              /* links en fila */
+  gap: 16px;
+}
+
+.navbar-links a {
+  color: #2f5d8a;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 6px 8px;
+  border-radius: 4px;
+}
+
+.navbar-links a:hover {
+  background: #e9eef3;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+}
+
+.btn-sesion {
+  padding: 8px 14px;
+  background: #2f5d8a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.btn-sesion:hover {
+  background: #24486b;
+}
