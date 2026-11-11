@@ -1,6 +1,17 @@
+:host {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  min-height: 100%;
+}
+
 .page {
+  flex: 1;
+  width: 100%;
+  min-height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 24px;
   background: #f0f4ff;
 }

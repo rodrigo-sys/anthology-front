@@ -1,0 +1,9 @@
+<section class="artists-page">
+  @if (artistService.artistToEdit()) {
+    <app-artist-edit></app-artist-edit>
+  } @else {
+    <app-artist-create></app-artist-create>
+  }
+
+  <app-artist-list></app-artist-list>
+</section>

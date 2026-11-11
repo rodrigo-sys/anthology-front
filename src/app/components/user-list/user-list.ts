@@ -2,9 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../service/user-service';
 import { User } from '../../interfaces/Users';
+import { UserEdit } from '../user-edit/user-edit';
 
 @Component({
-  imports: [FormsModule],
+  imports: [FormsModule, UserEdit],
   selector: 'app-user-list',
   styleUrl: './user-list.css',
   templateUrl: './user-list.html',
@@ -22,8 +23,7 @@ export class UserList implements OnInit {
 
   editar(user:User)
   {
-    this.userService.userById.set(user)
-
+    this.userService.userToEdit.set(user)
   }
   eliminar(id:number){
     this.userService.remove(id)

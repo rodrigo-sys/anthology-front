@@ -1,0 +1,9 @@
+<section class="users-page">
+  @if (userService.userToEdit()) {
+    <app-user-edit></app-user-edit>
+  } @else {
+    <app-user-create></app-user-create>
+  }
+
+  <app-user-list></app-user-list>
+</section>
