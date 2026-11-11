@@ -15,6 +15,9 @@ import { ArtistCreate } from './components/artist-create/artist-create';
 import { UserCreate } from './components/user-create/user-create';
 import { UserEdit } from './components/user-edit/user-edit';
 import { UserList } from './components/user-list/user-list';
+import { AccessDenied } from './pages/auth/access-denied/access-denied';
+import { AccessDeniedLogin } from './pages/auth/access-denied-login/access-denied-login';
+import { guestGuard } from './guard/guest-guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'songs', pathMatch: 'full' },
@@ -27,12 +30,14 @@ export const routes: Routes = [
   { path: 'suggestions/new', component: SuggestionCreatePage, canActivate: [authGuard] },
   { path: 'playlists', component: Playlists, canActivate: [authGuard] },
   { path: 'playlists/:id', component: PlaylistDetail, canActivate: [authGuard] },
-  { path: 'login', component: LoginPage },
+  { path: 'login', component: LoginPage, canActivate: [guestGuard] },
   { path: 'logout', component: LogoutPage },
-   { path: 'artist-create', component: ArtistCreate },
-   {path:'user-create',component:UserCreate},
-   {path:'user-edit',component:UserEdit},
-   {path:'user-list',component:UserList},
+  { path: 'artist-create', component: ArtistCreate },
+  { path: 'user-create', component: UserCreate },
+  { path: 'user-edit', component: UserEdit },
+  { path: 'user-list', component: UserList },
+  { path: 'access-denied', component: AccessDenied },
+  { path: 'access-denied-login', component: AccessDeniedLogin },
   { path: '**', redirectTo: 'songs' }
-  
+
 ];
