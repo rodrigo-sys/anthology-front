@@ -1,0 +1,25 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: #2d2a55;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.acciones {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.acciones a {
+  color: #e0e7ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.acciones a.activo {
+  color: #ffe8a3;
+}

@@ -1,1 +1,54 @@
-<p>user-list works!</p>
+<div class="page">
+  <section class="container">
+    <div class="card">
+      <div class="card-header">
+        <h2>Usuarios</h2>
+      </div>
+
+      <div class="search">
+        <div class="field search-field">
+          <label for="searchId">Buscar por ID</label>
+          <input id="searchId" type="number" [(ngModel)]="searchId" />
+        </div>
+        <div class="actions-inline">
+          <button type="button" (click)="buscar()">Buscar</button>
+        </div>
+      </div>
+
+      @if (userService.error()) {
+        <p class="error-box">{{ userService.error() }}</p>
+      }
+
+      @if (userService.userById()) {
+        <div class="result">
+          <h3>Resultado</h3>
+          <div class="user-card highlight">
+            <div class="user-info">
+              <span><strong>ID:</strong> {{ userService.userById()!.id }}</span>
+              <span><strong>Usuario:</strong> {{ userService.userById()!.username }}</span>
+              <span><strong>Email:</strong> {{ userService.userById()!.email }}</span>
+            </div>
+          </div>
+        </div>
+      }
+
+      <div class="list">
+        @for (user of userService.users(); track user.id) {
+          <article class="user-card">
+            <div class="user-info">
+              <span><strong>ID:</strong> {{ user.id }}</span>
+              <span><strong>Usuario:</strong> {{ user.username }}</span>
+              <span><strong>Email:</strong> {{ user.email }}</span>
+            </div>
+            <div class="actions-inline">
+              <button type="button" class="secondary" (click)="editar(user)">Editar</button>
+              <button type="button" class="danger" (click)="eliminar(user.id)">Eliminar</button>
+            </div>
+          </article>
+        } @empty {
+          <p class="empty">No hay usuarios.</p>
+        }
+      </div>
+    </div>
+  </section>
+</div>

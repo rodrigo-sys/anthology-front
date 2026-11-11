@@ -11,6 +11,10 @@ import { SuggestionCreatePage } from './pages/suggestion-create/suggestion-creat
 import { SuggestionsPage } from './pages/suggestions/suggestions';
 import { adminGuard } from './guard/admin-guard';
 import { authGuard } from './guard/auth-guard';
+import { ArtistCreate } from './components/artist-create/artist-create';
+import { UserCreate } from './components/user-create/user-create';
+import { UserEdit } from './components/user-edit/user-edit';
+import { UserList } from './components/user-list/user-list';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'songs', pathMatch: 'full' },
@@ -25,5 +29,10 @@ export const routes: Routes = [
   { path: 'playlists/:id', component: PlaylistDetail, canActivate: [authGuard] },
   { path: 'login', component: LoginPage },
   { path: 'logout', component: LogoutPage },
-  { path: '**', redirectTo: 'songs' },
+   { path: 'artist-create', component: ArtistCreate },
+   {path:'user-create',component:UserCreate},
+   {path:'user-edit',component:UserEdit},
+   {path:'user-list',component:UserList},
+  { path: '**', redirectTo: 'songs' }
+  
 ];
