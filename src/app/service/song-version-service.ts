@@ -51,12 +51,15 @@ export class SongVersionService {
     })
   }
 
-  add(songId: number, instrument: Instrument, file: File) {
+  add(songId: number, instrument: Instrument, file: File, alSubir?: () => void) {
     const cuerpo = new FormData()
     cuerpo.append('file', file)
 
     this.http.post<SongVersion>(this.url(songId), cuerpo, { params: { instrument } }).subscribe({
-      next: () => this.recargar(songId),
+      next: () => {
+        this.recargar(songId)
+        alSubir?.()
+      },
       error: () => this.error.set('No se pudo subir la versión')
     })
   }

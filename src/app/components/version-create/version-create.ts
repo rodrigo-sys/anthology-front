@@ -32,11 +32,12 @@ export class VersionCreate {
     if (this.formulario.invalid || !this.archivo) return
 
     const instrument = this.formulario.getRawValue().instrument!
+    const archivo = this.archivo
 
-    this.versionService.add(this.songId(), instrument, this.archivo)
-
-    this.archivo = null
-    archivoInput.value = ''
-    this.formulario.reset()
+    this.versionService.add(this.songId(), instrument, archivo, () => {
+      this.archivo = null
+      archivoInput.value = ''
+      this.formulario.reset()
+    })
   }
 }

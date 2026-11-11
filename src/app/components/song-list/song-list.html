@@ -5,22 +5,27 @@
   <div class="buscador">
     <div class="campo">
       <label for="filtro-title">Título</label>
-      <input id="filtro-title" type="text" [(ngModel)]="filtros.title">
+      <input id="filtro-title" type="text" [(ngModel)]="filtros.title" [disabled]="!!estado">
     </div>
 
     <div class="campo">
       <label for="filtro-artist">Artista</label>
-      <input id="filtro-artist" type="text" [(ngModel)]="filtros.artistName">
+      <input id="filtro-artist" type="text" [(ngModel)]="filtros.artistName" [disabled]="!!estado">
     </div>
 
     <div class="campo">
       <label for="filtro-genre">Género</label>
-      <input id="filtro-genre" type="text" [(ngModel)]="filtros.genre">
+      <input id="filtro-genre" type="text" [(ngModel)]="filtros.genre" [disabled]="!!estado">
     </div>
 
     <div class="campo">
       <label for="filtro-album">Álbum</label>
-      <input id="filtro-album" type="number" [(ngModel)]="filtros.albumId">
+      <select id="filtro-album" [(ngModel)]="filtros.albumId" [disabled]="!!estado">
+        <option [ngValue]="null">Todos</option>
+        @for (album of albumService.albums(); track album.id) {
+          <option [ngValue]="album.id">{{ album.title }} - {{ album.artistName }}</option>
+        }
+      </select>
     </div>
 
     <div class="campo">
@@ -28,7 +33,7 @@
       <select id="filtro-estado" [(ngModel)]="estado">
         <option value="">Todas</option>
         @for (estado of estados; track estado) {
-          <option [value]="estado">{{ estado }}</option>
+          <option [value]="estado">{{ estadoEtiquetas[estado] }}</option>
         }
       </select>
     </div>
@@ -53,6 +58,10 @@
     </div>
   </div>
 
+  @if (estado) {
+    <small>Con un estado seleccionado se ignoran los filtros de título, artista, género y álbum.</small>
+  }
+
   @if (songService.error()) {
     <p class="error">{{ songService.error() }}</p>
   }
@@ -66,12 +75,13 @@
         @if (song.AlbumTitle) {
           <span>Álbum: {{ song.AlbumTitle }} ({{ song.ReleaseYear }})</span>
         }
-        <span>Instrumentos: {{ song.availableInstruments.join(', ') }}</span>
-        <span>Estado: {{ song.status }}</span>
+        <span>Instrumentos: {{ instrumentosDe(song) }}</span>
+        <span>Estado: {{ estadoEtiquetas[song.status] }}</span>
 
         <div class="acciones">
+          <a [routerLink]="['/songs', song.id]">Ver</a>
           <button type="button" class="secundario" (click)="editar(song)">Editar</button>
-          <button type="button" class="eliminar" (click)="eliminar(song.id)">Eliminar</button>
+          <button type="button" class="eliminar" (click)="eliminar(song)">Eliminar</button>
         </div>
       </article>
     } @empty {

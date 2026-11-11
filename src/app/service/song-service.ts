@@ -65,6 +65,8 @@ export class SongService {
   }
 
   getById(id: number) {
+    this.songById.set(null)
+
     this.http.get<Song>(`${this.url}/${id}`).subscribe({
       next: (data) => {
         this.songById.set(data)
@@ -77,9 +79,12 @@ export class SongService {
     })
   }
 
-  add(song: SongRequest) {
+  add(song: SongRequest, alCrear?: () => void) {
     this.http.post<Song>(this.url, song).subscribe({
-      next: () => this.recargar(),
+      next: () => {
+        this.recargar()
+        alCrear?.()
+      },
       error: () => this.error.set('No se pudo agregar la canción')
     })
   }

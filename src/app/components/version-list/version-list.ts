@@ -1,11 +1,12 @@
 import { Component, inject, input, OnInit } from '@angular/core';
-import { INSTRUMENT_LABEL } from '../../interfaces/Enums';
+import { FormsModule } from '@angular/forms';
+import { INSTRUMENT_LABEL, STATUS_LABEL, Status } from '../../interfaces/Enums';
 import { SongVersion } from '../../interfaces/SongVersion';
 import { SongVersionService } from '../../service/song-version-service';
 
 @Component({
   selector: 'app-version-list',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './version-list.html',
 })
 export class VersionList implements OnInit {
@@ -14,9 +15,20 @@ export class VersionList implements OnInit {
   versionService = inject(SongVersionService)
 
   etiquetas = INSTRUMENT_LABEL
+  estadoEtiquetas = STATUS_LABEL
+  estados: Status[] = ['PENDING', 'APPROVED', 'REJECTED']
+
+  filtroEstado: Status | '' = ''
 
   ngOnInit(): void {
     this.versionService.listVersions(this.songId())
+  }
+
+  versionsFiltradas(): SongVersion[] {
+    const estado = this.filtroEstado
+    if (!estado) return this.versionService.versions()
+
+    return this.versionService.versions().filter((version) => version.status === estado)
   }
 
   cambiarVista(todas: boolean) {
@@ -32,7 +44,9 @@ export class VersionList implements OnInit {
     this.versionService.updateStatus(this.songId(), version.id, 'REJECTED')
   }
 
-  eliminar(id: number) {
-    this.versionService.remove(this.songId(), id)
+  eliminar(version: SongVersion) {
+    if (!confirm('¿Eliminar esta versión?')) return
+
+    this.versionService.remove(this.songId(), version.id)
   }
 }

@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Album } from '../../interfaces/Album';
 import { AlbumService } from '../../service/album-service';
 
 @Component({
@@ -10,6 +11,8 @@ import { AlbumService } from '../../service/album-service';
 export class AlbumCreate {
   albumService = inject(AlbumService)
   fb = inject(FormBuilder)
+
+  creado = output<Album>()
 
   private anioActual = new Date().getFullYear()
 
@@ -28,8 +31,9 @@ export class AlbumCreate {
 
     const { title, artistName, releaseYear } = this.formulario.getRawValue()
 
-    this.albumService.add({ title, artistName, releaseYear: releaseYear! })
-
-    this.formulario.reset()
+    this.albumService.add({ title, artistName, releaseYear: releaseYear! }, (album) => {
+      this.formulario.reset()
+      this.creado.emit(album)
+    })
   }
 }

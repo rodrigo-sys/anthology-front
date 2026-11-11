@@ -7,7 +7,6 @@ import { AlbumService } from '../../service/album-service';
 @Component({
   imports: [AlbumCreate, AlbumEdit, AlbumList],
   selector: 'app-albums',
-  styleUrl: './albums.css',
   templateUrl: './albums.html',
 })
 export class Albums {

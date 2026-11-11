@@ -38,7 +38,17 @@
 
     <div class="campo">
       <label for="song-album">Álbum (opcional)</label>
-      <input id="song-album" type="number" formControlName="albumId">
+      <div class="acciones">
+        <select id="song-album" formControlName="albumId">
+          <option [ngValue]="null">Sin álbum</option>
+          @for (album of albumService.albums(); track album.id) {
+            <option [ngValue]="album.id">{{ album.title }} - {{ album.artistName }} ({{ album.releaseYear }})</option>
+          }
+        </select>
+        <button type="button" class="secundario" (click)="mostrarAlbum = !mostrarAlbum">
+          {{ mostrarAlbum ? 'Cerrar' : 'Nuevo álbum' }}
+        </button>
+      </div>
       @if (formulario.controls['albumId'].hasError('min') && formulario.controls['albumId'].touched) {
         <small class="error">ID de álbum inválido</small>
       }
@@ -56,3 +66,9 @@
   }
 
 </form>
+
+@if (mostrarAlbum) {
+  <div class="album-rapido">
+    <app-album-create (creado)="albumCreado($event)" />
+  </div>
+}

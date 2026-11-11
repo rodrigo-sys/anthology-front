@@ -7,7 +7,6 @@ import { SongService } from '../../service/song-service';
 @Component({
   imports: [SongCreate, SongEdit, SongList],
   selector: 'app-songs',
-  styleUrl: './songs.css',
   templateUrl: './songs.html',
 })
 export class Songs {

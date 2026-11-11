@@ -9,3 +9,9 @@ export const INSTRUMENT_LABEL: Record<Instrument, string> = {
   BASS: 'Bajo',
   PIANO: 'Piano',
 }
+
+export const STATUS_LABEL: Record<Status, string> = {
+  PENDING: 'Pendiente',
+  APPROVED: 'Aprobado',
+  REJECTED: 'Rechazado',
+}

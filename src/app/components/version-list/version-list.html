@@ -7,16 +7,26 @@
     <button type="button" class="secundario" (click)="cambiarVista(true)">Todas</button>
   </div>
 
+  <div class="campo">
+    <label for="filtro-version-estado">Estado</label>
+    <select id="filtro-version-estado" [(ngModel)]="filtroEstado">
+      <option value="">Todos</option>
+      @for (estado of estados; track estado) {
+        <option [value]="estado">{{ estadoEtiquetas[estado] }}</option>
+      }
+    </select>
+  </div>
+
   @if (versionService.error()) {
     <p class="error">{{ versionService.error() }}</p>
   }
 
   <div class="lista">
-    @for (version of versionService.versions(); track version.id) {
+    @for (version of versionsFiltradas(); track version.id) {
       <article class="tarjeta">
         <strong>{{ version.songTitle }}</strong>
         <span>Instrumento: {{ etiquetas[version.instrument] }}</span>
-        <span>Estado: {{ version.status }}</span>
+        <span>Estado: {{ estadoEtiquetas[version.status] }}</span>
 
         <a [href]="version.pdfUrl" target="_blank" rel="noopener">Ver PDF</a>
 
@@ -25,7 +35,7 @@
             <button type="button" (click)="aprobar(version)">Aprobar</button>
             <button type="button" class="secundario" (click)="rechazar(version)">Rechazar</button>
           }
-          <button type="button" class="eliminar" (click)="eliminar(version.id)">Eliminar</button>
+          <button type="button" class="eliminar" (click)="eliminar(version)">Eliminar</button>
         </div>
       </article>
     } @empty {

@@ -17,6 +17,7 @@ export class AlbumService {
     this.http.get<Album[]>(this.url).subscribe({
       next: (data) => {
         this.albums.set(data)
+        this.albumById.set(null)
         this.error.set('')
       },
       error: () => this.error.set('No se pudieron cargar los álbumes')
@@ -24,6 +25,8 @@ export class AlbumService {
   }
 
   getById(id: number) {
+    this.albumById.set(null)
+
     this.http.get<Album>(`${this.url}/${id}`).subscribe({
       next: (data) => {
         this.albumById.set(data)
@@ -36,9 +39,13 @@ export class AlbumService {
     })
   }
 
-  add(album: AlbumRequest) {
+  add(album: AlbumRequest, alCrear?: (album: Album) => void) {
     this.http.post<Album>(this.url, album).subscribe({
-      next: () => this.listAlbums(),
+      next: (data) => {
+        this.error.set('')
+        this.listAlbums()
+        alCrear?.(data)
+      },
       error: () => this.error.set('No se pudo agregar el álbum')
     })
   }

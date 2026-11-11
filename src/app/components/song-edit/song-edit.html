@@ -37,13 +37,18 @@
     </div>
 
     <div class="campo">
-      <label for="edit-album">Álbum (ID, opcional)</label>
-      <input id="edit-album" type="number" placeholder="Sin cambios" formControlName="albumId">
+      <label for="edit-album">Álbum</label>
+      <select id="edit-album" formControlName="albumId">
+        <option [ngValue]="null">Sin cambios</option>
+        <option [ngValue]="0">Sin álbum (quitar)</option>
+        @for (album of albumService.albums(); track album.id) {
+          <option [ngValue]="album.id">{{ album.title }} - {{ album.artistName }} ({{ album.releaseYear }})</option>
+        }
+      </select>
       @if (albumActual) {
         <small>Álbum actual: {{ albumActual }}</small>
-      }
-      @if (formulario.controls['albumId'].hasError('min') && formulario.controls['albumId'].touched) {
-        <small class="error">ID de álbum inválido</small>
+      } @else {
+        <small>Sin álbum asignado</small>
       }
     </div>
   </div>
