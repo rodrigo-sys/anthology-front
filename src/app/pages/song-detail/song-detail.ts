@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { VersionCreate } from '../../components/version-create/version-create';
-import { VersionList } from '../../components/version-list/version-list';
+import { VersionCreate } from '../../components/versions/version-create/version-create';
+import { VersionList } from '../../components/versions/version-list/version-list';
 import { INSTRUMENT_LABEL, Instrument, STATUS_LABEL } from '../../interfaces/Enums';
 import { SongService } from '../../service/song-service';
 

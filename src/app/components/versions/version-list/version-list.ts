@@ -1,9 +1,9 @@
 import { Component, inject, input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { INSTRUMENT_LABEL, STATUS_LABEL, Status } from '../../interfaces/Enums';
-import { SongVersion } from '../../interfaces/SongVersion';
-import { AuthService } from '../../service/auth-service';
-import { SongVersionService } from '../../service/song-version-service';
+import { INSTRUMENT_LABEL, STATUS_LABEL, Status } from '../../../interfaces/Enums';
+import { SongVersion } from '../../../interfaces/SongVersion';
+import { AuthService } from '../../../service/auth-service';
+import { SongVersionService } from '../../../service/song-version-service';
 
 @Component({
   selector: 'app-version-list',

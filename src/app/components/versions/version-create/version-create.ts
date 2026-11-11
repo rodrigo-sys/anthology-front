@@ -1,7 +1,7 @@
 import { Component, inject, input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { INSTRUMENTS, INSTRUMENT_LABEL, Instrument } from '../../interfaces/Enums';
-import { SongVersionService } from '../../service/song-version-service';
+import { INSTRUMENTS, INSTRUMENT_LABEL, Instrument } from '../../../interfaces/Enums';
+import { SongVersionService } from '../../../service/song-version-service';
 
 @Component({
   selector: 'app-version-create',

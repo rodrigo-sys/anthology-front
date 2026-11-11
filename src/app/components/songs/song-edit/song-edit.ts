@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SongUpdateRequest } from '../../interfaces/Song';
-import { AlbumService } from '../../service/album-service';
-import { SongService } from '../../service/song-service';
+import { SongUpdateRequest } from '../../../interfaces/Song';
+import { AlbumService } from '../../../service/album-service';
+import { SongService } from '../../../service/song-service';
 
 @Component({
   selector: 'app-song-edit',

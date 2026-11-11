@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Album } from '../../interfaces/Album';
-import { STATUS_LABEL, Status } from '../../interfaces/Enums';
-import { AlbumService } from '../../service/album-service';
-import { AuthService } from '../../service/auth-service';
+import { Album } from '../../../interfaces/Album';
+import { STATUS_LABEL, Status } from '../../../interfaces/Enums';
+import { AlbumService } from '../../../service/album-service';
+import { AuthService } from '../../../service/auth-service';
 
 @Component({
   selector: 'app-album-list',

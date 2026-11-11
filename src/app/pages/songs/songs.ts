@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { SongCreate } from '../../components/song-create/song-create';
-import { SongEdit } from '../../components/song-edit/song-edit';
-import { SongList } from '../../components/song-list/song-list';
+import { SongCreate } from '../../components/songs/song-create/song-create';
+import { SongEdit } from '../../components/songs/song-edit/song-edit';
+import { SongList } from '../../components/songs/song-list/song-list';
 import { SongService } from '../../service/song-service';
 
 @Component({

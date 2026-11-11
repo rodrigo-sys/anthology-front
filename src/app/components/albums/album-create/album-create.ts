@@ -1,7 +1,7 @@
 import { Component, inject, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Album } from '../../interfaces/Album';
-import { AlbumService } from '../../service/album-service';
+import { Album } from '../../../interfaces/Album';
+import { AlbumService } from '../../../service/album-service';
 
 @Component({
   selector: 'app-album-create',

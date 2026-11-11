@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Album } from '../../interfaces/Album';
-import { AlbumService } from '../../service/album-service';
-import { SongService } from '../../service/song-service';
-import { AlbumCreate } from '../album-create/album-create';
+import { Album } from '../../../interfaces/Album';
+import { AlbumService } from '../../../service/album-service';
+import { SongService } from '../../../service/song-service';
+import { AlbumCreate } from '../../albums/album-create/album-create';
 
 @Component({
   selector: 'app-song-create',

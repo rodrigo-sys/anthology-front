@@ -1,11 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { INSTRUMENTS, INSTRUMENT_LABEL, STATUS_LABEL, Status } from '../../interfaces/Enums';
-import { Song, SongFilters } from '../../interfaces/Song';
-import { AlbumService } from '../../service/album-service';
-import { AuthService } from '../../service/auth-service';
-import { SongService } from '../../service/song-service';
+import { INSTRUMENTS, INSTRUMENT_LABEL, STATUS_LABEL, Status } from '../../../interfaces/Enums';
+import { Song, SongFilters } from '../../../interfaces/Song';
+import { AlbumService } from '../../../service/album-service';
+import { AuthService } from '../../../service/auth-service';
+import { SongService } from '../../../service/song-service';
 
 @Component({
   selector: 'app-song-list',

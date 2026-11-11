@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AlbumService } from '../../service/album-service';
+import { AlbumService } from '../../../service/album-service';
 
 @Component({
   selector: 'app-album-edit',
