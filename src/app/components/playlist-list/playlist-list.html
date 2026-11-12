@@ -1,13 +1,30 @@
 <div class="playlist-list">
+
   <h3>Mis Playlists</h3>
   @if (playlistService.playlists().length === 0) {
     <div>No hay playlists</div>
   }
+
   <ul>
     @for (playlist of playlistService.playlists(); track playlist.id) {
       <li>
-        <a [routerLink]="['/playlists', playlist.id]">{{ playlist.name }}</a>
+        @if (editingId === playlist.id) {
+          <input [(ngModel)]="newName" type="text" />
+          <button type="button" (click)="saveEdit(playlist)">Guardar</button>
+          <button type="button" (click)="editingId = null">Cancelar</button>
+        } @else {
+          <a [routerLink]="['/playlists', playlist.id]">{{ playlist.name }}</a>
+          <div class="acciones">
+            <button type="button" (click)="startEdit(playlist)">Renombrar</button>
+            <button type="button" class="eliminar" (click)="deletePlaylist(playlist)">Eliminar</button>
+          </div>
+        }
       </li>
     }
   </ul>
+
+  @if (authService.isAdmin()) {
+    <a routerLink="/all-playlists" class="ver-todas">Ver todas las playlists</a>
+  }
+
 </div>

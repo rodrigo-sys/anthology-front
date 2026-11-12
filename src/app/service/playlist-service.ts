@@ -37,6 +37,7 @@ export class PlaylistService {
   private url = '/api/playlists';
 
   playlists = signal<PlaylistResponse[]>([]);
+  allPlaylists = signal<PlaylistResponse[]>([]);
   playlistById = signal<PlaylistResponse | null>(null);
   error = signal<string>('');
 
@@ -47,6 +48,16 @@ export class PlaylistService {
         this.error.set('');
       },
       error: () => this.error.set('No se pudieron cargar las playlists')
+    });
+  }
+
+  getAllPlaylists() {
+    this.http.get<PlaylistResponse[]>(this.url).subscribe({
+      next: (data) => {
+        this.allPlaylists.set(data);
+        this.error.set('');
+      },
+      error: () => this.error.set('No se pudieron cargar todas las playlists')
     });
   }
 
@@ -70,16 +81,22 @@ export class PlaylistService {
     });
   }
 
-  deletePlaylist(id: number, userId: number) {
+  deletePlaylist(id: number, userId: number, refreshAll = false) {
     this.http.delete<void>(`${this.url}/${id}`).subscribe({
-      next: () => this.getPlaylistsByUser(userId),
+      next: () => {
+        this.getPlaylistsByUser(userId);
+        if (refreshAll) this.getAllPlaylists();
+      },
       error: () => this.error.set('No se pudo eliminar la playlist')
     });
   }
 
-  updatePlaylist(id: number, request: PlaylistUpdateRequest, userId: number) {
+  updatePlaylist(id: number, request: PlaylistUpdateRequest, userId: number, refreshAll = false) {
     this.http.patch<PlaylistResponse>(`${this.url}/${id}`, request).subscribe({
-      next: () => this.getPlaylistsByUser(userId),
+      next: () => {
+        this.getPlaylistsByUser(userId);
+        if (refreshAll) this.getAllPlaylists();
+      },
       error: () => this.error.set('No se pudo actualizar la playlist')
     });
   }

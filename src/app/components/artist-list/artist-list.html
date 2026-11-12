@@ -1,1 +1,64 @@
-<p>artist-list works!</p>
+<div class="page">
+  <section class="container">
+    <div class="card">
+      <div class="card-header">
+        <h2>Artistas</h2>
+      </div>
+
+      <div class="search">
+        <div class="field search-field">
+          <label for="searchId">Buscar por ID</label>
+          <input id="searchId" type="number" [(ngModel)]="searchId" />
+        </div>
+        <div class="actions-inline">
+          <button type="button" (click)="buscar()">Buscar</button>
+        </div>
+      </div>
+
+      @if (artistService.error()) {
+        <p class="error-box">{{ artistService.error() }}</p>
+      }
+
+      @if (artistService.artistById(); as searchedArtist) {
+        <div class="result">
+          <h3>Resultado de búsqueda</h3>
+          <div class="item-card highlight">
+            <div class="item-info">
+              <span><strong>ID:</strong> {{ searchedArtist.id }}</span>
+              <span><strong>Nombre artístico:</strong> {{ searchedArtist.stageName }}</span>
+              <span><strong>Biografía:</strong> {{ searchedArtist.biography }}</span>
+              <span><strong>Instagram:</strong> {{ searchedArtist.instagram }}</span>
+              <span><strong>Spotify:</strong> {{ searchedArtist.spotify }}</span>
+              <span><strong>YouTube:</strong> {{ searchedArtist.youtube }}</span>
+            </div>
+          </div>
+        </div>
+      }
+
+      <div class="list">
+        @for (artist of artistService.artists(); track artist.id) {
+          <article class="item-card">
+            <div class="item-info">
+              <span><strong>ID:</strong> {{ artist.id }}</span>
+              <span><strong>Nombre artístico:</strong> {{ artist.stageName }}</span>
+              <span><strong>Instagram:</strong> {{ artist.instagram }}</span>
+              <span><strong>Spotify:</strong> {{ artist.spotify }}</span>
+            </div>
+            <div class="actions-inline">
+              <button type="button" class="secondary" (click)="editar(artist)">Editar</button>
+              <button type="button" class="danger" (click)="eliminar(artist.id)">Eliminar</button>
+            </div>
+          </article>
+        } @empty {
+          <p class="empty">No hay artistas.</p>
+        }
+      </div>
+
+      @if (artistService.artistToEdit()) {
+        <div class="edit-panel">
+          <app-artist-edit></app-artist-edit>
+        </div>
+      }
+    </div>
+  </section>
+</div>

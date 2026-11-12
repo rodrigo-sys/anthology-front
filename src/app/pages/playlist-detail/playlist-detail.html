@@ -1,16 +1,27 @@
 <div class="playlist-detail">
+  <a routerLink="/playlists">Volver a playlists</a>
   @if (playlistService.playlistById(); as playlist) {
     <h2>{{ playlist.name }}</h2>
     <h3>Canciones</h3>
     @if (playlist.songVersions?.length) {
       <ul>
         @for (sv of playlist.songVersions; track sv.id) {
-          <li>{{ sv.songTitle }} - {{ sv.instrument }}</li>
+          <li>
+            <a [routerLink]="['/songs', sv.songId]">{{ sv.songTitle }} - {{ sv.instrument }}</a> |
+            <a [href]="sv.pdfUrl" target="_blank" rel="noopener">Ver PDF</a>
+            <button type="button" class="eliminar" (click)="removeSong(sv.id)">Quitar</button>
+          </li>
         }
       </ul>
     } @else {
       <div>No hay canciones</div>
     }
+
+    <div class="agregar-cancion">
+      <h4>Agregar Versión de Canción</h4>
+      <input type="number" [(ngModel)]="songVersionIdInput" placeholder="ID de versión de canción" />
+      <button type="button" (click)="addSong()">Agregar</button>
+    </div>
   } @else {
     <div>Cargando playlist...</div>
   }

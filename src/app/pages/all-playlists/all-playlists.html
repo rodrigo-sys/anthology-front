@@ -1,0 +1,71 @@
+<div class="all-playlists-container">
+  <h2>Todas las Playlists</h2>
+
+  <div class="filters-bar">
+    <input
+      type="text"
+      placeholder="Filtrar por nombre..."
+      [value]="nameFilter()"
+      (input)="onNameInput($event)"
+      class="search-input"
+    />
+
+    <input
+      type="number"
+      placeholder="ID de usuario"
+      [value]="userIdFilter()"
+      (input)="onUserIdInput($event)"
+      class="search-input"
+    />
+
+    <input
+      type="number"
+      placeholder="ID de playlist"
+      [value]="idFilter()"
+      (input)="onIdInput($event)"
+      class="search-input"
+    />
+  </div>
+
+  <div class="results-info">
+    Mostrando {{ filteredPlaylists().length }} de {{ playlistService.allPlaylists().length }} playlists
+  </div>
+
+  @if (playlistService.error()) {
+    <div class="error-message" style="color: red;">{{ playlistService.error() }}</div>
+  } @else if (filteredPlaylists().length === 0) {
+    <div class="no-results">No se encontraron playlists</div>
+  }
+
+  <div class="scrollable-list">
+    <div class="list-header">
+      <span>Nombre</span>
+      <span>Usuario ID</span>
+      <span>Playlist ID</span>
+      <span>Acciones</span>
+    </div>
+    <ul>
+      @for (playlist of filteredPlaylists(); track playlist.id) {
+        <li>
+          @if (editingId === playlist.id) {
+            <input class="cell" [(ngModel)]="newName" type="text" />
+            <span class="cell">{{ playlist.idUser }}</span>
+            <span class="cell">{{ playlist.id }}</span>
+            <div class="acciones">
+              <button type="button" (click)="saveEdit(playlist)">Guardar</button>
+              <button type="button" (click)="editingId = null">Cancelar</button>
+            </div>
+          } @else {
+            <a class="cell" [routerLink]="['/playlists', playlist.id]">{{ playlist.name }}</a>
+            <span class="cell">{{ playlist.idUser }}</span>
+            <span class="cell">{{ playlist.id }}</span>
+            <div class="acciones">
+              <button type="button" (click)="startEdit(playlist)">Renombrar</button>
+              <button type="button" class="eliminar" (click)="deletePlaylist(playlist)">Eliminar</button>
+            </div>
+          }
+        </li>
+      }
+    </ul>
+  </div>
+</div>

@@ -9,6 +9,7 @@ export class UserService {
 
   users=signal<User []>([])
   userById=signal<User | null>(null)
+  userToEdit=signal<User | null>(null)
   error=signal<string>('')
 
   listUsers()

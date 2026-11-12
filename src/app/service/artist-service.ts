@@ -11,6 +11,7 @@ export class ArtistService {
 
       artists=signal<Artist []>([])
   artistById=signal<Artist| null>(null)
+  artistToEdit=signal<Artist | null>(null)
   error=signal<string>('')
 
   listArtists()
