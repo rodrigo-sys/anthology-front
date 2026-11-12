@@ -2,14 +2,20 @@
   <h3>Lista de Sugerencias</h3>
 
   <div class="filters-bar">
-    <input 
-      type="text" 
-      placeholder="Buscar por título, artista o notas..." 
-      [value]="searchQuery()" 
-      (input)="onSearchInput($event)"
+    <input
+      type="text"
+      placeholder="Título"
+      [value]="titleFilter()"
+      (input)="onTitleInput($event)"
       class="search-input"
     />
-
+    <input
+      type="text"
+      placeholder="Artista"
+      [value]="artistFilter()"
+      (input)="onArtistInput($event)"
+      class="search-input"
+    />
     <select [value]="statusFilter()" (change)="onStatusChange($event)" class="status-select">
       <option value="ALL">Todos los estados</option>
       <option value="PENDING">Pendientes</option>
