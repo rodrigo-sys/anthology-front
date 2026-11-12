@@ -1,0 +1,62 @@
+.admin-page {
+  padding: 30px 20px;
+  background: #fafafa;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.admin-card {
+  width: 100%;
+  max-width: 800px;
+  background: #fff;
+  border: 1px solid #d2cfc6;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.admin-card h1 {
+  margin: 0;
+  color: #222;
+}
+
+.subtitulo {
+  margin: 6px 0 20px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.admin-menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.admin-opcion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  border: 1px solid #d2cfc6;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #222;
+  background: #fafafa;
+}
+
+.admin-opcion:hover {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.opcion-titulo {
+  font-weight: bold;
+  font-size: 17px;
+  color: #222;
+}
+
+.opcion-desc {
+  color: #555;
+  font-size: 14px;
+}

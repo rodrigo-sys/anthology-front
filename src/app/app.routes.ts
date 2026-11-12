@@ -21,6 +21,7 @@ import { UserEdit } from './components/user-edit/user-edit';
 import { UserList } from './components/user-list/user-list';
 import { AccessDenied } from './pages/auth/access-denied/access-denied';
 import { AccessDeniedLogin } from './pages/auth/access-denied-login/access-denied-login';
+import { AdminPage } from './pages/admin-page/admin-page';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'songs', pathMatch: 'full' },
@@ -42,5 +43,7 @@ export const routes: Routes = [
   { path: 'user-create', component: UserCreate },
   { path: 'user-edit', component: UserEdit },
   { path: 'user-list', component: UserList },
+  { path: 'access-denied-login', component: AccessDeniedLogin },
+  { path: 'admin', component: AdminPage, canActivate: [adminGuard] },
   { path: '**', redirectTo: 'songs' }
 ];
