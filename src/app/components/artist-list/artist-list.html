@@ -1,64 +1,57 @@
 <div class="page">
-  <section class="container">
-    <div class="card">
-      <div class="card-header">
-        <h2>Artistas</h2>
+  <h1>Artistas</h1>
+
+  <section class="artist-list">
+    <div class="buscador">
+      <h3>Buscar por ID</h3>
+
+      <div class="campo">
+        <label for="searchId">ID del artista</label>
+        <input id="searchId" type="number" [(ngModel)]="searchId" />
       </div>
 
-      <div class="search">
-        <div class="field search-field">
-          <label for="searchId">Buscar por ID</label>
-          <input id="searchId" type="number" [(ngModel)]="searchId" />
-        </div>
-        <div class="actions-inline">
-          <button type="button" (click)="buscar()">Buscar</button>
-        </div>
+      <div class="boton">
+        <button type="button" (click)="buscar()">Buscar</button>
       </div>
+    </div>
 
-      @if (artistService.error()) {
-        <p class="error-box">{{ artistService.error() }}</p>
-      }
+    @if (artistService.error()) {
+      <p class="error">{{ artistService.error() }}</p>
+    }
 
-      @if (artistService.artistById(); as searchedArtist) {
-        <div class="result">
-          <h3>Resultado de búsqueda</h3>
-          <div class="item-card highlight">
-            <div class="item-info">
-              <span><strong>ID:</strong> {{ searchedArtist.id }}</span>
-              <span><strong>Nombre artístico:</strong> {{ searchedArtist.stageName }}</span>
-              <span><strong>Biografía:</strong> {{ searchedArtist.biography }}</span>
-              <span><strong>Instagram:</strong> {{ searchedArtist.instagram }}</span>
-              <span><strong>Spotify:</strong> {{ searchedArtist.spotify }}</span>
-              <span><strong>YouTube:</strong> {{ searchedArtist.youtube }}</span>
-            </div>
+    @if (artistService.artistById(); as searchedArtist) {
+      <div class="resultado">
+        <strong>Encontrado: #{{ searchedArtist.id }} - {{ searchedArtist.stageName }}</strong>
+        <span>Biografía: {{ searchedArtist.biography }}</span>
+        <span>Instagram: {{ searchedArtist.instagram }}</span>
+        <span>Spotify: {{ searchedArtist.spotify }}</span>
+        <span>YouTube: {{ searchedArtist.youtube }}</span>
+      </div>
+    }
+
+    <div class="lista">
+      @for (artist of artistService.artists(); track artist.id) {
+        <article class="tarjeta">
+          <strong>{{ artist.stageName }}</strong>
+          <span>ID: {{ artist.id }}</span>
+          <span>Instagram: {{ artist.instagram }}</span>
+          <span>Spotify: {{ artist.spotify }}</span>
+          <span>YouTube: {{ artist.youtube }}</span>
+
+          <div class="acciones">
+            <button type="button" class="secundario" (click)="editar(artist)">Editar</button>
+            <button type="button" class="eliminar" (click)="eliminar(artist.id)">Eliminar</button>
           </div>
-        </div>
-      }
-
-      <div class="list">
-        @for (artist of artistService.artists(); track artist.id) {
-          <article class="item-card">
-            <div class="item-info">
-              <span><strong>ID:</strong> {{ artist.id }}</span>
-              <span><strong>Nombre artístico:</strong> {{ artist.stageName }}</span>
-              <span><strong>Instagram:</strong> {{ artist.instagram }}</span>
-              <span><strong>Spotify:</strong> {{ artist.spotify }}</span>
-            </div>
-            <div class="actions-inline">
-              <button type="button" class="secondary" (click)="editar(artist)">Editar</button>
-              <button type="button" class="danger" (click)="eliminar(artist.id)">Eliminar</button>
-            </div>
-          </article>
-        } @empty {
-          <p class="empty">No hay artistas.</p>
-        }
-      </div>
-
-      @if (artistService.artistToEdit()) {
-        <div class="edit-panel">
-          <app-artist-edit></app-artist-edit>
-        </div>
+        </article>
+      } @empty {
+        <p class="empty">No hay artistas.</p>
       }
     </div>
+
+    @if (artistService.artistToEdit()) {
+      <div class="edicion">
+        <app-artist-edit></app-artist-edit>
+      </div>
+    }
   </section>
 </div>
