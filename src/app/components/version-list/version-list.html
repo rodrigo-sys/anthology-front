@@ -30,7 +30,7 @@
       <article class="tarjeta">
         <strong>{{ version.songTitle }}</strong>
         <span>Instrumento: {{ etiquetas[version.instrument] }}</span>
-        <span>Estado: {{ estadoEtiquetas[version.status] }}</span>
+        <span>Estado: <span [class]="'estado estado-' + version.status.toLowerCase()">{{ estadoEtiquetas[version.status] }}</span></span>
 
         <a [href]="version.pdfUrl" target="_blank" rel="noopener">Ver PDF</a>
 
@@ -45,7 +45,7 @@
         </div>
       </article>
     } @empty {
-      <p>No hay versiones.</p>
+      <p class="empty">No hay versiones.</p>
     }
   </div>
 

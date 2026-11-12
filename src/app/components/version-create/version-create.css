@@ -1,0 +1,114 @@
+.version-create {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #f6f5f1;
+  border: 1px solid #d2cfc6;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+h2 {
+  margin: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2dfd6;
+  font-size: 18px;
+  color: #1f1f1f;
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 14px;
+  color: #4a4842;
+}
+
+select {
+  height: 36px;
+  padding: 7px 10px;
+  border: 1px solid #cfccc3;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 14px;
+  color: #222;
+  background: #fffdf9;
+  box-sizing: border-box;
+}
+
+select:focus {
+  outline: none;
+  border-color: #2d2a55;
+  box-shadow: 0 0 0 2px rgba(45, 42, 85, 0.15);
+}
+
+input[type="file"] {
+  height: 36px;
+  padding: 4px 6px;
+  border: 1px dashed #cfccc3;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 13px;
+  color: #4a4842;
+  background: #fffdf9;
+  box-sizing: border-box;
+}
+
+input[type="file"]::file-selector-button {
+  height: 26px;
+  margin-right: 8px;
+  padding: 0 10px;
+  border: 1px solid #c5c5bf;
+  border-radius: 4px;
+  background: #eeebe4;
+  color: #333;
+  font: inherit;
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: #e3e0d8;
+}
+
+.boton {
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  height: 36px;
+  padding: 7px 14px;
+  border: 1px solid #2d2a55;
+  border-radius: 6px;
+  background: #2d2a55;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+button:hover {
+  background: #232046;
+}
+
+button:disabled {
+  background: #9a98b0;
+  border-color: #9a98b0;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #a9443c;
+  font-size: 13px;
+}

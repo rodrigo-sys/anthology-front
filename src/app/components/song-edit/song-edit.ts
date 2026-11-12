@@ -8,6 +8,7 @@ import { SongService } from '../../service/song-service';
   selector: 'app-song-edit',
   imports: [ReactiveFormsModule],
   templateUrl: './song-edit.html',
+  styleUrl: './song-edit.css'
 })
 export class SongEdit implements OnInit {
   songService = inject(SongService)

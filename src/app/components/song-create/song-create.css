@@ -1,0 +1,107 @@
+.song-create {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #f6f5f1;
+  border: 1px solid #d2cfc6;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+h2 {
+  margin: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2dfd6;
+  font-size: 18px;
+  color: #1f1f1f;
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 14px;
+  color: #4a4842;
+}
+
+input,
+select {
+  height: 36px;
+  padding: 7px 10px;
+  border: 1px solid #cfccc3;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 14px;
+  color: #222;
+  background: #fffdf9;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #2d2a55;
+  box-shadow: 0 0 0 2px rgba(45, 42, 85, 0.15);
+}
+
+.campo .acciones {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.campo .acciones select {
+  flex: 1;
+}
+
+button {
+  height: 36px;
+  padding: 7px 14px;
+  border: 1px solid #2d2a55;
+  border-radius: 6px;
+  background: #2d2a55;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+button:hover {
+  background: #232046;
+}
+
+button.secundario {
+  background: #f9f9f7;
+  border-color: #c5c5bf;
+  color: #333;
+  font-weight: 400;
+}
+
+button.secundario:hover {
+  background: #ecece8;
+}
+
+.boton {
+  display: flex;
+  gap: 8px;
+}
+
+.error {
+  color: #a9443c;
+  font-size: 13px;
+}
+
+.album-rapido {
+  margin-top: 12px;
+}

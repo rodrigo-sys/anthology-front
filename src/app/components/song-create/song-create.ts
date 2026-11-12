@@ -9,6 +9,7 @@ import { AlbumCreate } from '../album-create/album-create';
   selector: 'app-song-create',
   imports: [ReactiveFormsModule, AlbumCreate],
   templateUrl: './song-create.html',
+  styleUrl: './song-create.css'
 })
 export class SongCreate implements OnInit {
   songService = inject(SongService)

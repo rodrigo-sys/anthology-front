@@ -1,0 +1,197 @@
+.song-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+button {
+  padding: 7px 14px;
+  border: 1px solid #2d2a55;
+  border-radius: 6px;
+  background: #2d2a55;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #232046;
+}
+
+button.secundario {
+  background: #f9f9f7;
+  border-color: #c5c5bf;
+  color: #333;
+}
+
+button.secundario:hover {
+  background: #ecece8;
+}
+
+.buscador {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #f6f5f1;
+  border: 1px solid #d2cfc6;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.buscador > h3 {
+  flex-basis: 100%;
+  margin: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2dfd6;
+  font-size: 16px;
+  color: #1f1f1f;
+}
+
+.vistas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  flex-basis: 100%;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 180px;
+}
+
+.campo label {
+  font-size: 13px;
+  color: #4a4842;
+}
+
+.campo input,
+.campo select {
+  padding: 8px 10px;
+  border: 1px solid #cfccc3;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 14px;
+  color: #222;
+  background: #fffdf9;
+}
+
+.campo input:focus,
+.campo select:focus {
+  outline: none;
+  border-color: #2d2a55;
+  box-shadow: 0 0 0 2px rgba(45, 42, 85, 0.15);
+}
+
+.buscador > .boton {
+  display: flex;
+  gap: 8px;
+  align-self: flex-end;
+}
+
+.nota {
+  font-size: 13px;
+  color: #6f6d66;
+}
+
+.error {
+  color: #a9443c;
+  font-size: 14px;
+}
+
+.lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #f6f5f1;
+  border: 1px solid #d2cfc6;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.tarjeta strong {
+  font-size: 17px;
+  color: #1f1f1f;
+}
+
+.tarjeta > span {
+  font-size: 14px;
+  color: #5d5a52;
+}
+
+.estado {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.estado-pending {
+  background: #f3edda;
+  border-color: #ddceaa;
+  color: #6b5a2e;
+}
+
+.estado-approved {
+  background: #e4efe6;
+  border-color: #b7d3bd;
+  color: #2f5d3a;
+}
+
+.estado-rejected {
+  background: #f6e3e1;
+  border-color: #d9b3ae;
+  color: #8a3d35;
+}
+
+.tarjeta .acciones {
+  margin-top: 6px;
+}
+
+.tarjeta a {
+  padding: 5px 12px;
+  border: 1px solid #c5c5bf;
+  border-radius: 6px;
+  background: #f9f9f7;
+  color: #2d2a55;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.tarjeta a:hover {
+  background: #ecece8;
+}
+
+button.eliminar {
+  border-color: #d8b4af;
+  background: #f9f9f7;
+  color: #a9443c;
+}
+
+button.eliminar:hover {
+  background: #f8eeec;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  padding: 16px;
+  text-align: center;
+  color: #666;
+}

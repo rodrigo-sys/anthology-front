@@ -9,6 +9,7 @@ import { SongVersionService } from '../../service/song-version-service';
   selector: 'app-version-list',
   imports: [FormsModule],
   templateUrl: './version-list.html',
+  styleUrl: './version-list.css'
 })
 export class VersionList implements OnInit {
   songId = input.required<number>()

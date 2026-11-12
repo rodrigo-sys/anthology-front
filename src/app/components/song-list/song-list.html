@@ -1,17 +1,17 @@
 <section class="song-list">
 
-  <h2>Canciones</h2>
-
-  <div class="acciones">
-    @if (esAdmin) {
-      <button type="button" (click)="verTodas()">Todas</button>
-    } @else {
-      <button type="button" (click)="verAprobadas()">Aprobadas</button>
-      <button type="button" class="secundario" (click)="verMias()">Mis canciones</button>
-    }
-  </div>
-
   <div class="buscador">
+    <h3>Buscar canciones</h3>
+
+    <div class="vistas">
+      @if (esAdmin) {
+        <button type="button" (click)="verTodas()">Ver todas</button>
+      } @else {
+        <button type="button" (click)="verAprobadas()">Ver aprobadas</button>
+        <button type="button" class="secundario" (click)="verMias()">Ver mis canciones</button>
+      }
+    </div>
+
     <div class="campo">
       <label for="filtro-title">Título</label>
       <input id="filtro-title" type="text" [(ngModel)]="filtros.title" [disabled]="!!estado">
@@ -70,7 +70,7 @@
   </div>
 
   @if (estado) {
-    <small>Con un estado seleccionado se ignoran los filtros de título, artista, género y álbum.</small>
+    <small class="nota">Con un estado seleccionado se ignoran los filtros de título, artista, género y álbum.</small>
   }
 
   @if (songService.error()) {
@@ -87,7 +87,7 @@
           <span>Álbum: {{ song.AlbumTitle }} ({{ song.ReleaseYear }})</span>
         }
         <span>Instrumentos: {{ instrumentosDe(song) }}</span>
-        <span>Estado: {{ estadoEtiquetas[song.status] }}</span>
+        <span>Estado: <span [class]="'estado estado-' + song.status.toLowerCase()">{{ estadoEtiquetas[song.status] }}</span></span>
 
         <div class="acciones">
           <a [routerLink]="['/songs', song.id]">Ver</a>
@@ -98,7 +98,7 @@
         </div>
       </article>
     } @empty {
-      <p>No hay canciones.</p>
+      <p class="empty">No hay canciones.</p>
     }
   </div>
 
