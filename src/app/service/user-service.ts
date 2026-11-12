@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service, signal } from '@angular/core';
-import { catchError, EMPTY } from 'rxjs';
+import { catchError, EMPTY, Observable, tap } from 'rxjs';
 import { User, UserRequest, UserResponse, UserUpdateRequest } from '../interfaces/Users';
 
 @Service()
@@ -59,17 +59,18 @@ export class UserService {
   
   }
   
-  update(id:number, cambios:Partial<UserUpdateRequest>)
+  update(id:number, cambios:Partial<UserUpdateRequest>): Observable<UserResponse>
   {
-    this.http.put<User>(`${this.url}/${id}`,cambios).subscribe(
-        {
-            next:()=>{
-                this.listUsers()
-            },
-            error:()=>{
-                this.error.set('no se pudo actualizar el usuario')
-            }
-        }
+    this.error.set('')
+
+    return this.http.put<UserResponse>(`${this.url}/${id}`,cambios).pipe(
+        tap(()=>{
+            this.listUsers()
+        }),
+        catchError((httpError)=>{
+            this.error.set(this.mensajeError(httpError,'No se pudo actualizar el usuario'))
+            return EMPTY
+        })
     )
   }
 

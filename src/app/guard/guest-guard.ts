@@ -9,5 +9,5 @@ export const guestGuard: CanActivateFn = (route, state) => {
   if (!authService.isLoggedIn()) {
     return true;
   }
-  return router.createUrlTree(['/access-denied-login']);
+  return router.createUrlTree(['/songs']);
 };

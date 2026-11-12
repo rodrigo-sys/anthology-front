@@ -2,18 +2,18 @@
   <strong>Anthology</strong>
 
   <nav class="acciones">
-    <a routerLink="/songs" routerLinkActive="activo">Canciones</a>
-    <a routerLink="/albums" routerLinkActive="activo">Álbumes</a>
-    <a routerLink="/playlists" routerLinkActive="activo">Playlists</a>
+    @if (authService.isLoggedIn()) {
+      <a routerLink="/songs" routerLinkActive="activo">Canciones</a>
+      <a routerLink="/albums" routerLinkActive="activo">Álbumes</a>
+      <a routerLink="/playlists" routerLinkActive="activo">Playlists</a>
 
-    @if(authService.isAdmin()){
-      <a routerLink="/admin" routerLinkActive="activo">Admin</a>
-    }
+      @if (authService.isAdmin()) {
+        <a routerLink="/admin" routerLinkActive="activo">Admin</a>
+      }
 
-    <a routerLink="/login" routerLinkActive="activo">Login</a>
-    <a routerLink="/logout" routerLinkActive="activo">Salir</a>
-
-    @if(!authService.isLoggedIn()){
+      <a routerLink="/logout" routerLinkActive="activo">Salir</a>
+    } @else {
+      <a routerLink="/login" routerLinkActive="activo">Iniciar sesión</a>
       <a routerLink="/user-create" routerLinkActive="activo">Registrarse</a>
     }
   </nav>

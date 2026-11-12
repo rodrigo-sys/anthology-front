@@ -25,7 +25,10 @@ export class UserList implements OnInit {
   {
     this.userService.userToEdit.set(user)
   }
-  eliminar(id:number){
-    this.userService.remove(id)
+  eliminar(user:User){
+    const confirmado = confirm(`¿Seguro que querés eliminar al usuario "${user.username}"?`)
+    if (!confirmado) return
+
+    this.userService.remove(user.id)
   }
 }

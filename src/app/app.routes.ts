@@ -25,10 +25,10 @@ import { AdminPage } from './pages/admin-page/admin-page';
 import { SongEdit } from './components/songs/song-edit/song-edit';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'songs', pathMatch: 'full' },
-  { path: 'songs', component: Songs },
-  { path: 'songs/:id', component: SongDetail },
-  { path: 'albums', component: Albums },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'songs', component: Songs, canActivate: [authGuard] },
+  { path: 'songs/:id', component: SongDetail, canActivate: [authGuard] },
+  { path: 'albums', component: Albums, canActivate: [authGuard] },
   { path: 'comments', component: CommentsPage, canActivate: [adminGuard] },
   { path: 'comments/:songVersionId', component: CommentsPage, canActivate: [authGuard] },
   { path: 'suggestions', component: SuggestionsPage, canActivate: [adminGuard] },
@@ -46,5 +46,5 @@ export const routes: Routes = [
   { path: 'user-list', component: UserList },
   { path: 'access-denied-login', component: AccessDeniedLogin },
   { path: 'admin', component: AdminPage, canActivate: [adminGuard] },
-  { path: '**', redirectTo: 'songs' }
+  { path: '**', redirectTo: 'login' }
 ];

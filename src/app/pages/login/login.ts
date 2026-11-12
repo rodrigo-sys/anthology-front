@@ -27,7 +27,7 @@ export class LoginPage {
 
     this.authService.login({ username, password }).subscribe({
       next: () => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/songs']);
       },
       error: (err) => {
         this.error.set(err.error?.message || 'Credenciales inválidas');

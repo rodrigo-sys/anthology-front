@@ -1,5 +1,6 @@
 import { Component, effect, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UserUpdateRequest } from '../../interfaces/Users';
 import { UserService } from '../../service/user-service';
 
 @Component({
@@ -15,8 +16,8 @@ export class UserEdit {
 
   formulario = this.fb.nonNullable.group({
     username: ['', Validators.required],
-    email: ['', Validators.required],
-    password: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.minLength(4)]],
   });
 
   constructor() {
@@ -26,7 +27,7 @@ export class UserEdit {
         this.formulario.patchValue({
           username: user.username,
           email: user.email,
-          password: user.password ?? '',
+          password: '',
         });
       }
     });
@@ -40,8 +41,12 @@ export class UserEdit {
 
     const { username, email, password } = this.formulario.getRawValue();
 
-    this.userService.update(user.id, { username, email, password });
-    this.userService.userToEdit.set(null);
+    const cambios: Partial<UserUpdateRequest> = { username, email };
+    if (password.trim()) cambios.password = password;
+
+    this.userService.update(user.id, cambios).subscribe({
+      next: () => this.userService.userToEdit.set(null)
+    });
   }
 
   cancelar() {
