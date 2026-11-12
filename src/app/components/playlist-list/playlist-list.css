@@ -1,3 +1,10 @@
 .playlist-list {
   padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ver-todas {
+  display: inline-block;
+  margin-top: 1.5rem;
 }

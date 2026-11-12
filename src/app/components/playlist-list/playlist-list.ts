@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class PlaylistList {
   playlistService = inject(PlaylistService);
-  authService = inject(AuthService)
+  authService = inject(AuthService);
 
   editingId: number | null = null;
   newName = '';

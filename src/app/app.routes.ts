@@ -5,6 +5,7 @@ import { LoginPage } from './pages/login/login';
 import { LogoutPage } from './pages/logout/logout';
 import { PlaylistDetail } from './pages/playlist-detail/playlist-detail';
 import { Playlists } from './pages/playlists/playlists';
+import { AllPlaylistsPage } from './pages/all-playlists/all-playlists';
 import { SongDetail } from './pages/song-detail/song-detail';
 import { Songs } from './pages/songs/songs';
 import { SuggestionCreatePage } from './pages/suggestion-create/suggestion-create';
@@ -29,6 +30,7 @@ export const routes: Routes = [
   { path: 'suggestions/new', component: SuggestionCreatePage, canActivate: [authGuard] },
   { path: 'playlists', component: Playlists, canActivate: [authGuard] },
   { path: 'playlists/:id', component: PlaylistDetail, canActivate: [authGuard] },
+  { path: 'all-playlists', component: AllPlaylistsPage, canActivate: [adminGuard] },
   { path: 'login', component: LoginPage },
   { path: 'logout', component: LogoutPage },
    { path: 'artist-create', component: ArtistCreate },

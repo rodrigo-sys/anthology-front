@@ -1,0 +1,87 @@
+.all-playlists-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.filters-bar {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.5rem;
+  border: 1px solid #000;
+  font-size: 1rem;
+}
+
+.results-info {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.scrollable-list {
+  max-height: 450px;
+  overflow-y: auto;
+  border: 1px solid #000;
+  padding: 0.5rem;
+  background: #fff;
+}
+
+.scrollable-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.list-header,
+.scrollable-list li {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.list-header {
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #000;
+}
+
+.cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.acciones {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.scrollable-list button {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #000;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.scrollable-list button:hover {
+  background-color: #eee;
+}
+
+.no-results {
+  padding: 1rem;
+  text-align: center;
+  color: #333;
+}
