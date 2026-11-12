@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service, signal } from '@angular/core';
+import { catchError, EMPTY } from 'rxjs';
 import { User, UserRequest, UserResponse, UserUpdateRequest } from '../interfaces/Users';
 
 @Service()
@@ -47,13 +48,13 @@ export class UserService {
 
   add(request:UserRequest)
   {
-    this.http.post<User>(this.url,request).subscribe(
-        {
-            next:() =>{
-                this.listUsers()
-            }
-              
-        }
+    this.error.set('')
+
+    return this.http.post<User>(this.url,request).pipe(
+        catchError((httpError)=>{
+            this.error.set(this.mensajeError(httpError,'No se pudo crear el usuario'))
+            return EMPTY
+        })
     )
   
   }
@@ -85,6 +86,15 @@ export class UserService {
     
         }
     )
+  }
+
+  private mensajeError(httpError:any, porDefecto:string)
+  {
+    const mensaje = httpError?.error?.message
+    if (mensaje) return mensaje
+    if (httpError?.status === 409) return 'Ese usuario o email ya existe.'
+    if (httpError?.status === 401) return 'Tu sesión venció. Iniciá sesión otra vez.'
+    return porDefecto
   }
 
   

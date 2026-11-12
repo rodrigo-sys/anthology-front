@@ -16,8 +16,8 @@ export class UserCreate {
 
   formulario=this.fb.nonNullable.group({
     username:['',Validators.required],
-    email:['',Validators.required],
-    password:['',Validators.required]
+    email:['',[Validators.required,Validators.email]],
+    password:['',[Validators.required,Validators.minLength(4)]]
   })
 
 
@@ -26,9 +26,11 @@ export class UserCreate {
 
     const { username, email, password  } = this.formulario.getRawValue()
 
-    this.userService.add({ username, email, password })
-
-    this.formulario.reset()
+    this.userService.add({ username, email, password }).subscribe({
+      next: () => {
+        this.formulario.reset()
+      }
+    })
   }
 }
 

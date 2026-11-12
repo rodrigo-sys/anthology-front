@@ -70,6 +70,15 @@ input:focus {
   font-size: 12px;
 }
 
+.server-error {
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid #e0bdb9;
+  border-radius: 6px;
+  background: #faeceb;
+  font-size: 13px;
+}
+
 .actions {
   display: flex;
   justify-content: flex-end;
