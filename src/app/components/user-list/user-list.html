@@ -41,5 +41,11 @@
         <p class="empty">No hay usuarios.</p>
       }
     </div>
+
+    @if (userService.userToEdit()) {
+      <div class="edicion">
+        <app-user-edit></app-user-edit>
+      </div>
+    }
   </section>
 </div>

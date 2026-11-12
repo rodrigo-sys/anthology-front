@@ -9,6 +9,11 @@
   padding: 28px 16px 40px;
 }
 
+:host-context(.edicion) .page {
+  max-width: none;
+  padding: 0;
+}
+
 .card {
   display: flex;
   flex-direction: column;
