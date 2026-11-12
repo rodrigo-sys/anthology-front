@@ -1,1 +1,79 @@
-/* comment-item styles */
+:host {
+  display: block;
+  border-top: 1px solid #e3e1db;
+}
+
+:host(:first-child) {
+  border-top: none;
+}
+
+.comment {
+  list-style: none;
+  padding: 14px 0;
+}
+
+.comment-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.username {
+  color: #1f1f1f;
+}
+
+.instrument {
+  padding: 2px 8px;
+  border: 1px solid #d2cfc6;
+  border-radius: 4px;
+  background: #eeebe4;
+  color: #4a4842;
+  font-size: 12px;
+}
+
+.song {
+  color: #5d5a52;
+  font-size: 13px;
+}
+
+.content {
+  margin: 8px 0;
+  color: #3f3d39;
+  font-size: 14px;
+}
+
+.comment-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.date {
+  font-size: 12px;
+  color: #6f6d66;
+}
+
+.danger {
+  padding: 5px 12px;
+  border: 1px solid #d8b4af;
+  border-radius: 6px;
+  background: #f9f9f7;
+  color: #a9443c;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.danger:hover {
+  background: #f8eeec;
+}
+
+@media (max-width: 560px) {
+  .comment-foot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

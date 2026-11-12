@@ -1,8 +1,18 @@
-<li>
-  <strong>{{ comment().username }}</strong> ({{ comment().instrument }}){{ songVersionId() === 0 ? ' — ' + comment().songTitle : '' }}:
-  <p>{{ comment().content }}</p>
-  <small>{{ comment().createdAt }}</small>
-  @if (authService.isAdmin()) {
-    <button (click)="deleteComment(comment().id)">Eliminar</button>
-  }
+<li class="comment">
+  <div class="comment-head">
+    <strong class="username">{{ comment().username }}</strong>
+    <span class="instrument">{{ etiquetas[comment().instrument] }}</span>
+    @if (songVersionId() === 0) {
+      <span class="song">{{ comment().songTitle }}</span>
+    }
+  </div>
+
+  <p class="content">{{ comment().content }}</p>
+
+  <div class="comment-foot">
+    <small class="date">{{ comment().createdAt | date:'dd/MM/yyyy HH:mm' }}</small>
+    @if (authService.isAdmin()) {
+      <button class="danger" (click)="deleteComment(comment().id)">Eliminar</button>
+    }
+  </div>
 </li>

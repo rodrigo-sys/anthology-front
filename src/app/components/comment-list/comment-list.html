@@ -1,6 +1,4 @@
 <div class="comment-list">
-  <h3>Comentarios</h3>
-
   @if (songVersionId() === 0) {
     <div class="filters-bar">
       <input
@@ -37,12 +35,12 @@
   }
 
   @if (commentService.error()) {
-    <div class="error-message" style="color: red;">{{ commentService.error() }}</div>
+    <div class="error-message">{{ commentService.error() }}</div>
   } @else if (filteredComments().length === 0) {
     <div class="no-results">No hay comentarios</div>
   }
 
-  <div [class.scrollable-list]="songVersionId() === 0">
+  <div class="comments-shell" [class.scrollable-list]="songVersionId() === 0">
     <ul>
       @for (comment of filteredComments(); track comment.id) {
         <app-comment-item [comment]="comment" [songVersionId]="songVersionId()"></app-comment-item>
