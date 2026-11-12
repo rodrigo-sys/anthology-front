@@ -1,13 +1,38 @@
-<div class="suggestion-list">
+<div class="suggestion-list-container">
   <h3>Lista de Sugerencias</h3>
+
+  <div class="filters-bar">
+    <input 
+      type="text" 
+      placeholder="Buscar por título, artista o notas..." 
+      [value]="searchQuery()" 
+      (input)="onSearchInput($event)"
+      class="search-input"
+    />
+
+    <select [value]="statusFilter()" (change)="onStatusChange($event)" class="status-select">
+      <option value="ALL">Todos los estados</option>
+      <option value="PENDING">Pendientes</option>
+      <option value="ADDED">Añadidas</option>
+      <option value="REJECTED">Rechazadas</option>
+    </select>
+  </div>
+
+  <div class="results-info">
+    Mostrando {{ filteredSuggestions().length }} de {{ suggestionService.suggestions().length }} sugerencias
+  </div>
+
   @if (suggestionService.error()) {
     <div class="error-message" style="color: red;">{{ suggestionService.error() }}</div>
-  } @else if (suggestionService.suggestions().length === 0) {
-    <div>No hay sugerencias</div>
+  } @else if (filteredSuggestions().length === 0) {
+    <div class="no-results">No se encontraron sugerencias</div>
   }
-  <ul>
-    @for (suggestion of suggestionService.suggestions(); track suggestion.id) {
-      <app-suggestion-item [suggestion]="suggestion"></app-suggestion-item>
-    }
-  </ul>
+
+  <div class="scrollable-list">
+    <ul>
+      @for (suggestion of filteredSuggestions(); track suggestion.id) {
+        <app-suggestion-item [suggestion]="suggestion"></app-suggestion-item>
+      }
+    </ul>
+  </div>
 </div>
