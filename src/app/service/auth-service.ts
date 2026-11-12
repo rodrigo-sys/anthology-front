@@ -70,10 +70,6 @@ export class AuthService {
     return this.getPayload()?.sub ?? null;
   }
 
-  // todo: solución temporal. descarga toda la lista de usuarios para encontrar el id.
-  // lo ideal seria que el backend obtenga el id con: authentication.getName() + userRepository.findByUsername(),
-  // y quitar los id de los dto requests
-  // o agregar el id al token (claim "userId")
   fetchUserId(): Observable<number | null> {
     const username = this.getUsername();
     if (!username) return of(null);
