@@ -22,6 +22,7 @@ import { UserList } from './components/user-list/user-list';
 import { AccessDenied } from './pages/auth/access-denied/access-denied';
 import { AccessDeniedLogin } from './pages/auth/access-denied-login/access-denied-login';
 import { AdminPage } from './pages/admin-page/admin-page';
+import { SongEdit } from './components/song-edit/song-edit';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'songs', pathMatch: 'full' },

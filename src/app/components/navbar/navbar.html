@@ -1,14 +1,16 @@
 <header class="navbar">
-  <strong>Anthology</strong>
+	<strong>Anthology</strong>
 
-  <nav class="acciones">
-    <a routerLink="/songs" routerLinkActive="activo">Canciones</a>
-    <a routerLink="/albums" routerLinkActive="activo">Álbumes</a>
-    <a routerLink="/comments" routerLinkActive="activo">Comentarios</a>
-    <a routerLink="/suggestions" routerLinkActive="activo">Sugerencias</a>
-    <a routerLink="/playlists" routerLinkActive="activo">Playlists</a>
-    <a routerLink="/admin" routerLinkActive="activo">Admin</a>
-    <a routerLink="/login" routerLinkActive="activo">Login</a>
-    <a routerLink="/logout" routerLinkActive="activo">Salir</a>
-  </nav>
+	<nav class="acciones">
+		<a routerLink="/songs" routerLinkActive="activo">Canciones</a>
+		<a routerLink="/albums" routerLinkActive="activo">Álbumes</a>
+		<a routerLink="/playlists" routerLinkActive="activo">Playlists</a>
+
+		@if(authService.isAdmin()){
+      <a routerLink="/admin" routerLinkActive="activo">Admin</a>
+		}
+
+		<a routerLink="/login" routerLinkActive="activo">Login</a>
+		<a routerLink="/logout" routerLinkActive="activo">Salir</a>
+	</nav>
 </header>
