@@ -1,28 +1,47 @@
 <div class="playlist-detail">
-  <a routerLink="/playlists">Volver a playlists</a>
   @if (playlistService.playlistById(); as playlist) {
-    <h2>{{ playlist.name }}</h2>
-    <h3>Canciones</h3>
-    @if (playlist.songVersions?.length) {
-      <ul>
-        @for (sv of playlist.songVersions; track sv.id) {
-          <li>
-            <a [routerLink]="['/songs', sv.songId]">{{ sv.songTitle }} - {{ sv.instrument }}</a> |
-            <a [href]="sv.pdfUrl" target="_blank" rel="noopener">Ver PDF</a>
-            <button type="button" class="eliminar" (click)="removeSong(sv.id)">Quitar</button>
-          </li>
-        }
-      </ul>
-    } @else {
-      <div>No hay canciones</div>
-    }
+    <a class="back" routerLink="/playlists">Volver a playlists</a>
+    <h1>{{ playlist.name }}</h1>
 
-    <div class="agregar-cancion">
-      <h4>Agregar Versión de Canción</h4>
-      <input type="number" [(ngModel)]="songVersionIdInput" placeholder="ID de versión de canción" />
-      <button type="button" (click)="addSong()">Agregar</button>
+    <div class="panel">
+      <h2>Versiones</h2>
+
+      @if (playlist.songVersions?.length) {
+        <ul class="list">
+          @for (sv of playlist.songVersions; track sv.id) {
+            <li class="item">
+              <div class="song-info">
+                <a [routerLink]="['/songs', sv.songId]">{{ sv.songTitle }}</a>
+                <span class="instrument">{{ etiquetas[sv.instrument] }}</span>
+                <a class="pdf" [href]="sv.pdfUrl" target="_blank" rel="noopener">Ver partitura</a>
+              </div>
+              <button type="button" class="danger" (click)="removeSong(sv.id)">Quitar</button>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="empty">No hay versiones.</p>
+      }
+    </div>
+
+    <div class="panel">
+      <h2>Agregar versión</h2>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="songVersionId">ID de versión de canción</label>
+          <input id="songVersionId" type="number" [(ngModel)]="songVersionIdInput" />
+        </div>
+        <button type="button" class="primary" (click)="addSong()">Agregar versión</button>
+      </div>
     </div>
   } @else {
-    <div>Cargando playlist...</div>
+    <div class="panel">
+      @if (playlistService.error()) {
+        <p class="error">{{ playlistService.error() }}</p>
+      } @else {
+        <p class="empty">Cargando playlist...</p>
+      }
+    </div>
   }
 </div>

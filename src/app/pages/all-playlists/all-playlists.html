@@ -1,71 +1,84 @@
-<div class="all-playlists-container">
-  <h2>Todas las Playlists</h2>
+<section class="all-playlists">
+  <h1>Todas las playlists</h1>
 
-  <div class="filters-bar">
-    <input
-      type="text"
-      placeholder="Filtrar por nombre..."
-      [value]="nameFilter()"
-      (input)="onNameInput($event)"
-      class="search-input"
-    />
+  <div class="filters">
+    <div class="field">
+      <label for="filterName">Nombre</label>
+      <input
+        id="filterName"
+        type="text"
+        placeholder="Filtrar por nombre..."
+        [value]="nameFilter()"
+        (input)="onNameInput($event)"
+      />
+    </div>
 
-    <input
-      type="number"
-      placeholder="ID de usuario"
-      [value]="userIdFilter()"
-      (input)="onUserIdInput($event)"
-      class="search-input"
-    />
+    <div class="field">
+      <label for="filterUserId">ID de usuario</label>
+      <input
+        id="filterUserId"
+        type="number"
+        placeholder="ID de usuario"
+        [value]="userIdFilter()"
+        (input)="onUserIdInput($event)"
+      />
+    </div>
 
-    <input
-      type="number"
-      placeholder="ID de playlist"
-      [value]="idFilter()"
-      (input)="onIdInput($event)"
-      class="search-input"
-    />
+    <div class="field">
+      <label for="filterId">ID de playlist</label>
+      <input
+        id="filterId"
+        type="number"
+        placeholder="ID de playlist"
+        [value]="idFilter()"
+        (input)="onIdInput($event)"
+      />
+    </div>
   </div>
 
-  <div class="results-info">
+  <p class="results-info">
     Mostrando {{ filteredPlaylists().length }} de {{ playlistService.allPlaylists().length }} playlists
-  </div>
+  </p>
 
   @if (playlistService.error()) {
-    <div class="error-message" style="color: red;">{{ playlistService.error() }}</div>
-  } @else if (filteredPlaylists().length === 0) {
-    <div class="no-results">No se encontraron playlists</div>
+    <p class="error">{{ playlistService.error() }}</p>
   }
 
-  <div class="scrollable-list">
-    <div class="list-header">
-      <span>Nombre</span>
-      <span>Usuario ID</span>
-      <span>Playlist ID</span>
-      <span>Acciones</span>
-    </div>
-    <ul>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Usuario ID</th>
+        <th>Playlist ID</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
       @for (playlist of filteredPlaylists(); track playlist.id) {
-        <li>
+        <tr>
           @if (editingId === playlist.id) {
-            <input class="cell" [(ngModel)]="newName" type="text" />
-            <span class="cell">{{ playlist.idUser }}</span>
-            <span class="cell">{{ playlist.id }}</span>
-            <div class="acciones">
-              <button type="button" (click)="saveEdit(playlist)">Guardar</button>
+            <td><input [(ngModel)]="newName" type="text" /></td>
+            <td>{{ playlist.idUser }}</td>
+            <td>{{ playlist.id }}</td>
+            <td class="actions">
+              <button type="button" class="primary" (click)="saveEdit(playlist)">Guardar</button>
               <button type="button" (click)="editingId = null">Cancelar</button>
-            </div>
+            </td>
           } @else {
-            <a class="cell" [routerLink]="['/playlists', playlist.id]">{{ playlist.name }}</a>
-            <span class="cell">{{ playlist.idUser }}</span>
-            <span class="cell">{{ playlist.id }}</span>
-            <div class="acciones">
+            <td><a [routerLink]="['/playlists', playlist.id]">{{ playlist.name }}</a></td>
+            <td>{{ playlist.idUser }}</td>
+            <td>{{ playlist.id }}</td>
+            <td class="actions">
               <button type="button" (click)="startEdit(playlist)">Renombrar</button>
-              <button type="button" class="eliminar" (click)="deletePlaylist(playlist)">Eliminar</button>
-            </div>
+              <button type="button" class="danger" (click)="deletePlaylist(playlist)">Eliminar</button>
+            </td>
           }
-        </li>
+        </tr>
+      } @empty {
+        <tr>
+          <td class="empty" colspan="4">No se encontraron playlists.</td>
+        </tr>
       }
-    </ul>
-  </div>
-</div>
+    </tbody>
+  </table>
+</section>

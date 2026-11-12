@@ -1,10 +1,114 @@
 .playlist-list {
-  padding: 1rem;
-  max-width: 800px;
-  margin: 0 auto;
+  background: #f6f5f1;
+  border: 1px solid #d2cfc6;
+  border-radius: 8px;
+  padding: 20px;
 }
 
-.ver-todas {
+h2 {
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2dfd6;
+  font-size: 18px;
+  color: #1f1f1f;
+}
+
+.error {
+  margin: 0 0 12px;
+  color: #a9443c;
+  font-size: 14px;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid #e2dfd6;
+}
+
+.item:first-child {
+  border-top: none;
+}
+
+.item a {
+  color: #2d2a55;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.item a:hover {
+  text-decoration: underline;
+}
+
+.item input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #cfccc3;
+  border-radius: 6px;
+  font: inherit;
+  background: #fffdf9;
+}
+
+.item input:focus {
+  outline: none;
+  border-color: #2d2a55;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  padding: 6px 12px;
+  border: 1px solid #cbc8bf;
+  border-radius: 6px;
+  background: #fffdf9;
+  color: #333;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #eeebe4;
+}
+
+button.primary {
+  background: #2d2a55;
+  border-color: #2d2a55;
+  color: #fff;
+}
+
+button.primary:hover {
+  background: #232046;
+}
+
+button.danger {
+  color: #a9443c;
+  border-color: #d8b4af;
+}
+
+button.danger:hover {
+  background: #f8eeec;
+}
+
+.empty {
+  margin: 0;
+  color: #5d5a52;
+}
+
+.all-link {
   display: inline-block;
-  margin-top: 1.5rem;
+  margin-top: 16px;
+  color: #2d2a55;
+  font-size: 14px;
 }

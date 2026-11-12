@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PlaylistService } from '../../service/playlist-service';
 import { FormsModule } from '@angular/forms';
+import { INSTRUMENT_LABEL } from '../../interfaces/Enums';
 
 @Component({
   selector: 'app-playlist-detail',
@@ -12,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class PlaylistDetail implements OnInit {
   private route = inject(ActivatedRoute);
   playlistService = inject(PlaylistService);
+  etiquetas = INSTRUMENT_LABEL;
   songVersionIdInput: number | null = null;
   playlistId = 0;
 
