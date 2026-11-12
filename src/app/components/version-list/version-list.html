@@ -1,1 +1,52 @@
-<p>version-list works!</p>
+<section class="version-list">
+
+  <h2>Versiones</h2>
+
+  <div class="acciones">
+    <button type="button" (click)="cambiarVista(false)">Aprobadas</button>
+    @if (esAdmin) {
+      <button type="button" class="secundario" (click)="cambiarVista(true)">Todas</button>
+    } @else {
+      <button type="button" class="secundario" (click)="verMias()">Mis versiones</button>
+    }
+  </div>
+
+  <div class="campo">
+    <label for="filtro-version-estado">Estado</label>
+    <select id="filtro-version-estado" [(ngModel)]="filtroEstado">
+      <option value="">Todos</option>
+      @for (estado of estados; track estado) {
+        <option [value]="estado">{{ estadoEtiquetas[estado] }}</option>
+      }
+    </select>
+  </div>
+
+  @if (versionService.error()) {
+    <p class="error">{{ versionService.error() }}</p>
+  }
+
+  <div class="lista">
+    @for (version of versionsFiltradas(); track version.id) {
+      <article class="tarjeta">
+        <strong>{{ version.songTitle }}</strong>
+        <span>Instrumento: {{ etiquetas[version.instrument] }}</span>
+        <span>Estado: {{ estadoEtiquetas[version.status] }}</span>
+
+        <a [href]="version.pdfUrl" target="_blank" rel="noopener">Ver PDF</a>
+
+        <div class="acciones">
+          @if (esAdmin && version.status === 'PENDING') {
+            <button type="button" (click)="aprobar(version)">Aprobar</button>
+            <button type="button" class="secundario" (click)="rechazar(version)">Rechazar</button>
+          }
+          @if (esAdmin || (mostrandoMias && version.status !== 'APPROVED')) {
+            <button type="button" class="eliminar" (click)="eliminar(version)">Eliminar</button>
+          }
+        </div>
+      </article>
+    } @empty {
+      <p>No hay versiones.</p>
+    }
+  </div>
+
+</section>

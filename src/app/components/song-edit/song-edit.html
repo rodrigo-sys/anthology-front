@@ -1,0 +1,69 @@
+<form class="tarjeta song-edit" [formGroup]="formulario" (ngSubmit)="guardar()">
+
+  <h2>Editar canción</h2>
+
+  <div class="campos">
+    <div class="campo">
+      <label for="edit-title">Título</label>
+      <input id="edit-title" type="text" formControlName="title">
+      @if (formulario.controls['title'].hasError('required') && formulario.controls['title'].touched) {
+        <small class="error">Campo requerido</small>
+      }
+      @if (formulario.controls['title'].hasError('maxlength') && formulario.controls['title'].touched) {
+        <small class="error">Máximo 255 caracteres</small>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="edit-artist">Artista</label>
+      <input id="edit-artist" type="text" formControlName="artistName">
+      @if (formulario.controls['artistName'].hasError('required') && formulario.controls['artistName'].touched) {
+        <small class="error">Campo requerido</small>
+      }
+      @if (formulario.controls['artistName'].hasError('maxlength') && formulario.controls['artistName'].touched) {
+        <small class="error">Máximo 255 caracteres</small>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="edit-genre">Género</label>
+      <input id="edit-genre" type="text" formControlName="genre">
+      @if (formulario.controls['genre'].hasError('required') && formulario.controls['genre'].touched) {
+        <small class="error">Campo requerido</small>
+      }
+      @if (formulario.controls['genre'].hasError('maxlength') && formulario.controls['genre'].touched) {
+        <small class="error">Máximo 100 caracteres</small>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="edit-album">Álbum</label>
+      <select id="edit-album" formControlName="albumId">
+        <option [ngValue]="null">Sin cambios</option>
+        <option [ngValue]="0">Sin álbum (quitar)</option>
+        @for (album of albumService.albums(); track album.id) {
+          <option [ngValue]="album.id">{{ album.title }} - {{ album.artistName }} ({{ album.releaseYear }})</option>
+        }
+      </select>
+      @if (albumActual) {
+        <small>Álbum actual: {{ albumActual }}</small>
+      } @else {
+        <small>Sin álbum asignado</small>
+      }
+    </div>
+  </div>
+
+  <div class="boton">
+    <button type="submit" [disabled]="formulario.invalid">
+      Guardar cambios
+    </button>
+    <button type="button" class="secundario" (click)="cancelar()">
+      Cancelar
+    </button>
+  </div>
+
+  @if (songService.error()) {
+    <small class="error">{{ songService.error() }}</small>
+  }
+
+</form>

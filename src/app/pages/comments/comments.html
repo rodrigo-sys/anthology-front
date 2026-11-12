@@ -1,0 +1,9 @@
+<div class="comments-page">
+  @if (songVersionId() > 0) {
+    <h2>Comentarios de la Versión</h2>
+    <app-comment-create [songVersionId]="songVersionId()"></app-comment-create>
+  } @else {
+    <h2>Comentarios</h2>
+  }
+  <app-comment-list [songVersionId]="songVersionId()"></app-comment-list>
+</div>

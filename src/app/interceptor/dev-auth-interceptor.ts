@@ -1,7 +1,11 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const devAuthInterceptor: HttpInterceptorFn = (req, next) => {
-  const token = typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null;
+  if (req.url.includes('/auth') || req.url.includes('/api/users')) {
+    return next(req);
+  }
+
+  const token = localStorage.getItem('token');
   if (token) {
     const cloned = req.clone({
       setHeaders: {

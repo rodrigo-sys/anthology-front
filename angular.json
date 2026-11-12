@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
@@ -55,7 +55,7 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {
-            "proxyConfig": "./proxy.conf.js"
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -63,7 +63,7 @@
             },
             "development": {
               "buildTarget": "anthology-front:build:development",
-              "proxyConfig": "./proxy.conf.js"
+            "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

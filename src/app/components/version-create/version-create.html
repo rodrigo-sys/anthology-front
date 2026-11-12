@@ -1,1 +1,44 @@
-<p>version-create works!</p>
+<form class="tarjeta version-create" [formGroup]="formulario" (ngSubmit)="add(archivoInput)">
+
+  <h2>Nueva versión</h2>
+
+  <div class="campos">
+    <div class="campo">
+      <label for="version-instrument">Instrumento</label>
+      <select id="version-instrument" formControlName="instrument">
+        <option [ngValue]="null">Seleccioná un instrumento</option>
+        @for (instrumento of instrumentos; track instrumento) {
+          <option [ngValue]="instrumento">{{ etiquetas[instrumento] }}</option>
+        }
+      </select>
+      @if (formulario.controls['instrument'].hasError('required') && formulario.controls['instrument'].touched) {
+        <small class="error">Campo requerido</small>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="version-file">Archivo (MusicXML, Guitar Pro o PDF)</label>
+      <input
+        #archivoInput
+        id="version-file"
+        type="file"
+        accept=".xml,.musicxml,.gp,.gp3,.gp4,.gp5,.pdf"
+        (change)="seleccionarArchivo($event)"
+      >
+      @if (!archivo) {
+        <small class="error">Seleccioná un archivo</small>
+      }
+    </div>
+  </div>
+
+  <div class="boton">
+    <button type="submit" [disabled]="formulario.invalid || !archivo">
+      Subir versión
+    </button>
+  </div>
+
+  @if (versionService.error()) {
+    <small class="error">{{ versionService.error() }}</small>
+  }
+
+</form>

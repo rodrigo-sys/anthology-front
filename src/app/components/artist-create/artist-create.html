@@ -1,0 +1,61 @@
+<div class="page">
+  <form class="card" [formGroup]="formulario" (ngSubmit)="add()">
+    <div class="card-header">
+      <h2>Crear artista</h2>
+    </div>
+
+    <div class="form-grid">
+      <div class="field">
+        <label for="idUser">ID de usuario</label>
+        <input id="idUser" type="number" formControlName="idUser" />
+        @if (formulario.controls.idUser.invalid && formulario.controls.idUser.touched) {
+          <small class="error">Campo requerido</small>
+        }
+      </div>
+
+      <div class="field">
+        <label for="stageName">Nombre artístico</label>
+        <input id="stageName" type="text" formControlName="stageName" />
+        @if (formulario.controls.stageName.invalid && formulario.controls.stageName.touched) {
+          <small class="error">Campo requerido</small>
+        }
+      </div>
+
+      <div class="field field-full">
+        <label for="biography">Biografía</label>
+        <textarea id="biography" rows="4" formControlName="biography"></textarea>
+        @if (formulario.controls.biography.invalid && formulario.controls.biography.touched) {
+          <small class="error">Campo requerido</small>
+        }
+      </div>
+
+      <div class="field">
+        <label for="instagram">Instagram</label>
+        <input id="instagram" type="text" formControlName="instagram" />
+        @if (formulario.controls.instagram.invalid && formulario.controls.instagram.touched) {
+          <small class="error">Campo requerido</small>
+        }
+      </div>
+
+      <div class="field">
+        <label for="spotify">Spotify</label>
+        <input id="spotify" type="text" formControlName="spotify" />
+        @if (formulario.controls.spotify.invalid && formulario.controls.spotify.touched) {
+          <small class="error">Campo requerido</small>
+        }
+      </div>
+
+      <div class="field">
+        <label for="youtube">YouTube</label>
+        <input id="youtube" type="text" formControlName="youtube" />
+        @if (formulario.controls.youtube.invalid && formulario.controls.youtube.touched) {
+          <small class="error">Campo requerido</small>
+        }
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="submit" [disabled]="formulario.invalid">Guardar artista</button>
+    </div>
+  </form>
+</div>

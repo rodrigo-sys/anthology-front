@@ -1,1 +1,105 @@
-<p>song-list works!</p>
+<section class="song-list">
+
+  <h2>Canciones</h2>
+
+  <div class="acciones">
+    @if (esAdmin) {
+      <button type="button" (click)="verTodas()">Todas</button>
+    } @else {
+      <button type="button" (click)="verAprobadas()">Aprobadas</button>
+      <button type="button" class="secundario" (click)="verMias()">Mis canciones</button>
+    }
+  </div>
+
+  <div class="buscador">
+    <div class="campo">
+      <label for="filtro-title">Título</label>
+      <input id="filtro-title" type="text" [(ngModel)]="filtros.title" [disabled]="!!estado">
+    </div>
+
+    <div class="campo">
+      <label for="filtro-artist">Artista</label>
+      <input id="filtro-artist" type="text" [(ngModel)]="filtros.artistName" [disabled]="!!estado">
+    </div>
+
+    <div class="campo">
+      <label for="filtro-genre">Género</label>
+      <input id="filtro-genre" type="text" [(ngModel)]="filtros.genre" [disabled]="!!estado">
+    </div>
+
+    <div class="campo">
+      <label for="filtro-album">Álbum</label>
+      <select id="filtro-album" [(ngModel)]="filtros.albumId" [disabled]="!!estado">
+        <option [ngValue]="null">Todos</option>
+        @for (album of albumService.albums(); track album.id) {
+          <option [ngValue]="album.id">{{ album.title }} - {{ album.artistName }}</option>
+        }
+      </select>
+    </div>
+
+    @if (esAdmin) {
+      <div class="campo">
+        <label for="filtro-estado">Estado</label>
+        <select id="filtro-estado" [(ngModel)]="estado">
+          <option value="">Todas</option>
+          @for (estado of estados; track estado) {
+            <option [value]="estado">{{ estadoEtiquetas[estado] }}</option>
+          }
+        </select>
+      </div>
+    }
+
+    <div class="campo">
+      <label for="filtro-instrumento">Instrumento</label>
+      <select
+        id="filtro-instrumento"
+        [ngModel]="songService.instrumento()"
+        (ngModelChange)="songService.instrumento.set($event)"
+      >
+        <option value="">Todos</option>
+        @for (instrumento of instrumentos; track instrumento) {
+          <option [value]="instrumento">{{ etiquetas[instrumento] }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="boton">
+      <button type="button" (click)="buscar()">Buscar</button>
+      <button type="button" class="secundario" (click)="limpiar()">Limpiar</button>
+    </div>
+  </div>
+
+  @if (estado) {
+    <small>Con un estado seleccionado se ignoran los filtros de título, artista, género y álbum.</small>
+  }
+
+  @if (songService.error()) {
+    <p class="error">{{ songService.error() }}</p>
+  }
+
+  <div class="lista">
+    @for (song of songService.songsFiltradas(); track song.id) {
+      <article class="tarjeta">
+        <strong>{{ song.title }}</strong>
+        <span>Artista: {{ song.artistName }}</span>
+        <span>Género: {{ song.genre }}</span>
+        @if (song.AlbumTitle) {
+          <span>Álbum: {{ song.AlbumTitle }} ({{ song.ReleaseYear }})</span>
+        }
+        <span>Instrumentos: {{ instrumentosDe(song) }}</span>
+        <span>Estado: {{ estadoEtiquetas[song.status] }}</span>
+
+        <div class="acciones">
+          <a [routerLink]="['/songs', song.id]">Ver</a>
+          @if (esAdmin || (mostrandoMias && song.status !== 'APPROVED')) {
+            <button type="button" class="secundario" (click)="editar(song)">Editar</button>
+            <button type="button" class="eliminar" (click)="eliminar(song)">Eliminar</button>
+          }
+        </div>
+      </article>
+    } @empty {
+      <p>No hay canciones.</p>
+    }
+  </div>
+
+</section>

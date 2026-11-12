@@ -9,5 +9,5 @@ export const adminGuard: CanActivateFn = (route, state) => {
   if (authService.isLoggedIn() && authService.isAdmin()) {
     return true;
   }
-  return router.createUrlTree(['/login']);
+  return router.createUrlTree(['/access-denied']);
 };
