@@ -5,7 +5,7 @@ import { User, UserRequest, UserResponse, UserUpdateRequest } from '../interface
 @Service()
 export class UserService {
   private http=inject(HttpClient)
-  private url='api/users'
+  private url='/api/users'
 
   users=signal<User []>([])
   userById=signal<User | null>(null)
@@ -59,7 +59,7 @@ export class UserService {
   
   update(id:number, cambios:Partial<UserUpdateRequest>)
   {
-    this.http.patch<User>(`${this.url}/${id}`,cambios).subscribe(
+    this.http.put<User>(`${this.url}/${id}`,cambios).subscribe(
         {
             next:()=>{
                 this.listUsers()

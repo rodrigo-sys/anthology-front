@@ -14,7 +14,7 @@ export class ArtistCreate {
   artistService=inject(ArtistService)
 
   formulario=this.fb.nonNullable.group({
-    idUser:[0,Validators.required],
+    userId:[0,Validators.required],
     stageName:['',Validators.required],
     biography:['',Validators.required],
     instagram:['',Validators.required],
@@ -26,9 +26,9 @@ export class ArtistCreate {
   add() {
     if (this.formulario.invalid) return
 
-    const { idUser, stageName, biography,instagram,spotify,youtube  } = this.formulario.getRawValue()
+    const { userId, stageName, biography,instagram,spotify,youtube  } = this.formulario.getRawValue()
 
-    this.artistService.add({ idUser, stageName, biography,instagram,spotify,youtube })
+    this.artistService.add({ userId, stageName, biography,instagram,spotify,youtube })
 
     this.formulario.reset()
   }

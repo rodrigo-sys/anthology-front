@@ -6,7 +6,7 @@ import { Artist, ArtistRequest, ArtistUpdateRequest } from '../interfaces/Artist
 export class ArtistService {
 
     private http=inject(HttpClient)
-    private url='api/artists'
+    private url='/api/artists'
 
 
       artists=signal<Artist []>([])
@@ -61,7 +61,7 @@ export class ArtistService {
   
   update(id:number, cambios:Partial<ArtistUpdateRequest>)
   {
-    this.http.patch<Artist>(`${this.url}/${id}`,cambios).subscribe(
+    this.http.put<Artist>(`${this.url}/${id}`,cambios).subscribe(
         {
             next:()=>{
                 this.listArtists()

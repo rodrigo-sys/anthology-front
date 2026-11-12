@@ -1,28 +1,28 @@
 export interface Artist{
     id:number
-    idUser:number
+    userId:number
     stageName:string
     biography:string
     instagram:string
     spotify:string
-    youtube:string 
+    youtube:string
 
 }
 
 export interface ArtistRequest{
-     idUser:number
+    userId:number
     stageName:string
     biography:string
     instagram:string
     spotify:string
-    youtube:string 
-    
+    youtube:string
+
 }
 export interface ArtistUpdateRequest{
      biography:string
     instagram:string
     spotify:string
-    youtube:string 
+    youtube:string
 }
 export interface ArtistResponse{
       id:number
@@ -30,5 +30,5 @@ export interface ArtistResponse{
     biography:string
     instagram:string
     spotify:string
-    youtube:string 
+    youtube:string
 }
