@@ -1,11 +1,52 @@
 <div class="comment-list">
   <h3>Comentarios</h3>
-  @if (commentService.comments().length === 0) {
-    <div>No hay comentarios</div>
+
+  @if (songVersionId() === 0) {
+    <div class="filters-bar">
+      <input
+        type="text"
+        placeholder="Filtrar por usuario..."
+        [value]="usernameFilter()"
+        (input)="onUsernameInput($event)"
+        class="search-input"
+      />
+
+      <input
+        type="text"
+        placeholder="Filtrar por canción..."
+        [value]="songTitleFilter()"
+        (input)="onSongTitleInput($event)"
+        class="search-input"
+      />
+
+      <select
+        [value]="instrumentFilter()"
+        (change)="onInstrumentChange($event)"
+        class="search-input"
+      >
+        <option value="">Todos los instrumentos</option>
+        <option value="GUITAR">Guitarra</option>
+        <option value="BASS">Bajo</option>
+        <option value="PIANO">Piano</option>
+      </select>
+    </div>
+
+    <div class="results-info">
+      Mostrando {{ filteredComments().length }} de {{ commentService.comments().length }} comentarios
+    </div>
   }
-  <ul>
-    @for (comment of commentService.comments(); track comment.id) {
-      <app-comment-item [comment]="comment" [songVersionId]="songVersionId()"></app-comment-item>
-    }
-  </ul>
+
+  @if (commentService.error()) {
+    <div class="error-message" style="color: red;">{{ commentService.error() }}</div>
+  } @else if (filteredComments().length === 0) {
+    <div class="no-results">No hay comentarios</div>
+  }
+
+  <div [class.scrollable-list]="songVersionId() === 0">
+    <ul>
+      @for (comment of filteredComments(); track comment.id) {
+        <app-comment-item [comment]="comment" [songVersionId]="songVersionId()"></app-comment-item>
+      }
+    </ul>
+  </div>
 </div>
