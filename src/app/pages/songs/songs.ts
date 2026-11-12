@@ -8,6 +8,7 @@ import { SongService } from '../../service/song-service';
   imports: [SongCreate, SongEdit, SongList],
   selector: 'app-songs',
   templateUrl: './songs.html',
+  styleUrl: './songs.css'
 })
 export class Songs {
   songService = inject(SongService)

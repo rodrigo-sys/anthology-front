@@ -6,6 +6,7 @@ import { AlbumService } from '../../../service/album-service';
   selector: 'app-album-edit',
   imports: [ReactiveFormsModule],
   templateUrl: './album-edit.html',
+  styleUrl: './album-edit.css'
 })
 export class AlbumEdit implements OnInit {
   albumService = inject(AlbumService)

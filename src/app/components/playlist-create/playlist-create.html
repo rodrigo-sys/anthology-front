@@ -1,4 +1,15 @@
-<form [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
-  <input type="text" formControlName="name" placeholder="Nombre de la playlist" />
-  <button type="submit" [disabled]="playlistForm.invalid">Crear playlist</button>
+<form class="playlist-create" [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
+  <h2>Nueva playlist</h2>
+
+  <div class="form-row">
+    <div class="field">
+      <label for="name">Nombre</label>
+      <input id="name" type="text" formControlName="name" placeholder="Nombre de la playlist" />
+      @if (playlistForm.controls['name'].invalid && playlistForm.controls['name'].touched) {
+        <small class="error">Mínimo 3 caracteres</small>
+      }
+    </div>
+
+    <button type="submit" [disabled]="playlistForm.invalid">Crear playlist</button>
+  </div>
 </form>

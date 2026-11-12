@@ -7,6 +7,7 @@ import { AlbumService } from '../../../service/album-service';
   selector: 'app-album-create',
   imports: [ReactiveFormsModule],
   templateUrl: './album-create.html',
+  styleUrl: './album-create.css'
 })
 export class AlbumCreate {
   albumService = inject(AlbumService)

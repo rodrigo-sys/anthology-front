@@ -2,24 +2,43 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 24px;
-  background: #2d2a55;
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 24px;
+  background: #f6f5f1;
+  border-bottom: 1px solid #d2cfc6;
+  color: #1f1f1f;
+}
+
+.navbar > strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
 }
 
 .acciones {
   display: flex;
-  gap: 16px;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 4px;
 }
 
 .acciones a {
-  color: #e0e7ff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  color: #4a4842;
+  font-size: 14px;
   text-decoration: none;
-  font-weight: 600;
+}
+
+.acciones a:hover {
+  background: #ecece8;
+  color: #1f1f1f;
 }
 
 .acciones a.activo {
-  color: #ffe8a3;
+  background: #e6e3da;
+  color: #2d2a55;
+  font-weight: 600;
 }

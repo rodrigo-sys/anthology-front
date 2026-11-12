@@ -8,6 +8,7 @@ import { AlbumService } from '../../service/album-service';
   imports: [AlbumCreate, AlbumEdit, AlbumList],
   selector: 'app-albums',
   templateUrl: './albums.html',
+  styleUrl: './albums.css'
 })
 export class Albums {
   albumService = inject(AlbumService)

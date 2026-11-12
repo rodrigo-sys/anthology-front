@@ -1,47 +1,50 @@
 .denied-page {
-  min-height: 80vh;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  background: #f6f3ed;
+  padding: 48px 20px;
+  background: transparent;
 }
 
 .denied-card {
   width: 100%;
   max-width: 440px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-top: 6px solid #c77700; /* ámbar: aviso, no error de permiso */
+  background: #f6f5f1;
+  border: 1px solid #d2cfc6;
+  border-top: 4px solid #2d2a55;
   border-radius: 8px;
-  padding: 24px;
+  padding: 28px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .icono-alerta {
-  width: 50px;
-  height: 50px;
-  margin: 0 auto 10px auto;
-  background: #fff4e0;
-  color: #c77700;
-  font-size: 28px;
-  font-weight: bold;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 12px;
+  background: #e6e3da;
+  border: 1px solid #cfccc3;
+  color: #2d2a55;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  font-weight: 600;
   border-radius: 50%;
-
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .denied-card h1 {
-  margin: 0 0 8px 0;
-  color: #222;
+  margin: 0 0 8px;
+  font-size: 24px;
+  color: #1f1f1f;
 }
 
 .denied-card p {
-  margin: 0 0 16px 0;
-  color: #555;
+  margin: 0 0 20px;
+  color: #5d5a52;
+  font-size: 15px;
+  line-height: 1.5;
 }
 
 .acciones {
@@ -52,18 +55,30 @@
 
 .btn-volver {
   display: inline-block;
-  padding: 10px 16px;
-  background: #2f5d8a;
+  padding: 8px 14px;
+  background: #2d2a55;
   color: #fff;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-volver:hover {
+  background: #232046;
 }
 
 .btn-secundario {
-  padding: 10px 16px;
-  background: #e9eef3;
-  color: #2f5d8a;
-  border: none;
-  border-radius: 4px;
+  padding: 8px 14px;
+  background: #f9f9f7;
+  border: 1px solid #c5c5bf;
+  color: #333;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 14px;
   cursor: pointer;
+}
+
+.btn-secundario:hover {
+  background: #ecece8;
 }

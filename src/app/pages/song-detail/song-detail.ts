@@ -9,6 +9,7 @@ import { SongService } from '../../service/song-service';
   imports: [RouterLink, VersionList, VersionCreate],
   selector: 'app-song-detail',
   templateUrl: './song-detail.html',
+  styleUrl: './song-detail.css'
 })
 export class SongDetail implements OnInit {
   songService = inject(SongService)

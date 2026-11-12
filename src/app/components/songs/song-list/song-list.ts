@@ -11,6 +11,7 @@ import { SongService } from '../../../service/song-service';
   selector: 'app-song-list',
   imports: [FormsModule, RouterLink],
   templateUrl: './song-list.html',
+  styleUrl: './song-list.css'
 })
 export class SongList implements OnInit {
   songService = inject(SongService)

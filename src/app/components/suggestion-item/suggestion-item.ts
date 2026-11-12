@@ -1,5 +1,5 @@
 import { Component, inject, input } from '@angular/core';
-import { SongSuggestionResponse } from '../../interfaces/Suggestion';
+import { SongSuggestionResponse, SuggestionStatus } from '../../interfaces/Suggestion';
 import { SuggestionService } from '../../service/suggestion-service';
 import { AuthService } from '../../service/auth-service';
 
@@ -13,6 +13,11 @@ export class SuggestionItem {
   suggestion = input.required<SongSuggestionResponse>();
   suggestionService = inject(SuggestionService);
   authService = inject(AuthService);
+  estadoEtiqueta: Record<SuggestionStatus, string> = {
+    PENDING: 'Pendiente',
+    ADDED: 'Añadida',
+    REJECTED: 'Rechazada',
+  };
 
   reject(id: number) {
     this.suggestionService.reject(id);

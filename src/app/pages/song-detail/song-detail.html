@@ -1,6 +1,6 @@
 <section class="song-detail">
 
-  <a routerLink="/songs">Volver a canciones</a>
+  <a class="volver" routerLink="/songs">Volver a canciones</a>
 
   @if (songService.error()) {
     <p class="error">{{ songService.error() }}</p>
@@ -8,14 +8,14 @@
 
   @if (songService.songById(); as song) {
     <article class="tarjeta">
-      <h2>{{ song.title }}</h2>
+      <h1>{{ song.title }}</h1>
       <span>Artista: {{ song.artistName }}</span>
       <span>Género: {{ song.genre }}</span>
       @if (song.AlbumTitle) {
         <span>Álbum: {{ song.AlbumTitle }} ({{ song.ReleaseYear }})</span>
       }
       <span>Instrumentos: {{ instrumentos(song.availableInstruments) }}</span>
-      <span>Estado: {{ estadoEtiquetas[song.status] }}</span>
+      <span>Estado: <span [class]="'estado estado-' + song.status.toLowerCase()">{{ estadoEtiquetas[song.status] }}</span></span>
     </article>
 
     <app-version-list [songId]="id" />

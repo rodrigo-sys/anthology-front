@@ -9,6 +9,7 @@ import { AuthService } from '../../../service/auth-service';
   selector: 'app-album-list',
   imports: [FormsModule],
   templateUrl: './album-list.html',
+  styleUrl: './album-list.css'
 })
 export class AlbumList implements OnInit {
   albumService = inject(AlbumService)

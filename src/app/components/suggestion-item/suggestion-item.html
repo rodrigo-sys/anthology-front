@@ -1,14 +1,24 @@
-<li>
-  <strong>{{ suggestion().title }}</strong> - {{ suggestion().artistName }}
-  <p>Nota: {{ suggestion().notes }}</p>
-  <span>Usuario: {{ suggestion().idUser }} - </span>
-  <span>Estado: {{ suggestion().status }} </span>
-  @if (authService.isAdmin()) {
+<li class="suggestion">
+  <div class="suggestion-head">
     <div>
-      <button (click)="approve(suggestion().id)">Aprobar</button>
-      <button (click)="reject(suggestion().id)">Rechazar</button>
-      <button (click)="delete(suggestion().id)">Eliminar</button>
+      <h3 class="title">{{ suggestion().title }}</h3>
+      <p class="artist">{{ suggestion().artistName }}</p>
     </div>
-  }
-  <hr class="suggestion-divider" />
+    <span [class]="'status status-' + suggestion().status.toLowerCase()">
+      {{ estadoEtiqueta[suggestion().status] }}
+    </span>
+  </div>
+
+  <p class="notes"><span class="notes-label">Nota:</span> {{ suggestion().notes }}</p>
+
+  <div class="suggestion-foot">
+    <span class="user">Usuario: {{ suggestion().idUser }}</span>
+    @if (authService.isAdmin()) {
+      <div class="actions">
+        <button class="approve" (click)="approve(suggestion().id)">Aprobar</button>
+        <button (click)="reject(suggestion().id)">Rechazar</button>
+        <button class="danger" (click)="delete(suggestion().id)">Eliminar</button>
+      </div>
+    }
+  </div>
 </li>

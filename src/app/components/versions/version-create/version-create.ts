@@ -7,6 +7,7 @@ import { SongVersionService } from '../../../service/song-version-service';
   selector: 'app-version-create',
   imports: [ReactiveFormsModule],
   templateUrl: './version-create.html',
+  styleUrl: './version-create.css'
 })
 export class VersionCreate {
   songId = input.required<number>()

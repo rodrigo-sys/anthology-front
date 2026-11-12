@@ -1,3 +1,181 @@
 .playlist-detail {
-  padding: 1rem;
+  flex: 1;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 28px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.back {
+  color: #2d2a55;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.back:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  margin: 0;
+  padding-bottom: 10px;
+  border-bottom: 3px double #2d2a55;
+  font-size: 26px;
+  color: #1f1f1f;
+}
+
+.panel {
+  background: #f6f5f1;
+  border: 1px solid #d2cfc6;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+h2 {
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2dfd6;
+  font-size: 18px;
+  color: #1f1f1f;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid #e2dfd6;
+}
+
+.item:first-child {
+  border-top: none;
+}
+
+.song-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.song-info a {
+  color: #2d2a55;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.song-info a:hover {
+  text-decoration: underline;
+}
+
+.song-info .instrument {
+  color: #5d5a52;
+  font-size: 13px;
+}
+
+.song-info .pdf {
+  color: #5d5a52;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 14px;
+  color: #4a4842;
+}
+
+input {
+  padding: 9px 10px;
+  border: 1px solid #cfccc3;
+  border-radius: 6px;
+  font: inherit;
+  background: #fffdf9;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2d2a55;
+  box-shadow: 0 0 0 2px rgba(45, 42, 85, 0.15);
+}
+
+button {
+  padding: 6px 12px;
+  border: 1px solid #cbc8bf;
+  border-radius: 6px;
+  background: #fffdf9;
+  color: #333;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #eeebe4;
+}
+
+button.primary {
+  background: #2d2a55;
+  border-color: #2d2a55;
+  color: #fff;
+  padding: 9px 16px;
+  font-weight: 600;
+}
+
+button.primary:hover {
+  background: #232046;
+}
+
+button.danger {
+  color: #a9443c;
+  border-color: #d8b4af;
+}
+
+button.danger:hover {
+  background: #f8eeec;
+}
+
+.empty {
+  margin: 0;
+  color: #5d5a52;
+}
+
+.error {
+  margin: 0;
+  color: #a9443c;
+  font-size: 14px;
+}
+
+@media (max-width: 560px) {
+  .form-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

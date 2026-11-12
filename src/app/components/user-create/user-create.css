@@ -1,58 +1,42 @@
 :host {
-  display: flex;
-  flex: 1;
-  width: 100%;
-  min-height: 100%;
+  display: block;
 }
 
 .page {
-  flex: 1;
   width: 100%;
-  min-height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 24px;
-  background: #f0f4ff;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 28px 16px 40px;
 }
 
 .card {
-  position: relative;
-  width: 100%;
-  max-width: 720px;
-  background: #ffffff;
-  padding: 24px;
-  border-radius: 12px;
-  border-top: 6px solid #6c63ff;
-  box-shadow: 0 6px 16px rgba(76, 81, 191, 0.2);
-}
-
-.card-header {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  flex-direction: column;
+  gap: 16px;
+  background: #f6f5f1;
+  border: 1px solid #d2cfc6;
+  border-radius: 8px;
+  padding: 20px;
 }
 
-.card-header h2 {
+h2 {
   margin: 0;
-  font-size: 24px;
-  color: #2d2a55;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2dfd6;
+  font-size: 18px;
+  color: #1f1f1f;
 }
 
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 10px;
-  background: #f7f8ff;
-  border-radius: 8px;
 }
 
 .field-full {
@@ -60,57 +44,58 @@
 }
 
 label {
-  font-weight: 600;
   font-size: 14px;
-  color: #4a4e69;
+  color: #4a4842;
 }
 
-input,
-textarea {
-  padding: 10px;
-  border: 1px solid #c7d2fe;
-  border-radius: 8px;
+input {
+  height: 36px;
+  padding: 7px 10px;
+  border: 1px solid #cfccc3;
+  border-radius: 6px;
+  background: #fffdf9;
+  color: #222;
   font: inherit;
-  background: #ffffff;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
-input:focus,
-textarea:focus {
+input:focus {
   outline: none;
-  border-color: #6c63ff;
-  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+  border-color: #6f6d66;
 }
 
 .error {
-  color: #d32f2f;
+  color: #a9443c;
   font-size: 12px;
 }
 
 .actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px;
+  gap: 8px;
 }
 
 button {
-  padding: 10px 18px;
-  border: none;
-  border-radius: 8px;
-  background: #6c63ff;
+  height: 36px;
+  padding: 7px 14px;
+  border: 1px solid #3f3d56;
+  border-radius: 6px;
+  background: #3f3d56;
   color: #fff;
+  font: inherit;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(108, 99, 255, 0.35);
+  box-sizing: border-box;
 }
 
 button:hover {
-  background: #584ee0;
+  background: #343249;
 }
 
 button:disabled {
-  background: #b7b3f5;
+  background: #9a98b0;
+  border-color: #9a98b0;
   cursor: not-allowed;
-  box-shadow: none;
 }

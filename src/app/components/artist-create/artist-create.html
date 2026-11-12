@@ -1,14 +1,12 @@
 <div class="page">
   <form class="card" [formGroup]="formulario" (ngSubmit)="add()">
-    <div class="card-header">
-      <h2>Crear artista</h2>
-    </div>
+    <h2>Crear artista</h2>
 
     <div class="form-grid">
       <div class="field">
-        <label for="idUser">ID de usuario</label>
-        <input id="idUser" type="number" formControlName="idUser" />
-        @if (formulario.controls.idUser.invalid && formulario.controls.idUser.touched) {
+        <label for="userId">ID de usuario</label>
+        <input id="userId" type="number" formControlName="userId" />
+        @if (formulario.controls.userId.invalid && formulario.controls.userId.touched) {
           <small class="error">Campo requerido</small>
         }
       </div>

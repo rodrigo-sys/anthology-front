@@ -1,87 +1,151 @@
-.all-playlists-container {
+.all-playlists {
+  flex: 1;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 28px 16px 40px;
+}
+
+h1 {
+  margin: 0 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #c4c2bb;
+  font-size: 22px;
+  color: #2f2f2f;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #f4f4f2;
+  border: 1px solid #d4d4cf;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.field {
+  flex: 1;
+  min-width: 160px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1rem;
+  gap: 6px;
 }
 
-.filters-bar {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+label {
+  font-size: 14px;
+  color: #4f4f4b;
 }
 
-.search-input {
-  flex: 1;
-  min-width: 200px;
-  padding: 0.5rem;
-  border: 1px solid #000;
-  font-size: 1rem;
+input {
+  padding: 9px 10px;
+  border: 1px solid #c9c9c3;
+  border-radius: 6px;
+  font: inherit;
+  background: #fbfbfa;
+}
+
+input:focus {
+  outline: none;
+  border-color: #6f6d66;
 }
 
 .results-info {
-  font-size: 0.9rem;
-  color: #333;
+  margin: 12px 0;
+  font-size: 14px;
+  color: #666;
 }
 
-.scrollable-list {
-  max-height: 450px;
-  overflow-y: auto;
-  border: 1px solid #000;
-  padding: 0.5rem;
+.error {
+  margin: 0 0 12px;
+  color: #a9443c;
+  font-size: 14px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fafaf8;
+  border: 1px solid #d4d4cf;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid #e4e4df;
+  font-size: 14px;
+}
+
+.table th {
+  background: #ecece8;
+  color: #55534d;
+  font-weight: 600;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table a {
+  color: #3f3d56;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.table a:hover {
+  text-decoration: underline;
+}
+
+.table input {
+  width: 100%;
+  padding: 7px 9px;
+  border: 1px solid #c9c9c3;
+  border-radius: 6px;
+  font: inherit;
   background: #fff;
 }
 
-.scrollable-list ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.actions {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
-.list-header,
-.scrollable-list li {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.5fr;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.list-header {
-  font-weight: bold;
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
-  border-bottom: 1px solid #000;
-}
-
-.cell {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.acciones {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.scrollable-list button {
-  padding: 0.25rem 0.5rem;
-  border: 1px solid #000;
-  background-color: #fff;
+button {
+  padding: 6px 12px;
+  border: 1px solid #c5c5bf;
+  border-radius: 6px;
+  background: #f9f9f7;
+  color: #333;
+  font: inherit;
+  font-size: 13px;
   cursor: pointer;
 }
 
-.scrollable-list button:hover {
-  background-color: #eee;
+button:hover {
+  background: #ecece8;
 }
 
-.no-results {
-  padding: 1rem;
+button.primary {
+  background: #3f3d56;
+  border-color: #3f3d56;
+  color: #fff;
+}
+
+button.primary:hover {
+  background: #343249;
+}
+
+button.danger {
+  color: #a9443c;
+  border-color: #d8b4af;
+}
+
+button.danger:hover {
+  background: #f8eeec;
+}
+
+.empty {
   text-align: center;
-  color: #333;
+  color: #666;
 }
