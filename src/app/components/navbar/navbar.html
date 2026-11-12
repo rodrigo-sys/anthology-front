@@ -10,6 +10,10 @@
       <a routerLink="/admin" routerLinkActive="activo">Admin</a>
     }
 
+    @if(authService.isLoggedIn()){
+      <a routerLink="/artist-panel" routerLinkActive="activo">Artista</a>
+    }
+
     <a routerLink="/login" routerLinkActive="activo">Login</a>
     <a routerLink="/logout" routerLinkActive="activo">Salir</a>
 

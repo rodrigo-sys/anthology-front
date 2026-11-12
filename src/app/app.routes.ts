@@ -23,6 +23,7 @@ import { AccessDenied } from './pages/auth/access-denied/access-denied';
 import { AccessDeniedLogin } from './pages/auth/access-denied-login/access-denied-login';
 import { AdminPage } from './pages/admin-page/admin-page';
 import { SongEdit } from './components/song-edit/song-edit';
+import { ArtistPage } from './pages/artist-page/artist-page';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'songs', pathMatch: 'full' },
@@ -46,5 +47,7 @@ export const routes: Routes = [
   { path: 'user-list', component: UserList },
   { path: 'access-denied-login', component: AccessDeniedLogin },
   { path: 'admin', component: AdminPage, canActivate: [adminGuard] },
+  { path: 'artist-panel', component: ArtistPage, canActivate: [authGuard] },
+  { path: 'artist', component: ArtistPage, canActivate: [authGuard] },
   { path: '**', redirectTo: 'songs' }
 ];
