@@ -1,23 +1,128 @@
-li {
-  list-style: none;
-  margin-bottom: 1rem;
+:host {
+  display: block;
+  border-top: 1px solid #e4e4df;
 }
 
-.suggestion-divider {
-  border: none;
-  border-top: 1px solid #000;
-  margin-top: 1rem;
+:host(:first-child) {
+  border-top: none;
+}
+
+.suggestion {
+  list-style: none;
+  padding: 14px 0;
+}
+
+.suggestion-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  color: #1f1f1f;
+}
+
+.artist {
+  margin: 2px 0 0;
+  color: #5d5a52;
+  font-size: 14px;
+}
+
+.status {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border: 1px solid;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.status-pending {
+  background: #f3edda;
+  border-color: #ddceaa;
+  color: #6b5a2e;
+}
+
+.status-added {
+  background: #e4efe6;
+  border-color: #b7d3bd;
+  color: #2f5d3a;
+}
+
+.status-rejected {
+  background: #f6e3e1;
+  border-color: #d9b3ae;
+  color: #8a3d35;
+}
+
+.notes {
+  margin: 8px 0;
+  color: #3f3d39;
+  font-size: 14px;
+}
+
+.notes-label {
+  color: #6f6d66;
+}
+
+.suggestion-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.user {
+  font-size: 13px;
+  color: #6f6d66;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
 }
 
 button {
-  margin-right: 0.5rem;
-  margin-top: 0.5rem;
-  padding: 0.25rem 0.5rem;
-  border: 1px solid #000;
-  background-color: #fff;
+  padding: 5px 12px;
+  border: 1px solid #c5c5bf;
+  border-radius: 6px;
+  background: #f9f9f7;
+  color: #333;
+  font: inherit;
+  font-size: 13px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #eee;
+  background: #ecece8;
+}
+
+button.approve {
+  background: #3f3d56;
+  border-color: #3f3d56;
+  color: #fff;
+}
+
+button.approve:hover {
+  background: #343249;
+}
+
+button.danger {
+  color: #a9443c;
+  border-color: #d8b4af;
+}
+
+button.danger:hover {
+  background: #f8eeec;
+}
+
+@media (max-width: 560px) {
+  .suggestion-head,
+  .suggestion-foot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

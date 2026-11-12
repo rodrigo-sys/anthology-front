@@ -1,5 +1,5 @@
 <div class="suggestion-create">
-  <h3>Sugerir Canción</h3>
+  <h2>Sugerir canción</h2>
   <form [formGroup]="suggestionForm" (ngSubmit)="createSuggestion()">
     <div>
       <label>Título:</label>
@@ -13,6 +13,6 @@
       <label>Nota:</label>
       <textarea formControlName="notes" placeholder="¿Por qué quieres sugerir esta canción?" required></textarea>
     </div>
-    <button type="submit" [disabled]="suggestionForm.invalid">Enviar Sugerencia</button>
+    <button type="submit" [disabled]="suggestionForm.invalid">Enviar sugerencia</button>
   </form>
 </div>
