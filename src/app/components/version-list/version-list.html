@@ -33,6 +33,7 @@
         <span>Estado: <span [class]="'estado estado-' + version.status.toLowerCase()">{{ estadoEtiquetas[version.status] }}</span></span>
 
         <a [href]="version.pdfUrl" target="_blank" rel="noopener">Ver PDF</a>
+        <a [routerLink]="['/comments', version.id]">Comentarios</a>
 
         <div class="acciones">
           @if (esAdmin && version.status === 'PENDING') {
