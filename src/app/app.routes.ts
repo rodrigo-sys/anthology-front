@@ -13,6 +13,7 @@ import { SuggestionsPage } from './pages/suggestions/suggestions';
 import { UsersPage } from './pages/user/user';
 import { ArtistsPage } from './pages/artists/artists';
 import { adminGuard } from './guard/admin-guard';
+import { artistGuard } from './guard/artist-guard';
 import { authGuard } from './guard/auth-guard';
 import { guestGuard } from './guard/guest-guard';
 import { ArtistCreate } from './components/artist-create/artist-create';
@@ -24,6 +25,7 @@ import { AccessDeniedLogin } from './pages/auth/access-denied-login/access-denie
 import { AdminPage } from './pages/admin-page/admin-page';
 import { SongEdit } from './components/songs/song-edit/song-edit';
 import { ArtistPage } from './pages/artist-page/artist-page';
+import { ArtistProfilePage } from './pages/artist-profile/artist-profile';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -47,7 +49,9 @@ export const routes: Routes = [
   { path: 'user-list', component: UserList },
   { path: 'access-denied-login', component: AccessDeniedLogin },
   { path: 'admin', component: AdminPage, canActivate: [adminGuard] },
-  { path: 'artist-panel', component: ArtistPage, canActivate: [authGuard] },
-  { path: 'artist', component: ArtistPage, canActivate: [authGuard] },
+  { path: 'artist-list', component: ArtistsPage, canActivate: [adminGuard] },
+  { path: 'artist-profile', component: ArtistProfilePage, canActivate: [artistGuard] },
+  { path: 'artist-panel', component: ArtistPage, canActivate: [artistGuard] },
+  { path: 'artist', component: ArtistPage, canActivate: [artistGuard] },
   { path: '**', redirectTo: 'login' }
 ];

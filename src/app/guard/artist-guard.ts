@@ -6,8 +6,11 @@ export const artistGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (authService.isLoggedIn() && authService.isArtist()) {
+  if (!authService.isLoggedIn()) {
+    return router.createUrlTree(['/login']);
+  }
+  if (authService.isArtist()) {
     return true;
   }
-  return router.createUrlTree(['/login']);
+  return router.createUrlTree(['/access-denied']);
 };

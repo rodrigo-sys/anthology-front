@@ -43,9 +43,9 @@ export class ArtistEdit {
     if (!artist) return;
 
     const { biography, instagram, spotify, youtube } = this.formulario.getRawValue();
+    const cambios = { biography, instagram, spotify, youtube };
 
-    this.artistService.update(artist.id, { biography, instagram, spotify, youtube });
-    this.artistService.artistToEdit.set(null);
+    this.artistService.save(artist.id, cambios);
   }
 
   cancelar() {

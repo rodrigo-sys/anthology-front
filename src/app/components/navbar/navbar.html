@@ -6,12 +6,15 @@
       <a routerLink="/songs" routerLinkActive="activo">Canciones</a>
       <a routerLink="/albums" routerLinkActive="activo">Álbumes</a>
       <a routerLink="/playlists" routerLinkActive="activo">Playlists</a>
+      <a routerLink="/suggestions/new" routerLinkActive="activo">Sugerir canción</a>
 
       @if (authService.isAdmin()) {
         <a routerLink="/admin" routerLinkActive="activo">Admin</a>
       }
 
-      <a routerLink="/artist-panel" routerLinkActive="activo">Artista</a>
+      @if (authService.isArtist()) {
+        <a routerLink="/artist-panel" routerLinkActive="activo">Artista</a>
+      }
 
       <a routerLink="/logout" routerLinkActive="activo">Salir</a>
     } @else {

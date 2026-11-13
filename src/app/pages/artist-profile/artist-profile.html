@@ -1,0 +1,6 @@
+<section class="artist-profile-page">
+  @if (artistService.error()) {
+    <p class="error">{{ artistService.error() }}</p>
+  }
+  <app-artist-edit></app-artist-edit>
+</section>

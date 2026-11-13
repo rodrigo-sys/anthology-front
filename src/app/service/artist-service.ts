@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service, signal } from '@angular/core';
+import { Observable, of, map, tap, catchError } from 'rxjs';
 import { Artist, ArtistRequest, ArtistUpdateRequest } from '../interfaces/Artists';
+import { AuthService } from './auth-service';
 
 @Service()
 export class ArtistService {
 
     private http=inject(HttpClient)
+    private authService=inject(AuthService)
     private url='/api/artists'
 
 
@@ -66,9 +69,52 @@ export class ArtistService {
         {
             next:()=>{
                 this.listArtists()
+                this.artistToEdit.set(null)
             },
             error:()=>{
                 this.error.set('no se pudo actualizar el usuario')
+            }
+        }
+    )
+  }
+
+  save(id:number, cambios:Partial<ArtistUpdateRequest>)
+  {
+    if (this.authService.isAdmin()) {
+      this.update(id, cambios)
+    } else {
+      this.updateMine(cambios)
+    }
+  }
+
+  getMine(): Observable<Artist | null>
+  {
+    const userId = this.authService.getUserId();
+    return this.http.get<Artist[]>(this.url).pipe(
+        map((artists) => artists.find((artist) => artist.userId === userId) ?? null),
+        tap((artist) => {
+            if (artist) {
+                this.artistToEdit.set(artist);
+            } else {
+                this.error.set('no se encontró tu perfil de artista');
+            }
+        }),
+        catchError(() => {
+            this.error.set('no se pudo cargar tu perfil de artista');
+            return of(null);
+        })
+    )
+  }
+
+  updateMine(cambios: Partial<ArtistUpdateRequest>)
+  {
+    this.http.put<Artist>(`${this.url}/artist`, cambios).subscribe(
+        {
+            next:()=>{
+                this.listArtists()
+            },
+            error:()=>{
+                this.error.set('no se pudo actualizar tu perfil de artista')
             }
         }
     )
