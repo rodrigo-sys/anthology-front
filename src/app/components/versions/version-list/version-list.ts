@@ -5,6 +5,7 @@ import { INSTRUMENT_LABEL, STATUS_LABEL, Status } from '../../../interfaces/Enum
 import { SongVersion } from '../../../interfaces/SongVersion';
 import { AuthService } from '../../../service/auth-service';
 import { SongVersionService } from '../../../service/song-version-service';
+import { PlaylistService } from '../../../service/playlist-service';
 
 @Component({
   selector: 'app-version-list',
@@ -17,6 +18,7 @@ export class VersionList implements OnInit {
 
   versionService = inject(SongVersionService)
   authService = inject(AuthService)
+  playlistService = inject(PlaylistService)
 
   esAdmin = this.authService.isAdmin()
   esArtist = this.authService.isArtist()
@@ -27,6 +29,9 @@ export class VersionList implements OnInit {
 
   filtroEstado: Status | '' = ''
   mostrandoMias = false
+
+  activeVersionId: number | null = null
+  selectedPlaylistForVersion: { [versionId: number]: number } = {}
 
   ngOnInit(): void {
     this.versionService.listVersions(this.songId())
@@ -63,5 +68,28 @@ export class VersionList implements OnInit {
     if (!confirm('¿Eliminar esta versión?')) return
 
     this.versionService.remove(this.songId(), version.id)
+  }
+
+  togglePlaylistSelector(versionId: number) {
+    if (this.activeVersionId === versionId) {
+      this.activeVersionId = null;
+    } else {
+      this.activeVersionId = versionId;
+      const userId = this.authService.getUserId();
+      if (userId) {
+        this.playlistService.getPlaylistsByUser(userId);
+      }
+    }
+  }
+
+  addToPlaylist(versionId: number) {
+    const playlistId = this.selectedPlaylistForVersion[versionId];
+    if (!playlistId) {
+      alert('Por favor selecciona una playlist.');
+      return;
+    }
+    this.playlistService.addSongVersion(playlistId, versionId);
+    this.activeVersionId = null;
+    alert('Canción agregada a la playlist exitosamente.');
   }
 }

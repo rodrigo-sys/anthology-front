@@ -35,6 +35,26 @@
         <a [href]="version.pdfUrl" target="_blank" rel="noopener">Ver PDF</a>
         <a [routerLink]="['/comments', version.id]">Comentarios</a>
 
+        <button type="button" class="btn-small" (click)="togglePlaylistSelector(version.id)">
+          Agregar a playlist
+        </button>
+
+        @if (activeVersionId === version.id) {
+          <div class="playlist-selector" style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px; padding: 8px; background: #fff; border: 1px solid #ccc; border-radius: 6px;">
+            @if (playlistService.playlists().length > 0) {
+              <select [(ngModel)]="selectedPlaylistForVersion[version.id]" style="padding: 6px; border-radius: 4px; border: 1px solid #ccc; font-size: 13px;">
+                <option [ngValue]="undefined" disabled selected>Selecciona una playlist</option>
+                @for (playlist of playlistService.playlists(); track playlist.id) {
+                  <option [value]="playlist.id">{{ playlist.name }}</option>
+                }
+              </select>
+              <button type="button" class="btn-small" style="align-self: flex-end;" (click)="addToPlaylist(version.id)">Confirmar</button>
+            } @else {
+              <p class="empty" style="margin: 0; font-size: 13px;">No tienes playlists creadas.</p>
+            }
+          </div>
+        }
+
         <div class="acciones">
           @if (esAdmin && version.status === 'PENDING') {
             <button type="button" (click)="aprobar(version)">Aprobar</button>

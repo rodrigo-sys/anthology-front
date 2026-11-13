@@ -43,6 +43,21 @@ button.secundario:hover {
   background: #ecece8;
 }
 
+button.btn-small {
+  align-self: flex-start;
+  padding: 5px 12px;
+  border: 1px solid #c5c5bf;
+  border-radius: 6px;
+  background: #f9f9f7;
+  color: #2d2a55;
+  font-size: 13px;
+  font-weight: normal;
+}
+
+button.btn-small:hover {
+  background: #ecece8;
+}
+
 .campo {
   display: flex;
   align-items: center;
