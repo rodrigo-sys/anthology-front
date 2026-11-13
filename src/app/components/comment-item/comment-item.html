@@ -10,7 +10,7 @@
   <p class="content">{{ comment().content }}</p>
 
   <div class="comment-foot">
-    <small class="date">{{ comment().createdAt | date:'dd/MM/yyyy HH:mm' }}</small>
+    <small class="date">{{ comment().createdAt }}</small>
     @if (authService.isAdmin()) {
       <button class="danger" (click)="deleteComment(comment().id)">Eliminar</button>
     }
