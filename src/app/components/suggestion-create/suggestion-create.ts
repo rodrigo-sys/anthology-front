@@ -25,9 +25,8 @@ export class SuggestionCreate {
     if (this.suggestionForm.invalid) return;
 
     const request: SongSuggestionRequest = {
-      ...this.suggestionForm.getRawValue(),
-      idUser: this.authService.getUserId()
-    };
+      ...this.suggestionForm.getRawValue()
+    } as SongSuggestionRequest;
 
     this.suggestionService.create(request);
     this.suggestionForm.reset();

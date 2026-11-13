@@ -1,7 +1,7 @@
 export type SuggestionStatus = 'PENDING' | 'ADDED' | 'REJECTED';
 
 export interface SongSuggestionRequest {
-  idUser: number;
+  idUser?: number;
   title: string;
   artistName: string;
   notes: string;
