@@ -22,15 +22,12 @@ export class CommentCreate {
 
   createComment() {
     if (this.commentForm.invalid) return;
-    const idUser = this.authService.getUserId();
-    if (!idUser) return;
 
     const sId = this.songVersionId();
     const request: CommentRequest = {
-      idUser: idUser,
       SongVersion: sId,
       content: this.commentForm.value.content
-    };
+    } as CommentRequest;
     this.commentService.add(request, sId);
     this.commentForm.reset();
   }

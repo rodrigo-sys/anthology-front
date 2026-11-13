@@ -1,5 +1,5 @@
 export interface CommentRequest {
-  idUser: number;
+  idUser?: number;
   SongVersion: number;
   content: string;
 }
