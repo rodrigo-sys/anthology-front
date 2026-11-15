@@ -2,12 +2,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 18px 24px;
-  background: #2d2a55;
-  border-top: 1px solid #232046;
-  color: #ffffff;
+  padding: 28px 24px;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
 }
 
 .footer span {
-  font-size: 13px;
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
 }

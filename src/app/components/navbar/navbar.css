@@ -1,44 +1,55 @@
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 12px;
-  padding: 14px 24px;
-  background: #f6f5f1;
-  border-bottom: 1px solid #d2cfc6;
-  color: #1f1f1f;
+  min-height: 56px;
+  padding: 0 24px;
+  background: rgba(13, 13, 15, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
 }
 
 .navbar > strong {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-transform: lowercase;
+  color: var(--text);
+}
+
+.navbar > strong::after {
+  content: ".";
+  color: var(--accent);
 }
 
 .acciones {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 2px;
 }
 
 .acciones a {
-  padding: 6px 10px;
-  border-radius: 4px;
-  color: #4a4842;
-  font-size: 14px;
+  padding: 8px 11px;
+  border-radius: var(--radius);
+  color: var(--text-2);
+  font-size: 13.5px;
   text-decoration: none;
+  transition: color 0.12s ease, background 0.12s ease;
 }
 
 .acciones a:hover {
-  background: #ecece8;
-  color: #1f1f1f;
+  background: var(--surface-2);
+  color: var(--text);
 }
 
 .acciones a.activo {
-  background: #e6e3da;
-  color: #2d2a55;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
   font-weight: 600;
 }

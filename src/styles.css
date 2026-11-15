@@ -1,3 +1,32 @@
+:root {
+  color-scheme: dark;
+
+  --bg: #0d0d0f;
+  --bg-elev: #141417;
+  --surface: #1a1a1e;
+  --surface-2: #202026;
+  --surface-3: #27272e;
+
+  --line: #2b2b33;
+  --line-strong: #3c3c46;
+
+  --text: #f4f4f7;
+  --text-2: #c4c4ce;
+  --muted: #8b8b96;
+
+  --accent: #4fb3c9;
+  --accent-strong: #79cfe2;
+  --accent-soft: rgba(79, 179, 201, 0.14);
+
+  --ok: #6fcf97;
+  --warn: #e0b34a;
+  --danger: #e57373;
+
+  --radius: 3px;
+  --radius-md: 6px;
+  --font: "Helvetica Neue", Helvetica, Arial, "Segoe UI", system-ui, sans-serif;
+}
+
 html,
 body {
   height: 100%;
@@ -5,14 +34,31 @@ body {
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #222;
-  background: #e7e6e1;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
 h2,
 h3 {
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 600;
+  font-family: var(--font);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: var(--accent);
+}
+
+::selection {
+  background: var(--accent);
+  color: #04222a;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
 }
