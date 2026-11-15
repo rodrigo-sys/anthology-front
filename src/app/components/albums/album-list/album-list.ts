@@ -1,9 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Album } from '../../../interfaces/Album';
 import { STATUS_LABEL, Status } from '../../../interfaces/Enums';
 import { AlbumService } from '../../../service/album-service';
 import { AuthService } from '../../../service/auth-service';
+import { SongService } from '../../../service/song-service';
 
 @Component({
   selector: 'app-album-list',
@@ -13,7 +15,9 @@ import { AuthService } from '../../../service/auth-service';
 })
 export class AlbumList implements OnInit {
   albumService = inject(AlbumService)
+  songService = inject(SongService)
   authService = inject(AuthService)
+  route = inject(ActivatedRoute)
 
   esAdmin = this.authService.isAdmin()
   esArtist = this.authService.isArtist()
@@ -31,6 +35,13 @@ export class AlbumList implements OnInit {
   mostrandoMias = false
 
   ngOnInit(): void {
+    const estadoParam = this.route.snapshot.queryParamMap.get('estado')
+    const estado = this.estados.find((valor) => valor === estadoParam)
+
+    if (this.esAdmin && estado) {
+      this.filtros.status = estado
+    }
+
     this.albumService.listAlbums()
   }
 
@@ -62,16 +73,32 @@ export class AlbumList implements OnInit {
 
   verTodos(): void {
     this.mostrandoMias = false
+    this.filtros.status = ''
     this.albumService.listAlbums()
   }
 
   verMios(): void {
     this.mostrandoMias = true
+    this.filtros.status = ''
     this.albumService.myAlbums()
   }
 
   editar(album: Album): void {
     this.albumService.albumSeleccionado.set(album)
+  }
+
+  aprobar(album: Album): void {
+    this.albumService.updateStatus(album.id, 'APPROVED', () => {
+      this.songService.aprobarContenidoDeAlbum(
+        album.title,
+        album.releaseYear,
+        album.artistName
+      )
+    })
+  }
+
+  rechazar(album: Album): void {
+    this.albumService.updateStatus(album.id, 'REJECTED')
   }
 
   eliminar(album: Album): void {

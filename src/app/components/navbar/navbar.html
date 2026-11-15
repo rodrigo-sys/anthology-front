@@ -18,8 +18,8 @@
 
       <a routerLink="/logout" routerLinkActive="activo">Salir</a>
     } @else {
-      <a routerLink="/login" routerLinkActive="activo">Iniciar sesión</a>
-      <a routerLink="/user-create" routerLinkActive="activo">Registrarse</a>
+      <a routerLink="/" [queryParams]="{ acceso: 'login' }">Iniciar sesión</a>
+      <a routerLink="/" [queryParams]="{ acceso: 'registro' }">Registrarse</a>
     }
   </nav>
 </header>

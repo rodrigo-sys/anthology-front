@@ -139,6 +139,27 @@ export class SongVersionService {
     })
   }
 
+  aprobarPendientes(songId: number) {
+    if (!this.soloAdmin('aprobar versiones')) return
+
+    this.http.get<SongVersion[]>(`${this.url(songId)}/all`).subscribe({
+      next: (versions) => {
+        const pendientes = versions.filter((version) => version.status === 'PENDING')
+
+        for (const version of pendientes) {
+          this.http.patch<SongVersion>(
+            `${this.url(songId)}/${version.id}/status`,
+            null,
+            { params: { status: 'APPROVED' } }
+          ).subscribe({
+            error: () => this.error.set('No se pudieron aprobar todas las versiones')
+          })
+        }
+      },
+      error: () => this.error.set('No se pudieron cargar las versiones')
+    })
+  }
+
   remove(songId: number, versionId: number) {
     if (!this.puedeEscribir('eliminar versiones')) return
 

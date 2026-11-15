@@ -26,9 +26,10 @@ import { AdminPage } from './pages/admin-page/admin-page';
 import { SongEdit } from './components/songs/song-edit/song-edit';
 import { ArtistPage } from './pages/artist-page/artist-page';
 import { ArtistProfilePage } from './pages/artist-profile/artist-profile';
+import { HomePage } from './pages/home/home';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', component: HomePage, pathMatch: 'full' },
   { path: 'songs', component: Songs, canActivate: [authGuard] },
   { path: 'songs/:id', component: SongDetail, canActivate: [authGuard] },
   { path: 'albums', component: Albums, canActivate: [authGuard] },
@@ -53,5 +54,5 @@ export const routes: Routes = [
   { path: 'artist-profile', component: ArtistProfilePage, canActivate: [artistGuard] },
   { path: 'artist-panel', component: ArtistPage, canActivate: [artistGuard] },
   { path: 'artist', component: ArtistPage, canActivate: [artistGuard] },
-  { path: '**', redirectTo: 'login' }
+  { path: '**', redirectTo: '' }
 ];

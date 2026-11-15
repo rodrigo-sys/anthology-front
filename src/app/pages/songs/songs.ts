@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { SongCreate } from '../../components/songs/song-create/song-create';
 import { SongEdit } from '../../components/songs/song-edit/song-edit';
 import { SongList } from '../../components/songs/song-list/song-list';
+import { AuthService } from '../../service/auth-service';
 import { SongService } from '../../service/song-service';
 
 @Component({
@@ -12,4 +13,5 @@ import { SongService } from '../../service/song-service';
 })
 export class Songs {
   songService = inject(SongService)
+  authService = inject(AuthService)
 }

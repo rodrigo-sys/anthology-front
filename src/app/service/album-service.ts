@@ -107,12 +107,44 @@ export class AlbumService {
     })
   }
 
-  updateStatus(id: number, status: Status) {
+  updateStatus(id: number, status: Status, alCambiar?: () => void) {
     if (!this.soloAdmin('cambiar el estado de un álbum')) return
 
     this.http.patch<Album>(`${this.url}/${id}/status`, null, { params: { status } }).subscribe({
-      next: () => this.recargar(),
+      next: () => {
+        this.recargar()
+        alCambiar?.()
+      },
       error: () => this.error.set('No se pudo cambiar el estado')
+    })
+  }
+
+  aprobarPorTituloYAnio(title: string, releaseYear?: number, artistName?: string) {
+    if (!this.soloAdmin('aprobar álbumes')) return
+
+    const buscar = (albums: Album[]) => {
+      const coincide = (item: Album) =>
+        item.title.toLowerCase() === title.toLowerCase() &&
+        (!releaseYear || item.releaseYear === releaseYear)
+
+      const album =
+        albums.find((item) => coincide(item) && !!artistName && item.artistName.toLowerCase() === artistName.toLowerCase()) ??
+        albums.find(coincide)
+
+      if (album) this.updateStatus(album.id, 'APPROVED')
+    }
+
+    if (this.albums().length) {
+      buscar(this.albums())
+      return
+    }
+
+    this.http.get<Album[]>(this.url).subscribe({
+      next: (data) => {
+        this.albums.set(data)
+        buscar(data)
+      },
+      error: () => this.error.set('No se pudieron cargar los álbumes')
     })
   }
 

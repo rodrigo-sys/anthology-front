@@ -1,13 +1,26 @@
 <div class="page">
   <form class="card" [formGroup]="formulario" (ngSubmit)="add()">
-    <h2>Crear artista</h2>
+    <h2>Asignar artista</h2>
+
+    <p class="ayuda">
+      Elegí un usuario y completá su perfil. Al guardar, ese usuario recibe el rol de artista.
+      Para ver las funciones nuevas tiene que cerrar sesión y volver a iniciar sesión.
+    </p>
 
     <div class="form-grid">
       <div class="field">
-        <label for="userId">ID de usuario</label>
-        <input id="userId" type="number" formControlName="userId" />
+        <label for="userId">Usuario</label>
+        <select id="userId" formControlName="userId">
+          <option [ngValue]="0" disabled>Elegí un usuario</option>
+          @for (user of usuariosDisponibles(); track user.id) {
+            <option [ngValue]="user.id">{{ user.username }} (#{{ user.id }})</option>
+          }
+        </select>
+        @if (usuariosDisponibles().length === 0) {
+          <small class="ayuda-chica">Todos los usuarios ya tienen perfil de artista.</small>
+        }
         @if (formulario.controls.userId.invalid && formulario.controls.userId.touched) {
-          <small class="error">Campo requerido</small>
+          <small class="error">Elegí un usuario</small>
         }
       </div>
 
@@ -28,32 +41,33 @@
       </div>
 
       <div class="field">
-        <label for="instagram">Instagram</label>
+        <label for="instagram">Instagram (opcional)</label>
         <input id="instagram" type="text" formControlName="instagram" />
-        @if (formulario.controls.instagram.invalid && formulario.controls.instagram.touched) {
-          <small class="error">Campo requerido</small>
-        }
       </div>
 
       <div class="field">
-        <label for="spotify">Spotify</label>
+        <label for="spotify">Spotify (opcional)</label>
         <input id="spotify" type="text" formControlName="spotify" />
-        @if (formulario.controls.spotify.invalid && formulario.controls.spotify.touched) {
-          <small class="error">Campo requerido</small>
-        }
       </div>
 
       <div class="field">
-        <label for="youtube">YouTube</label>
+        <label for="youtube">YouTube (opcional)</label>
         <input id="youtube" type="text" formControlName="youtube" />
-        @if (formulario.controls.youtube.invalid && formulario.controls.youtube.touched) {
-          <small class="error">Campo requerido</small>
-        }
       </div>
     </div>
 
+    @if (mensaje()) {
+      <p class="exito">{{ mensaje() }}</p>
+    }
+
+    @if (error()) {
+      <p class="error">{{ error() }}</p>
+    }
+
     <div class="actions">
-      <button type="submit" [disabled]="formulario.invalid">Guardar artista</button>
+      <button type="submit" [disabled]="formulario.invalid || guardando()">
+        {{ guardando() ? 'Guardando...' : 'Guardar artista' }}
+      </button>
     </div>
   </form>
 </div>

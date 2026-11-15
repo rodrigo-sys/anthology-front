@@ -19,7 +19,9 @@
     </article>
 
     <app-version-list [songId]="id" />
-    <app-version-create [songId]="id" />
+    @if (authService.isAdmin() || authService.isArtist()) {
+      <app-version-create [songId]="id" />
+    }
   }
 
 </section>

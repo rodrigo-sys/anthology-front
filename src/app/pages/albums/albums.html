@@ -2,10 +2,12 @@
 
   <h1>Álbumes</h1>
 
-  @if (albumService.albumSeleccionado()) {
-    <app-album-edit></app-album-edit>
-  } @else {
-    <app-album-create></app-album-create>
+  @if (authService.isAdmin() || authService.isArtist()) {
+    @if (albumService.albumSeleccionado()) {
+      <app-album-edit></app-album-edit>
+    } @else {
+      <app-album-create></app-album-create>
+    }
   }
 
   <app-album-list></app-album-list>

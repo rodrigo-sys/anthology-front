@@ -49,6 +49,7 @@ label {
 }
 
 input,
+select,
 textarea {
   padding: 7px 10px;
   border: 1px solid #cfccc3;
@@ -60,8 +61,13 @@ textarea {
   box-sizing: border-box;
 }
 
-input {
+input,
+select {
   height: 36px;
+}
+
+select {
+  cursor: pointer;
 }
 
 textarea {
@@ -70,9 +76,33 @@ textarea {
 }
 
 input:focus,
+select:focus,
 textarea:focus {
   outline: none;
   border-color: #6f6d66;
+}
+
+.ayuda {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #4a4842;
+}
+
+.ayuda-chica {
+  font-size: 12px;
+  color: #6b6960;
+}
+
+.exito {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid #b9d3bb;
+  border-radius: 6px;
+  background: #eef6ee;
+  color: #2f5c33;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .error {

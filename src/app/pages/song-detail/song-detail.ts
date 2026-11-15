@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { VersionCreate } from '../../components/versions/version-create/version-create';
 import { VersionList } from '../../components/versions/version-list/version-list';
 import { INSTRUMENT_LABEL, Instrument, STATUS_LABEL } from '../../interfaces/Enums';
+import { AuthService } from '../../service/auth-service';
 import { SongService } from '../../service/song-service';
 
 @Component({
@@ -13,6 +14,7 @@ import { SongService } from '../../service/song-service';
 })
 export class SongDetail implements OnInit {
   songService = inject(SongService)
+  authService = inject(AuthService)
   route = inject(ActivatedRoute)
 
   etiquetas = INSTRUMENT_LABEL

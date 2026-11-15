@@ -67,6 +67,10 @@
         <span>Estado: <span [class]="'estado estado-' + album.status.toLowerCase()">{{ estadoEtiquetas[album.status] }}</span></span>
 
         <div class="acciones">
+          @if (esAdmin && album.status === 'PENDING') {
+            <button type="button" (click)="aprobar(album)">Aprobar</button>
+            <button type="button" class="secundario" (click)="rechazar(album)">Rechazar</button>
+          }
           @if (esAdmin || (mostrandoMias && album.status !== 'APPROVED')) {
             <button type="button" class="secundario" (click)="editar(album)">Editar</button>
             <button type="button" class="eliminar" (click)="eliminar(album)">Eliminar</button>
@@ -74,7 +78,9 @@
         </div>
       </article>
     } @empty {
-      <p class="empty">No hay álbumes que coincidan.</p>
+      <p class="empty">
+        {{ filtros.status === 'PENDING' ? 'No hay álbumes pendientes de revisión.' : 'No hay álbumes que coincidan.' }}
+      </p>
     }
   </div>
 

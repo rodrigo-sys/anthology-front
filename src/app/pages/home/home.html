@@ -1,0 +1,168 @@
+<section class="hero">
+  <div class="hero-interior">
+    <div class="hero-texto">
+      <p class="etiqueta">Partituras · Guitarra · Bajo · Piano</p>
+      <h1>La partitura de cada canción, en tu instrumento</h1>
+      <p class="bajada">
+        Buscá una canción del catálogo, elegí su versión de guitarra, bajo o piano
+        y abrí la partitura en PDF.
+      </p>
+
+      @if (authService.isLoggedIn()) {
+        <div class="hero-acciones">
+          <a class="btn btn-claro" routerLink="/songs">Buscar canciones</a>
+        </div>
+      } @else {
+        <div class="hero-acciones">
+          <button type="button" class="btn btn-claro" (click)="abrir('registro')">Crear cuenta</button>
+          <button type="button" class="btn" (click)="abrir('login')">Iniciar sesión</button>
+        </div>
+      }
+    </div>
+
+    <div class="hero-mock" aria-hidden="true">
+      <article class="mock-card">
+        <div class="mock-datos">
+          <strong>Fur Elise</strong>
+          <span>Beethoven · Clásica</span>
+        </div>
+        <div class="mock-versiones">
+          <span>Guitarra</span>
+          <span>Piano</span>
+        </div>
+      </article>
+      <article class="mock-card">
+        <div class="mock-datos">
+          <strong>Money</strong>
+          <span>Pink Floyd · Rock</span>
+        </div>
+        <div class="mock-versiones">
+          <span>Guitarra</span>
+          <span>Bajo</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="contenido">
+  <section class="seccion">
+    <h2>Cómo funciona</h2>
+    <ol class="pasos">
+      @for (paso of pasos; track paso.titulo; let i = $index) {
+        <li>
+          <span class="numero">{{ i + 1 }}</span>
+          <div>
+            <h3>{{ paso.titulo }}</h3>
+            <p>{{ paso.texto }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <section class="seccion">
+    <h2>Además de las partituras</h2>
+    <div class="tarjetas">
+      @for (extra of extras; track extra.titulo) {
+        <article class="tarjeta">
+          <span class="kicker">{{ extra.kicker }}</span>
+          <h3>{{ extra.titulo }}</h3>
+          <p>{{ extra.texto }}</p>
+        </article>
+      }
+    </div>
+  </section>
+</div>
+
+@if (acceso()) {
+  <div class="modal-fondo" (click)="cerrar()" (document:keydown.escape)="cerrar()">
+    <div
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-titulo"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="modal-head">
+        <h2 id="modal-titulo">{{ acceso() === 'login' ? 'Iniciar sesión' : 'Crear cuenta' }}</h2>
+        <button type="button" class="cerrar" (click)="cerrar()" aria-label="Cerrar">×</button>
+      </div>
+
+      @if (acceso() === 'login') {
+        <form class="form-acceso" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <div class="campo">
+            <label for="home-login-username">Usuario</label>
+            <input
+              id="home-login-username"
+              type="text"
+              formControlName="username"
+              autocomplete="username"
+              required
+            />
+          </div>
+          <div class="campo">
+            <label for="home-login-password">Contraseña</label>
+            <input
+              id="home-login-password"
+              type="password"
+              formControlName="password"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          @if (loginError()) {
+            <p class="error">{{ loginError() }}</p>
+          }
+
+          <button type="submit" [disabled]="loginForm.invalid || enviando()">
+            {{ enviando() ? 'Ingresando...' : 'Ingresar' }}
+          </button>
+        </form>
+      } @else {
+        <form class="form-acceso" [formGroup]="registerForm" (ngSubmit)="onRegister()">
+          <div class="campo">
+            <label for="home-reg-username">Usuario</label>
+            <input
+              id="home-reg-username"
+              type="text"
+              formControlName="username"
+              autocomplete="username"
+              required
+            />
+          </div>
+          <div class="campo">
+            <label for="home-reg-email">Email</label>
+            <input
+              id="home-reg-email"
+              type="email"
+              formControlName="email"
+              autocomplete="email"
+              required
+            />
+          </div>
+          <div class="campo">
+            <label for="home-reg-password">Contraseña</label>
+            <input
+              id="home-reg-password"
+              type="password"
+              formControlName="password"
+              autocomplete="new-password"
+              required
+            />
+            <small>Mínimo 4 caracteres.</small>
+          </div>
+
+          @if (registerError()) {
+            <p class="error">{{ registerError() }}</p>
+          }
+
+          <button type="submit" [disabled]="registerForm.invalid || enviando()">
+            {{ enviando() ? 'Creando cuenta...' : 'Crear cuenta' }}
+          </button>
+        </form>
+      }
+    </div>
+  </div>
+}

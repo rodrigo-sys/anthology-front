@@ -3,6 +3,7 @@ import { AlbumCreate } from '../../components/albums/album-create/album-create';
 import { AlbumEdit } from '../../components/albums/album-edit/album-edit';
 import { AlbumList } from '../../components/albums/album-list/album-list';
 import { AlbumService } from '../../service/album-service';
+import { AuthService } from '../../service/auth-service';
 
 @Component({
   imports: [AlbumCreate, AlbumEdit, AlbumList],
@@ -12,4 +13,5 @@ import { AlbumService } from '../../service/album-service';
 })
 export class Albums {
   albumService = inject(AlbumService)
+  authService = inject(AuthService)
 }

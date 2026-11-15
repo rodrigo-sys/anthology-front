@@ -146,12 +146,41 @@ export class SongService {
     })
   }
 
-  updateStatus(id: number, status: Status) {
+  updateStatus(id: number, status: Status, alCambiar?: () => void) {
     if (!this.soloAdmin('cambiar el estado de una canción')) return
 
     this.http.patch<Song>(`${this.url}/${id}/status`, null, { params: { status } }).subscribe({
-      next: () => this.recargar(),
+      next: () => {
+        this.recargar()
+        alCambiar?.()
+      },
       error: () => this.error.set('No se pudo cambiar el estado')
+    })
+  }
+
+  aprobarContenidoDeAlbum(albumTitle: string, releaseYear?: number, artistName?: string) {
+    if (!this.soloAdmin('aprobar canciones')) return
+
+    this.http.get<Song[]>(`${this.url}/all`).subscribe({
+      next: (songs) => {
+        const coincide = (song: Song) =>
+          song.AlbumTitle?.toLowerCase() === albumTitle.toLowerCase() &&
+          (!releaseYear || song.ReleaseYear === releaseYear)
+
+        const conArtista = songs.filter((song) =>
+          coincide(song) && !!artistName && song.artistName.toLowerCase() === artistName.toLowerCase()
+        )
+        const delAlbum = conArtista.length ? conArtista : songs.filter(coincide)
+
+        for (const song of delAlbum) {
+          if (song.status !== 'PENDING') continue
+
+          this.http.patch<Song>(`${this.url}/${song.id}/status`, null, { params: { status: 'APPROVED' } }).subscribe({
+            error: () => this.error.set('No se pudieron aprobar todas las canciones del álbum')
+          })
+        }
+      },
+      error: () => this.error.set('No se pudieron cargar las canciones del álbum')
     })
   }
 

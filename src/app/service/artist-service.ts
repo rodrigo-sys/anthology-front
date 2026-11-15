@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service, signal } from '@angular/core';
-import { Observable, of, map, tap, catchError } from 'rxjs';
+import { Observable, of, map, tap, catchError, throwError } from 'rxjs';
 import { Artist, ArtistRequest, ArtistUpdateRequest } from '../interfaces/Artists';
 import { AuthService } from './auth-service';
 
@@ -50,17 +50,19 @@ export class ArtistService {
     )
   }
 
-  add(request:ArtistRequest)
+  add(request:ArtistRequest): Observable<Artist>
   {
-    this.http.post<Artist>(this.url,request).subscribe(
-        {
-            next:() =>{
-                this.listArtists()
-            }
-              
-        }
+    this.error.set('')
+
+    return this.http.post<Artist>(this.url,request).pipe(
+        tap(()=>{
+            this.listArtists()
+        }),
+        catchError((httpError)=>{
+            this.error.set(this.mensajeError(httpError,'No se pudo asignar el rol de artista'))
+            return throwError(()=>httpError)
+        })
     )
-  
   }
   
   update(id:number, cambios:Partial<ArtistUpdateRequest>)
@@ -133,5 +135,15 @@ export class ArtistService {
     
         }
     )
+  }
+
+  private mensajeError(httpError:any, porDefecto:string)
+  {
+    const mensaje = httpError?.error?.message
+    if (mensaje) return mensaje
+    if (httpError?.status === 409) return 'Ya existe un artista con ese nombre.'
+    if (httpError?.status === 404) return 'No se encontró el usuario elegido.'
+    if (httpError?.status === 401 || httpError?.status === 403) return 'Tu sesión venció o no tenés permisos. Volvé a iniciar sesión.'
+    return porDefecto
   }
 }

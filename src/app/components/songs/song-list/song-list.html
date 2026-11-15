@@ -93,6 +93,10 @@
 
         <div class="acciones">
           <a [routerLink]="['/songs', song.id]">Ver</a>
+          @if (esAdmin && song.status === 'PENDING') {
+            <button type="button" (click)="aprobar(song)">Aprobar</button>
+            <button type="button" class="secundario" (click)="rechazar(song)">Rechazar</button>
+          }
           @if (esAdmin || (mostrandoMias && song.status !== 'APPROVED')) {
             <button type="button" class="secundario" (click)="editar(song)">Editar</button>
             <button type="button" class="eliminar" (click)="eliminar(song)">Eliminar</button>
@@ -100,7 +104,9 @@
         </div>
       </article>
     } @empty {
-      <p class="empty">No hay canciones.</p>
+      <p class="empty">
+        {{ estado === 'PENDING' ? 'No hay partituras pendientes de revisión.' : 'No hay canciones.' }}
+      </p>
     }
   </div>
 

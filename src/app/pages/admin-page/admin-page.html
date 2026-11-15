@@ -4,7 +4,7 @@
     <p class="subtitulo">Gestioná las partituras y las revisiones pendientes.</p>
 
     <div class="admin-menu">
-      <a class="admin-opcion" routerLink="/" routerLinkActive="activo">
+      <a class="admin-opcion" routerLink="/songs" [queryParams]="{ estado: 'PENDING' }" routerLinkActive="activo">
         <span class="opcion-titulo">Partituras en revisión</span>
         <span class="opcion-desc">Aprobar o rechazar envíos de músicos</span>
       </a>
@@ -17,6 +17,11 @@
       <a class="admin-opcion" routerLink="/albums" routerLinkActive="activo">
         <span class="opcion-titulo">Álbumes</span>
         <span class="opcion-desc">Organizar colecciones</span>
+      </a>
+
+      <a class="admin-opcion" routerLink="/albums" [queryParams]="{ estado: 'PENDING' }" routerLinkActive="activo">
+        <span class="opcion-titulo">Álbumes en revisión</span>
+        <span class="opcion-desc">Aprobar o rechazar álbumes pendientes</span>
       </a>
 
       <a class="admin-opcion" routerLink="/suggestions" routerLinkActive="activo">
