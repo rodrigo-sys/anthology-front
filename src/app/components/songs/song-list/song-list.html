@@ -82,14 +82,20 @@
   <div class="lista">
     @for (song of songService.songsFiltradas(); track song.id) {
       <article class="tarjeta">
-        <strong>{{ song.title }}</strong>
-        <span>Artista: {{ song.artistName }}</span>
-        <span>Género: {{ song.genre }}</span>
-        @if (song.AlbumTitle) {
-          <span>Álbum: {{ song.AlbumTitle }} ({{ song.ReleaseYear }})</span>
-        }
-        <span>Instrumentos: {{ instrumentosDe(song) }}</span>
-        <span>Estado: <span [class]="'estado estado-' + song.status.toLowerCase()">{{ estadoEtiquetas[song.status] }}</span></span>
+        <div class="cover" aria-hidden="true">{{ iniciales(song) }}</div>
+
+        <div class="info">
+          <strong class="titulo">{{ song.title }}</strong>
+          <span class="artista">{{ song.artistName }}</span>
+          <span class="meta">Género: {{ song.genre }}</span>
+          @if (song.AlbumTitle) {
+            <span class="meta">Álbum: {{ song.AlbumTitle }} ({{ song.ReleaseYear }})</span>
+          }
+          <span class="meta">Instrumentos: {{ instrumentosDe(song) }}</span>
+          <span class="estado-linea">
+            <span [class]="'estado estado-' + song.status.toLowerCase()">{{ estadoEtiquetas[song.status] }}</span>
+          </span>
+        </div>
 
         <div class="acciones">
           <a [routerLink]="['/songs', song.id]">Ver</a>

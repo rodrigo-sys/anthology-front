@@ -106,4 +106,9 @@ export class SongList implements OnInit {
   instrumentosDe(song: Song): string {
     return song.availableInstruments.map((instrumento) => this.etiquetas[instrumento]).join(', ')
   }
+
+  iniciales(song: Song): string {
+    const palabras = song.title.trim().split(/\s+/).filter(Boolean)
+    return palabras.slice(0, 2).map((palabra) => palabra[0]).join('').toUpperCase()
+  }
 }
