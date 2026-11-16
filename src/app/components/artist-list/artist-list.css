@@ -6,18 +6,21 @@
   width: 100%;
   max-width: 880px;
   margin: 0 auto;
-  padding: 28px 16px 40px;
+  padding: 40px 16px 64px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
+  box-sizing: border-box;
 }
 
 h1 {
   margin: 0;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #c4c2bb;
-  font-size: 22px;
-  color: #2f2f2f;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(26px, 3.6vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
 }
 
 .artist-list {
@@ -29,60 +32,68 @@ h1 {
 button {
   height: 36px;
   padding: 7px 14px;
-  border: 1px solid #3f3d56;
-  border-radius: 6px;
-  background: #3f3d56;
-  color: #fff;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #04222a;
   font: inherit;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
   box-sizing: border-box;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
 }
 
 button:hover {
-  background: #343249;
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
 }
 
 button.secundario {
-  background: #f9f9f7;
-  border-color: #c5c5bf;
-  color: #333;
-  font-weight: 400;
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--text-2);
+  font-weight: 600;
 }
 
 button.secundario:hover {
-  background: #ecece8;
+  background: var(--surface-2);
+  border-color: var(--accent);
+  color: var(--accent-strong);
 }
 
 button.eliminar {
-  background: #f9f9f7;
-  border-color: #d8b4af;
-  color: #a9443c;
-  font-weight: 400;
+  background: transparent;
+  border-color: rgba(229, 115, 115, 0.4);
+  color: #f0a3a3;
+  font-weight: 600;
 }
 
 button.eliminar:hover {
-  background: #f8eeec;
+  background: rgba(229, 115, 115, 0.12);
+  border-color: rgba(229, 115, 115, 0.6);
 }
 
 .buscador {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  background: #f4f4f2;
-  border: 1px solid #d4d4cf;
-  border-radius: 8px;
   padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
 }
 
 .buscador > h3 {
   flex-basis: 100%;
   margin: 0;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #e0e0dc;
-  font-size: 16px;
-  color: #1f1f1f;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .campo {
@@ -93,17 +104,19 @@ button.eliminar:hover {
 }
 
 .campo label {
-  font-size: 13px;
-  color: #4a4842;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-2);
 }
 
 .campo input {
   height: 36px;
-  padding: 7px 10px;
-  border: 1px solid #c9c9c3;
-  border-radius: 6px;
-  background: #fbfbfa;
-  color: #222;
+  padding: 7px 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  color: var(--text);
   font: inherit;
   font-size: 14px;
   box-sizing: border-box;
@@ -111,7 +124,8 @@ button.eliminar:hover {
 
 .campo input:focus {
   outline: none;
-  border-color: #6f6d66;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .buscador > .boton {
@@ -122,8 +136,12 @@ button.eliminar:hover {
 
 .error {
   margin: 0;
-  color: #a9443c;
-  font-size: 14px;
+  padding: 9px 11px;
+  border: 1px solid rgba(229, 115, 115, 0.4);
+  border-radius: var(--radius);
+  background: rgba(229, 115, 115, 0.12);
+  color: #ffb4b4;
+  font-size: 13px;
 }
 
 .resultado {
@@ -131,15 +149,15 @@ button.eliminar:hover {
   flex-direction: column;
   gap: 4px;
   padding: 12px 14px;
-  background: #f0eee7;
-  border-left: 3px solid #6f6d66;
-  border-radius: 4px;
+  background: var(--surface-2);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
   font-size: 14px;
-  color: #3f3f3a;
+  color: var(--text-2);
 }
 
 .resultado strong {
-  color: #1f1f1f;
+  color: var(--text);
 }
 
 .lista {
@@ -152,20 +170,20 @@ button.eliminar:hover {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  background: #f6f5f1;
-  border: 1px solid #d2cfc6;
-  border-radius: 8px;
   padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
 }
 
 .tarjeta strong {
   font-size: 17px;
-  color: #1f1f1f;
+  color: var(--text);
 }
 
 .tarjeta > span {
   font-size: 14px;
-  color: #5d5a52;
+  color: var(--muted);
 }
 
 .tarjeta .acciones {
@@ -179,5 +197,6 @@ button.eliminar:hover {
   grid-column: 1 / -1;
   padding: 16px;
   text-align: center;
-  color: #666;
+  color: var(--muted);
+  font-size: 14px;
 }

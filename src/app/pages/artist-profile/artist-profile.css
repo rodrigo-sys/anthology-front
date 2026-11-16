@@ -14,7 +14,12 @@
 }
 
 .error {
-  color: #a9443c;
-  text-align: center;
   margin: 1rem 0 0;
+  padding: 9px 11px;
+  border: 1px solid rgba(229, 115, 115, 0.4);
+  border-radius: var(--radius);
+  background: rgba(229, 115, 115, 0.12);
+  color: #ffb4b4;
+  font-size: 13px;
+  text-align: center;
 }
