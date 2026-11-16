@@ -7,60 +7,68 @@
 button {
   height: 36px;
   padding: 7px 14px;
-  border: 1px solid #2d2a55;
-  border-radius: 6px;
-  background: #2d2a55;
-  color: #fff;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #04222a;
   font: inherit;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
   box-sizing: border-box;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
 }
 
 button:hover {
-  background: #232046;
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
 }
 
 button.secundario {
-  background: #f9f9f7;
-  border-color: #c5c5bf;
-  color: #333;
-  font-weight: 400;
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--text-2);
+  font-weight: 600;
 }
 
 button.secundario:hover {
-  background: #ecece8;
+  background: var(--surface-2);
+  border-color: var(--accent);
+  color: var(--accent-strong);
 }
 
 button.eliminar {
-  background: #f9f9f7;
-  border-color: #d8b4af;
-  color: #a9443c;
-  font-weight: 400;
+  background: transparent;
+  border-color: rgba(229, 115, 115, 0.4);
+  color: #f0a3a3;
+  font-weight: 600;
 }
 
 button.eliminar:hover {
-  background: #f8eeec;
+  background: rgba(229, 115, 115, 0.12);
+  border-color: rgba(229, 115, 115, 0.6);
 }
 
 .buscador {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  background: #f6f5f1;
-  border: 1px solid #d2cfc6;
-  border-radius: 8px;
   padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
 }
 
 .buscador > h3 {
   flex-basis: 100%;
   margin: 0;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #e2dfd6;
-  font-size: 16px;
-  color: #1f1f1f;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .vistas {
@@ -79,28 +87,34 @@ button.eliminar:hover {
 }
 
 .campo label {
-  font-size: 13px;
-  color: #4a4842;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-2);
 }
 
 .campo input,
 .campo select {
   height: 36px;
-  padding: 7px 10px;
-  border: 1px solid #cfccc3;
-  border-radius: 6px;
+  padding: 7px 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  color: var(--text);
   font: inherit;
   font-size: 14px;
-  color: #222;
-  background: #fffdf9;
   box-sizing: border-box;
+}
+
+.campo select {
+  cursor: pointer;
 }
 
 .campo input:focus,
 .campo select:focus {
   outline: none;
-  border-color: #2d2a55;
-  box-shadow: 0 0 0 2px rgba(45, 42, 85, 0.15);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .buscador > .boton {
@@ -110,18 +124,23 @@ button.eliminar:hover {
 }
 
 .error {
-  color: #a9443c;
-  font-size: 14px;
+  margin: 0;
+  padding: 9px 11px;
+  border: 1px solid rgba(229, 115, 115, 0.4);
+  border-radius: var(--radius);
+  background: rgba(229, 115, 115, 0.12);
+  color: #ffb4b4;
+  font-size: 13px;
 }
 
 .resultado {
   margin: 0;
   padding: 12px 14px;
-  background: #f0eee7;
-  border-left: 3px solid #2d2a55;
-  border-radius: 4px;
+  background: var(--surface-2);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
   font-size: 14px;
-  color: #3f3d36;
+  color: var(--text-2);
 }
 
 .lista {
@@ -134,47 +153,50 @@ button.eliminar:hover {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  background: #f6f5f1;
-  border: 1px solid #d2cfc6;
-  border-radius: 8px;
   padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
 }
 
 .tarjeta strong {
   font-size: 17px;
-  color: #1f1f1f;
+  color: var(--text);
 }
 
 .tarjeta > span {
   font-size: 14px;
-  color: #5d5a52;
+  color: var(--muted);
 }
 
 .estado {
   display: inline-block;
   padding: 2px 8px;
   border: 1px solid;
-  border-radius: 4px;
-  font-size: 12px;
-  line-height: 1.4;
+  border-radius: var(--radius);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.5;
 }
 
 .estado-pending {
-  background: #f3edda;
-  border-color: #ddceaa;
-  color: #6b5a2e;
+  background: rgba(224, 179, 74, 0.14);
+  border-color: rgba(224, 179, 74, 0.35);
+  color: #f0cf8a;
 }
 
 .estado-approved {
-  background: #e4efe6;
-  border-color: #b7d3bd;
-  color: #2f5d3a;
+  background: rgba(111, 207, 151, 0.13);
+  border-color: rgba(111, 207, 151, 0.35);
+  color: #9be3b8;
 }
 
 .estado-rejected {
-  background: #f6e3e1;
-  border-color: #d9b3ae;
-  color: #8a3d35;
+  background: rgba(229, 115, 115, 0.13);
+  border-color: rgba(229, 115, 115, 0.35);
+  color: #f0a3a3;
 }
 
 .tarjeta .acciones {
@@ -188,5 +210,6 @@ button.eliminar:hover {
   grid-column: 1 / -1;
   padding: 16px;
   text-align: center;
-  color: #666;
+  color: var(--muted);
+  font-size: 14px;
 }
