@@ -10,21 +10,22 @@
 .denied-card {
   width: 100%;
   max-width: 440px;
-  background: #f6f5f1;
-  border: 1px solid #d2cfc6;
-  border-top: 4px solid #2d2a55;
-  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--radius-md);
   padding: 28px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .icono-alerta {
   width: 44px;
   height: 44px;
   margin: 0 auto 12px;
-  background: #e6e3da;
-  border: 1px solid #cfccc3;
-  color: #2d2a55;
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  color: var(--accent);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 22px;
   font-weight: 600;
@@ -37,12 +38,14 @@
 .denied-card h1 {
   margin: 0 0 8px;
   font-size: 24px;
-  color: #1f1f1f;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
 }
 
 .denied-card p {
   margin: 0 0 20px;
-  color: #5d5a52;
+  color: var(--muted);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -56,29 +59,34 @@
 .btn-volver {
   display: inline-block;
   padding: 8px 14px;
-  background: #2d2a55;
-  color: #fff;
+  background: var(--accent);
+  color: #04222a;
   text-decoration: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.12s ease;
 }
 
 .btn-volver:hover {
-  background: #232046;
+  background: var(--accent-strong);
 }
 
 .btn-secundario {
   padding: 8px 14px;
-  background: #f9f9f7;
-  border: 1px solid #c5c5bf;
-  color: #333;
-  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  color: var(--text-2);
+  border-radius: var(--radius);
   font: inherit;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
 }
 
 .btn-secundario:hover {
-  background: #ecece8;
+  background: var(--surface-2);
+  border-color: var(--accent);
+  color: var(--accent-strong);
 }

@@ -10,21 +10,22 @@
 .denied-card {
   width: 100%;
   max-width: 440px;
-  background: #f6f5f1;
-  border: 1px solid #d2cfc6;
-  border-top: 4px solid #a9443c;
-  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--danger);
+  border-radius: var(--radius-md);
   padding: 28px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .icono-alerta {
   width: 44px;
   height: 44px;
   margin: 0 auto 12px;
-  background: #f6e3e1;
-  border: 1px solid #d9b3ae;
-  color: #a9443c;
+  background: rgba(229, 115, 115, 0.12);
+  border: 1px solid rgba(229, 115, 115, 0.4);
+  color: #f0a3a3;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 22px;
   font-weight: 600;
@@ -37,12 +38,14 @@
 .denied-card h1 {
   margin: 0 0 8px;
   font-size: 24px;
-  color: #1f1f1f;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
 }
 
 .denied-card p {
   margin: 0 0 20px;
-  color: #5d5a52;
+  color: var(--muted);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -50,14 +53,15 @@
 .btn-volver {
   display: inline-block;
   padding: 8px 14px;
-  background: #2d2a55;
-  color: #fff;
+  background: var(--accent);
+  color: #04222a;
   text-decoration: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.12s ease;
 }
 
 .btn-volver:hover {
-  background: #232046;
+  background: var(--accent-strong);
 }
