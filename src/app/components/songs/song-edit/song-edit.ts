@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, afterNextRender, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SongUpdateRequest } from '../../../interfaces/Song';
 import { AlbumService } from '../../../service/album-service';
@@ -14,6 +14,14 @@ export class SongEdit implements OnInit {
   songService = inject(SongService)
   albumService = inject(AlbumService)
   fb = inject(FormBuilder)
+
+  private host = inject<ElementRef<HTMLElement>>(ElementRef)
+
+  constructor() {
+    afterNextRender(() =>
+      this.host.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+    )
+  }
 
   private cancion = this.songService.songSeleccionada()
 

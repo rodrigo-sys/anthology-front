@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, afterNextRender, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AlbumService } from '../../../service/album-service';
 
@@ -11,6 +11,14 @@ import { AlbumService } from '../../../service/album-service';
 export class AlbumEdit implements OnInit {
   albumService = inject(AlbumService)
   fb = inject(FormBuilder)
+
+  private host = inject<ElementRef<HTMLElement>>(ElementRef)
+
+  constructor() {
+    afterNextRender(() =>
+      this.host.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+    )
+  }
 
   private album = this.albumService.albumSeleccionado()
 

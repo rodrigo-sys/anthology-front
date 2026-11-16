@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, ElementRef, effect, afterNextRender, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ArtistService } from '../../service/artist-service';
 
@@ -13,6 +13,8 @@ export class ArtistEdit {
 
   artistService = inject(ArtistService);
 
+  private host = inject<ElementRef<HTMLElement>>(ElementRef);
+
   formulario = this.fb.nonNullable.group({
     stageName: ['', Validators.required],
     biography: ['', Validators.required],
@@ -22,6 +24,10 @@ export class ArtistEdit {
   });
 
   constructor() {
+    afterNextRender(() =>
+      this.host.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+    );
+
     effect(() => {
       const artist = this.artistService.artistToEdit();
       if (artist) {

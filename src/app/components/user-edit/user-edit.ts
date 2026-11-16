@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, ElementRef, effect, afterNextRender, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserUpdateRequest } from '../../interfaces/Users';
 import { UserService } from '../../service/user-service';
@@ -14,6 +14,8 @@ export class UserEdit {
 
   userService = inject(UserService);
 
+  private host = inject<ElementRef<HTMLElement>>(ElementRef);
+
   formulario = this.fb.nonNullable.group({
     username: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
@@ -21,6 +23,10 @@ export class UserEdit {
   });
 
   constructor() {
+    afterNextRender(() =>
+      this.host.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+    );
+
     effect(() => {
       const user = this.userService.userToEdit();
       if (user) {
