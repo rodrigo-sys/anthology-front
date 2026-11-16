@@ -1,16 +1,19 @@
 .comment-create {
-  background: #f6f5f1;
-  border: 1px solid #d2cfc6;
-  border-radius: 8px;
   padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
 }
 
 h2 {
   margin: 0 0 14px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #e2dfd6;
-  font-size: 18px;
-  color: #1f1f1f;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 form {
@@ -20,38 +23,45 @@ form {
 
 input {
   flex: 1;
-  padding: 9px 10px;
-  border: 1px solid #cfccc3;
-  border-radius: 6px;
+  padding: 9px 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  color: var(--text);
   font: inherit;
-  color: #222;
-  background: #fffdf9;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
 input:focus {
   outline: none;
-  border-color: #2d2a55;
-  box-shadow: 0 0 0 2px rgba(45, 42, 85, 0.15);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 button {
   flex-shrink: 0;
   padding: 9px 16px;
-  border: none;
-  border-radius: 6px;
-  background: #2d2a55;
-  color: #fff;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #04222a;
   font: inherit;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
 }
 
 button:hover {
-  background: #232046;
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
 }
 
 button:disabled {
-  background: #9a98b0;
+  background: var(--surface-3);
+  border-color: var(--line-strong);
+  color: var(--muted);
   cursor: not-allowed;
 }
 

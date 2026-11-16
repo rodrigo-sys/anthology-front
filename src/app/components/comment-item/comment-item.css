@@ -1,6 +1,6 @@
 :host {
   display: block;
-  border-top: 1px solid #e3e1db;
+  border-top: 1px solid var(--line);
 }
 
 :host(:first-child) {
@@ -20,26 +20,31 @@
 }
 
 .username {
-  color: #1f1f1f;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .instrument {
   padding: 2px 8px;
-  border: 1px solid #d2cfc6;
-  border-radius: 4px;
-  background: #eeebe4;
-  color: #4a4842;
-  font-size: 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .song {
-  color: #5d5a52;
+  color: var(--muted);
   font-size: 13px;
 }
 
 .content {
-  margin: 8px 0;
-  color: #3f3d39;
+  margin: 10px 0 0;
+  color: var(--text-2);
   font-size: 14px;
 }
 
@@ -48,27 +53,30 @@
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 .date {
   font-size: 12px;
-  color: #6f6d66;
+  color: var(--muted);
 }
 
 .danger {
   padding: 5px 12px;
-  border: 1px solid #d8b4af;
-  border-radius: 6px;
-  background: #f9f9f7;
-  color: #a9443c;
+  border: 1px solid rgba(229, 115, 115, 0.4);
+  border-radius: var(--radius);
+  background: transparent;
+  color: #f0a3a3;
   font: inherit;
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
 }
 
 .danger:hover {
-  background: #f8eeec;
+  background: rgba(229, 115, 115, 0.12);
+  border-color: rgba(229, 115, 115, 0.6);
 }
 
 @media (max-width: 560px) {
