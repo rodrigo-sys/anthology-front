@@ -1,29 +1,32 @@
 .admin-page {
   padding: 30px 20px;
-  background: #fafafa;
   min-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  background: var(--bg);
 }
 
 .admin-card {
   width: 100%;
   max-width: 800px;
-  background: #fff;
-  border: 1px solid #d2cfc6;
-  border-radius: 8px;
   padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
 }
 
 .admin-card h1 {
   margin: 0;
-  color: #222;
+  font-size: clamp(26px, 3.6vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
 }
 
 .subtitulo {
   margin: 6px 0 20px 0;
-  color: #555;
+  color: var(--muted);
   font-size: 14px;
 }
 
@@ -38,24 +41,30 @@
   flex-direction: column;
   gap: 6px;
   padding: 16px;
-  border: 1px solid #d2cfc6;
-  border-radius: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg-elev);
+  color: var(--text);
   text-decoration: none;
-  color: #222;
-  background: #fafafa;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .admin-opcion:hover {
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-color: var(--accent);
+  background: var(--surface-2);
+}
+
+.admin-opcion.activo {
+  border-color: var(--accent);
 }
 
 .opcion-titulo {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 17px;
-  color: #222;
+  color: var(--text);
 }
 
 .opcion-desc {
-  color: #555;
+  color: var(--muted);
   font-size: 14px;
 }
