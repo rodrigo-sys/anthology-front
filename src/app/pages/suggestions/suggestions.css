@@ -3,13 +3,16 @@
   width: 100%;
   max-width: 880px;
   margin: 0 auto;
-  padding: 28px 16px 40px;
+  padding: 40px 16px 64px;
+  box-sizing: border-box;
 }
 
 h1 {
-  margin: 0 0 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #c4c2bb;
-  font-size: 22px;
-  color: #2f2f2f;
+  margin: 0 0 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(26px, 3.6vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
 }

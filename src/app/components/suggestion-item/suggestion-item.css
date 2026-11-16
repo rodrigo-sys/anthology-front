@@ -1,6 +1,6 @@
 :host {
   display: block;
-  border-top: 1px solid #e4e4df;
+  border-top: 1px solid var(--line);
 }
 
 :host(:first-child) {
@@ -22,49 +22,53 @@
 .title {
   margin: 0;
   font-size: 16px;
-  color: #1f1f1f;
+  font-weight: 600;
+  color: var(--text);
 }
 
 .artist {
-  margin: 2px 0 0;
-  color: #5d5a52;
-  font-size: 14px;
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 13px;
 }
 
 .status {
   flex-shrink: 0;
   padding: 2px 8px;
   border: 1px solid;
-  border-radius: 4px;
-  font-size: 12px;
+  border-radius: var(--radius);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .status-pending {
-  background: #f3edda;
-  border-color: #ddceaa;
-  color: #6b5a2e;
+  background: rgba(224, 179, 74, 0.14);
+  border-color: rgba(224, 179, 74, 0.35);
+  color: #f0cf8a;
 }
 
 .status-added {
-  background: #e4efe6;
-  border-color: #b7d3bd;
-  color: #2f5d3a;
+  background: rgba(111, 207, 151, 0.13);
+  border-color: rgba(111, 207, 151, 0.35);
+  color: #9be3b8;
 }
 
 .status-rejected {
-  background: #f6e3e1;
-  border-color: #d9b3ae;
-  color: #8a3d35;
+  background: rgba(229, 115, 115, 0.13);
+  border-color: rgba(229, 115, 115, 0.35);
+  color: #f0a3a3;
 }
 
 .notes {
-  margin: 8px 0;
-  color: #3f3d39;
+  margin: 10px 0 0;
+  color: var(--text-2);
   font-size: 14px;
 }
 
 .notes-label {
-  color: #6f6d66;
+  color: var(--muted);
 }
 
 .suggestion-foot {
@@ -72,12 +76,12 @@
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 .user {
   font-size: 13px;
-  color: #6f6d66;
+  color: var(--muted);
 }
 
 .actions {
@@ -87,36 +91,44 @@
 
 button {
   padding: 5px 12px;
-  border: 1px solid #c5c5bf;
-  border-radius: 6px;
-  background: #f9f9f7;
-  color: #333;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-2);
   font: inherit;
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
 }
 
 button:hover {
-  background: #ecece8;
+  background: var(--surface-2);
+  border-color: var(--accent);
+  color: var(--accent-strong);
 }
 
 button.approve {
-  background: #3f3d56;
-  border-color: #3f3d56;
-  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #04222a;
 }
 
 button.approve:hover {
-  background: #343249;
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: #04222a;
 }
 
 button.danger {
-  color: #a9443c;
-  border-color: #d8b4af;
+  border-color: rgba(229, 115, 115, 0.4);
+  color: #f0a3a3;
 }
 
 button.danger:hover {
-  background: #f8eeec;
+  background: rgba(229, 115, 115, 0.12);
+  border-color: rgba(229, 115, 115, 0.6);
+  color: #f0a3a3;
 }
 
 @media (max-width: 560px) {
