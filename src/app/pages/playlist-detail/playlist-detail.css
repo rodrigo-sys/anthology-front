@@ -3,43 +3,58 @@
   width: 100%;
   max-width: 880px;
   margin: 0 auto;
-  padding: 28px 16px 40px;
+  padding: 40px 16px 64px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+  box-sizing: border-box;
 }
 
 .back {
-  color: #2d2a55;
-  font-size: 14px;
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-2);
   text-decoration: none;
+  transition: color 0.12s ease;
+}
+
+.back::before {
+  content: "← ";
 }
 
 .back:hover {
-  text-decoration: underline;
+  color: var(--accent-strong);
 }
 
 h1 {
   margin: 0;
-  padding-bottom: 10px;
-  border-bottom: 3px double #2d2a55;
-  font-size: 26px;
-  color: #1f1f1f;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
 }
 
 .panel {
-  background: #f6f5f1;
-  border: 1px solid #d2cfc6;
-  border-radius: 8px;
   padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
 }
 
 h2 {
-  margin: 0 0 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #e2dfd6;
-  font-size: 18px;
-  color: #1f1f1f;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .list {
@@ -54,7 +69,7 @@ h2 {
   align-items: center;
   gap: 12px;
   padding: 12px 0;
-  border-top: 1px solid #e2dfd6;
+  border-top: 1px solid var(--line);
 }
 
 .item:first-child {
@@ -69,24 +84,30 @@ h2 {
 }
 
 .song-info a {
-  color: #2d2a55;
-  text-decoration: none;
+  color: var(--text);
+  font-size: 15px;
   font-weight: 600;
+  text-decoration: none;
+  transition: color 0.12s ease;
 }
 
 .song-info a:hover {
-  text-decoration: underline;
+  color: var(--accent-strong);
 }
 
 .song-info .instrument {
-  color: #5d5a52;
+  color: var(--muted);
   font-size: 13px;
 }
 
 .song-info .pdf {
-  color: #5d5a52;
+  color: var(--accent);
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 600;
+}
+
+.song-info .pdf:hover {
+  color: var(--accent-strong);
 }
 
 .form-row {
@@ -103,69 +124,87 @@ h2 {
 }
 
 label {
-  font-size: 14px;
-  color: #4a4842;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-2);
 }
 
 input {
-  padding: 9px 10px;
-  border: 1px solid #cfccc3;
-  border-radius: 6px;
+  padding: 9px 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  color: var(--text);
   font: inherit;
-  background: #fffdf9;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
 input:focus {
   outline: none;
-  border-color: #2d2a55;
-  box-shadow: 0 0 0 2px rgba(45, 42, 85, 0.15);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 button {
   padding: 6px 12px;
-  border: 1px solid #cbc8bf;
-  border-radius: 6px;
-  background: #fffdf9;
-  color: #333;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-2);
   font: inherit;
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
 }
 
 button:hover {
-  background: #eeebe4;
+  background: var(--surface-2);
+  border-color: var(--accent);
+  color: var(--accent-strong);
 }
 
 button.primary {
-  background: #2d2a55;
-  border-color: #2d2a55;
-  color: #fff;
   padding: 9px 16px;
-  font-weight: 600;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #04222a;
+  font-size: 14px;
 }
 
 button.primary:hover {
-  background: #232046;
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: #04222a;
 }
 
 button.danger {
-  color: #a9443c;
-  border-color: #d8b4af;
+  border-color: rgba(229, 115, 115, 0.4);
+  color: #f0a3a3;
 }
 
 button.danger:hover {
-  background: #f8eeec;
+  background: rgba(229, 115, 115, 0.12);
+  border-color: rgba(229, 115, 115, 0.6);
+  color: #f0a3a3;
 }
 
 .empty {
   margin: 0;
-  color: #5d5a52;
+  color: var(--muted);
+  font-size: 14px;
 }
 
 .error {
   margin: 0;
-  color: #a9443c;
-  font-size: 14px;
+  padding: 9px 11px;
+  border: 1px solid rgba(229, 115, 115, 0.4);
+  border-radius: var(--radius);
+  background: rgba(229, 115, 115, 0.12);
+  color: #ffb4b4;
+  font-size: 13px;
 }
 
 @media (max-width: 560px) {
