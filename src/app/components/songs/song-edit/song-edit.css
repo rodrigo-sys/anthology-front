@@ -2,18 +2,21 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background: #f6f5f1;
-  border: 1px solid #d2cfc6;
-  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
   padding: 20px;
 }
 
 h2 {
   margin: 0;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #e2dfd6;
-  font-size: 18px;
-  color: #1f1f1f;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .campos {
@@ -30,8 +33,10 @@ h2 {
 }
 
 label {
-  font-size: 14px;
-  color: #4a4842;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-2);
 }
 
 input,
@@ -39,59 +44,70 @@ select {
   height: 36px;
   width: 100%;
   max-width: 100%;
-  padding: 7px 10px;
-  border: 1px solid #cfccc3;
-  border-radius: 6px;
+  padding: 7px 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
   font: inherit;
   font-size: 14px;
-  color: #222;
-  background: #fffdf9;
+  color: var(--text);
+  background: var(--bg-elev);
   box-sizing: border-box;
 }
 
 input:focus,
 select:focus {
   outline: none;
-  border-color: #2d2a55;
-  box-shadow: 0 0 0 2px rgba(45, 42, 85, 0.15);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .campo small {
   font-size: 12px;
-  color: #6f6d66;
+  color: var(--muted);
 }
 
 .campo small.error {
-  color: #a9443c;
+  color: #f0a3a3;
 }
 
 button {
   height: 36px;
   padding: 7px 14px;
-  border: 1px solid #2d2a55;
-  border-radius: 6px;
-  background: #2d2a55;
-  color: #fff;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #04222a;
   font: inherit;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
   box-sizing: border-box;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
 }
 
 button:hover {
-  background: #232046;
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+}
+
+button:disabled {
+  background: var(--surface-3);
+  border-color: var(--line);
+  color: var(--muted);
+  cursor: not-allowed;
 }
 
 button.secundario {
-  background: #f9f9f7;
-  border-color: #c5c5bf;
-  color: #333;
-  font-weight: 400;
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--text-2);
+  font-weight: 600;
 }
 
 button.secundario:hover {
-  background: #ecece8;
+  background: var(--surface-2);
+  border-color: var(--accent);
+  color: var(--accent-strong);
 }
 
 .boton {
@@ -100,6 +116,6 @@ button.secundario:hover {
 }
 
 .error {
-  color: #a9443c;
+  color: #f0a3a3;
   font-size: 13px;
 }
